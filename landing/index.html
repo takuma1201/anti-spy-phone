@@ -2813,6 +2813,7 @@
     // Formspree endpoint for order notification emails (free tier: 50/month)
     // Get yours at https://formspree.io → leave blank to disable
     const ORDER_NOTIFY_ENDPOINT = '';
+    const STRIPE_PAYMENT_LINK  = 'https://buy.stripe.com/test_7sY00i7fD8Q7a8x74Y7g401';
 
     // ── DOM refs ─────────────────────────────────────────────────
     const overlay = document.getElementById('co-overlay');
@@ -3009,7 +3010,10 @@
       `;
       footer.innerHTML = `
         <button class="co-btn-back" id="co-back2">← 戻る</button>
-        <button class="co-btn-next" id="co-confirm">注文を確定する</button>
+        <button class="co-btn-next" id="co-confirm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Stripeで支払う
+        </button>
       `;
       document.getElementById('co-back2').addEventListener('click', () => { step = 1; render(); });
       document.getElementById('co-confirm').addEventListener('click', placeOrder);
@@ -3060,28 +3064,22 @@
       });
     }
 
-    // ── Place order ───────────────────────────────────────────────
+    // ── Place order → redirect to Stripe ─────────────────────────
     async function placeOrder() {
       const confirmBtn = document.getElementById('co-confirm');
       confirmBtn.disabled = true;
-      confirmBtn.textContent = '処理中...';
+      confirmBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:cf-spin 0.8s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> 処理中...';
 
       const orderNum = 'ASP-' + Date.now().toString(36).toUpperCase().slice(-6);
       const total    = cartSnapshot.reduce((s,i) => s + i.price * i.qty, 0);
-      const order = {
-        orderNum,
-        ...orderData,
-        items: cartSnapshot,
-        total,
-        createdAt: new Date().toISOString(),
-      };
+      const order    = { orderNum, ...orderData, items: cartSnapshot, total, createdAt: new Date().toISOString() };
 
-      // Save to localStorage (owner can retrieve from browser)
+      // Save to localStorage
       const orders = JSON.parse(localStorage.getItem('antispy-orders') || '[]');
       orders.push(order);
       localStorage.setItem('antispy-orders', JSON.stringify(orders));
 
-      // Send notification email via Formspree (if configured)
+      // Send notification email (if Formspree configured)
       if (ORDER_NOTIFY_ENDPOINT) {
         try {
           await fetch(ORDER_NOTIFY_ENDPOINT, {
@@ -3093,17 +3091,20 @@
               name:    `${orderData.sei} ${orderData.mei}`,
               email:   orderData.email,
               tel:     orderData.tel,
-              address: `${orderData.zip} ${orderData.pref}${orderData.addr1} ${orderData.addr2}`,
+              address: `${orderData.zip} ${orderData.pref}${orderData.addr1} ${orderData.addr2||''}`,
               items:   cartSnapshot.map(i => `${i.name} x${i.qty} ¥${(i.price*i.qty).toLocaleString()}`).join(', '),
               total:   `¥${total.toLocaleString('ja-JP')}`,
             })
           });
-        } catch (e) { /* fail silently — order is saved locally */ }
+        } catch(e) { /* fail silently */ }
       }
 
-      step = 3;
-      render();
-      renderStep3(orderNum);
+      // Redirect to Stripe Payment Link
+      // Pass order number and email as prefill params
+      const stripeUrl = new URL(STRIPE_PAYMENT_LINK);
+      stripeUrl.searchParams.set('prefilled_email', orderData.email);
+      stripeUrl.searchParams.set('client_reference_id', orderNum);
+      window.location.href = stripeUrl.toString();
     }
 
     // ── Listen for cart cleared event ─────────────────────────────
