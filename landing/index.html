@@ -2102,6 +2102,28 @@
   <div id="ed-banner">テキストをクリックして編集 · 画像をクリックして差し替え</div>
   <div id="ed-toast"></div>
 
+  <!-- ── Selection formatting toolbar ── -->
+  <div id="ed-sel-bar">
+    <button id="ed-bold"   type="button" title="太字 (Cmd+B)"><b>B</b></button>
+    <button id="ed-italic" type="button" title="斜体 (Cmd+I)"><i style="font-style:italic">I</i></button>
+    <button id="ed-under"  type="button" title="下線 (Cmd+U)"><u>U</u></button>
+    <button id="ed-strike" type="button" title="打消し線"><s>S</s></button>
+    <div class="sel-sep"></div>
+    <select id="ed-font-select" title="フォント">
+      <option value="-apple-system,'SF Pro Text',sans-serif">SF Pro</option>
+      <option value="'Space Grotesk',sans-serif">Space Grotesk</option>
+      <option value="Georgia,serif">Georgia</option>
+      <option value="'Helvetica Neue',Arial,sans-serif">Helvetica</option>
+      <option value="'Courier New',monospace">Monospace</option>
+    </select>
+    <div class="sel-sep"></div>
+    <div class="sel-size-group">
+      <button id="ed-sz-minus" type="button" title="文字を小さく">−</button>
+      <input  id="ed-size-display" type="text" value="16px" readonly title="文字サイズ">
+      <button id="ed-sz-plus"  type="button" title="文字を大きく">+</button>
+    </div>
+  </div>
+
   <!-- ── Cart UI ── -->
   <div id="cart-overlay"></div>
   <div id="cart-panel">
@@ -2434,6 +2456,151 @@
         if (overlay.classList.contains('show')) { hidePasswordDialog(); return; }
         if (isActive) exit(true);
       }
+    });
+
+    // ── Selection formatting toolbar ─────────────────────────────
+    const selBar     = document.getElementById('ed-sel-bar');
+    const boldBtn    = document.getElementById('ed-bold');
+    const italicBtn  = document.getElementById('ed-italic');
+    const underBtn   = document.getElementById('ed-under');
+    const strikeBtn  = document.getElementById('ed-strike');
+    const fontSelect = document.getElementById('ed-font-select');
+    const szDisplay  = document.getElementById('ed-size-display');
+    const szMinus    = document.getElementById('ed-sz-minus');
+    const szPlus     = document.getElementById('ed-sz-plus');
+
+    // Font size steps (px)
+    const SIZE_STEPS = [10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 48, 64];
+    let curSzIdx = 3; // default = 16px
+    let savedRange = null;
+
+    function saveSelection() {
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount) savedRange = sel.getRangeAt(0).cloneRange();
+    }
+    function restoreSelection() {
+      if (!savedRange) return;
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(savedRange);
+    }
+
+    function positionBar(rect) {
+      selBar.style.visibility = 'hidden';
+      selBar.classList.add('show');
+      const barW = selBar.offsetWidth  || 340;
+      const barH = selBar.offsetHeight || 40;
+      selBar.classList.remove('show');
+      selBar.style.visibility = '';
+
+      let top  = rect.top  + window.scrollY - barH - 10;
+      let left = rect.left + window.scrollX + rect.width / 2 - barW / 2;
+      top  = Math.max(window.scrollY + 8, top);
+      left = Math.max(8, Math.min(window.innerWidth - barW - 8, left));
+      selBar.style.top  = top  + 'px';
+      selBar.style.left = left + 'px';
+    }
+
+    function hideSelBar() { selBar.classList.remove('show'); }
+
+    function updateBarState() {
+      boldBtn.classList.toggle('on',   document.queryCommandState('bold'));
+      italicBtn.classList.toggle('on', document.queryCommandState('italic'));
+      underBtn.classList.toggle('on',  document.queryCommandState('underline'));
+      strikeBtn.classList.toggle('on', document.queryCommandState('strikethrough'));
+
+      // Read font size from the anchor node
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount) {
+        const node = sel.getRangeAt(0).commonAncestorContainer;
+        const el   = node.nodeType === 3 ? node.parentElement : node;
+        if (el) {
+          const fs = parseFloat(getComputedStyle(el).fontSize);
+          if (fs) {
+            // Snap to nearest step
+            let nearest = 0;
+            let diff = Infinity;
+            SIZE_STEPS.forEach((px, i) => {
+              if (Math.abs(px - fs) < diff) { diff = Math.abs(px - fs); nearest = i; }
+            });
+            curSzIdx = nearest;
+            szDisplay.value = SIZE_STEPS[curSzIdx] + 'px';
+          }
+        }
+      }
+    }
+
+    // Show toolbar on any selection change
+    document.addEventListener('selectionchange', () => {
+      if (!isActive) return;
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || !sel.toString().trim()) { hideSelBar(); return; }
+      const anchor = sel.anchorNode;
+      const node   = anchor ? (anchor.nodeType === 3 ? anchor.parentElement : anchor) : null;
+      if (!node || !node.closest('[contenteditable="true"]')) { hideSelBar(); return; }
+      const rect = sel.getRangeAt(0).getBoundingClientRect();
+      if (!rect.width && !rect.height) { hideSelBar(); return; }
+      updateBarState();
+      positionBar(rect);
+      selBar.classList.add('show');
+    });
+
+    // Prevent toolbar clicks from collapsing selection
+    selBar.addEventListener('mousedown', e => {
+      if (e.target.tagName !== 'SELECT' && e.target.tagName !== 'INPUT') {
+        e.preventDefault();
+      }
+    });
+
+    function fmtCmd(cmd) {
+      document.execCommand(cmd, false, null);
+      updateBarState();
+    }
+
+    boldBtn.addEventListener('click',   () => fmtCmd('bold'));
+    italicBtn.addEventListener('click', () => fmtCmd('italic'));
+    underBtn.addEventListener('click',  () => fmtCmd('underline'));
+    strikeBtn.addEventListener('click', () => fmtCmd('strikethrough'));
+
+    // Font family — save selection before dropdown steals focus, restore on change
+    fontSelect.addEventListener('mousedown', saveSelection);
+    fontSelect.addEventListener('change', () => {
+      restoreSelection();
+      document.execCommand('styleWithCSS', false, true);
+      document.execCommand('fontName', false, fontSelect.value);
+      savedRange = null;
+    });
+
+    // Font size +/-
+    function applySize() {
+      szDisplay.value = SIZE_STEPS[curSzIdx] + 'px';
+      document.execCommand('styleWithCSS', false, true);
+      // Use fontSize 1-7 as a carrier then patch the generated <span>
+      // Simpler: use insertHTML to wrap selection in a span
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed) return;
+      const range = sel.getRangeAt(0);
+      const frag  = range.extractContents();
+      const span  = document.createElement('span');
+      span.style.fontSize = SIZE_STEPS[curSzIdx] + 'px';
+      span.appendChild(frag);
+      range.insertNode(span);
+      // Re-select the inserted span content
+      range.selectNodeContents(span);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    szMinus.addEventListener('click', () => {
+      if (curSzIdx > 0) { curSzIdx--; applySize(); }
+    });
+    szPlus.addEventListener('click', () => {
+      if (curSzIdx < SIZE_STEPS.length - 1) { curSzIdx++; applySize(); }
+    });
+
+    // Hide bar when clicking outside toolbar
+    document.addEventListener('mousedown', e => {
+      if (!selBar.contains(e.target)) hideSelBar();
     });
   })();
   </script>
