@@ -2110,11 +2110,7 @@
     <button id="ed-strike" type="button" title="打消し線"><s>S</s></button>
     <div class="sel-sep"></div>
     <select id="ed-font-select" title="フォント">
-      <option value="-apple-system,'SF Pro Text',sans-serif">SF Pro</option>
-      <option value="'Space Grotesk',sans-serif">Space Grotesk</option>
-      <option value="Georgia,serif">Georgia</option>
-      <option value="'Helvetica Neue',Arial,sans-serif">Helvetica</option>
-      <option value="'Courier New',monospace">Monospace</option>
+      <option value="">フォント…</option>
     </select>
     <div class="sel-sep"></div>
     <div class="sel-size-group">
@@ -2246,6 +2242,9 @@
 
       // Load localStorage edits if any
       applyLocalEdits();
+
+      // Load font list into toolbar (async, non-blocking)
+      loadSystemFonts();
     }
 
     // ── Exit edit mode ───────────────────────────────────────────
@@ -2473,6 +2472,112 @@
     const SIZE_STEPS = [10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 48, 64];
     let curSzIdx = 3; // default = 16px
     let savedRange = null;
+    let fontsLoaded = false;
+
+    // ── Load system fonts into the dropdown ──────────────────────
+    // Curated fallback: web-safe + macOS/Windows built-ins + Japanese
+    const FALLBACK_FONTS = [
+      // System UI
+      { label: 'SF Pro (System)', value: "-apple-system,'SF Pro Text',sans-serif" },
+      { label: 'Segoe UI',        value: "'Segoe UI',sans-serif" },
+      { label: 'Roboto',          value: "'Roboto',sans-serif" },
+      // Page fonts
+      { label: 'Space Grotesk',   value: "'Space Grotesk',sans-serif" },
+      // Sans-serif
+      { label: 'Helvetica Neue',  value: "'Helvetica Neue',Helvetica,sans-serif" },
+      { label: 'Arial',           value: "Arial,sans-serif" },
+      { label: 'Arial Black',     value: "'Arial Black',sans-serif" },
+      { label: 'Verdana',         value: "Verdana,sans-serif" },
+      { label: 'Tahoma',          value: "Tahoma,sans-serif" },
+      { label: 'Trebuchet MS',    value: "'Trebuchet MS',sans-serif" },
+      { label: 'Impact',          value: "Impact,sans-serif" },
+      { label: 'Century Gothic',  value: "'Century Gothic',sans-serif" },
+      { label: 'Calibri',         value: "Calibri,sans-serif" },
+      { label: 'Gill Sans',       value: "'Gill Sans',sans-serif" },
+      { label: 'Optima',          value: "Optima,sans-serif" },
+      { label: 'Futura',          value: "Futura,sans-serif" },
+      { label: 'Avenir',          value: "Avenir,sans-serif" },
+      { label: 'Avenir Next',     value: "'Avenir Next',sans-serif" },
+      { label: 'Candara',         value: "Candara,sans-serif" },
+      { label: 'Franklin Gothic', value: "'Franklin Gothic Medium',sans-serif" },
+      // Serif
+      { label: 'Georgia',         value: "Georgia,serif" },
+      { label: 'Times New Roman', value: "'Times New Roman',Times,serif" },
+      { label: 'Palatino',        value: "'Palatino Linotype',Palatino,serif" },
+      { label: 'Garamond',        value: "Garamond,serif" },
+      { label: 'Baskerville',     value: "Baskerville,serif" },
+      { label: 'Book Antiqua',    value: "'Book Antiqua',Palatino,serif" },
+      { label: 'Didot',           value: "Didot,serif" },
+      { label: 'Bodoni 72',       value: "'Bodoni 72',serif" },
+      { label: 'Hoefler Text',    value: "'Hoefler Text',serif" },
+      { label: 'American Typewriter', value: "'American Typewriter',serif" },
+      { label: 'Rockwell',        value: "Rockwell,serif" },
+      { label: 'Copperplate',     value: "Copperplate,serif" },
+      // Display
+      { label: 'Zapfino',         value: "Zapfino,cursive" },
+      { label: 'Brush Script',    value: "'Brush Script MT',cursive" },
+      { label: 'Comic Sans',      value: "'Comic Sans MS',cursive" },
+      // Monospace
+      { label: 'Courier New',     value: "'Courier New',Courier,monospace" },
+      { label: 'Monaco',          value: "Monaco,monospace" },
+      { label: 'Menlo',           value: "Menlo,monospace" },
+      { label: 'Consolas',        value: "Consolas,monospace" },
+      { label: 'SF Mono',         value: "'SF Mono',monospace" },
+      // Japanese (macOS)
+      { label: 'ヒラギノ角ゴ',    value: "'Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif" },
+      { label: 'ヒラギノ明朝',    value: "'Hiragino Mincho ProN','Hiragino Mincho Pro',serif" },
+      { label: 'Yu Gothic',       value: "'Yu Gothic','游ゴシック',sans-serif" },
+      { label: 'Yu Mincho',       value: "'Yu Mincho','游明朝',serif" },
+      { label: 'Meiryo',          value: "Meiryo,'メイリオ',sans-serif" },
+      { label: 'Noto Sans JP',    value: "'Noto Sans JP',sans-serif" },
+    ];
+
+    async function loadSystemFonts() {
+      if (fontsLoaded) return;
+      fontsLoaded = true;
+
+      let families = null;
+
+      // Try Font Access API (Chrome 103+, needs permission)
+      if (typeof window.queryLocalFonts === 'function') {
+        try {
+          const result = await window.queryLocalFonts();
+          // De-duplicate family names, sort alphabetically
+          const seen = new Set();
+          families = result
+            .map(f => f.family)
+            .filter(f => { if (seen.has(f)) return false; seen.add(f); return true; })
+            .sort((a, b) => a.localeCompare(b, 'ja'));
+        } catch (e) {
+          // Permission denied — fall back to curated list
+        }
+      }
+
+      fontSelect.innerHTML = '';
+
+      if (families && families.length > 0) {
+        // Real installed fonts — show them all, styled in their own font
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = 'フォントを選択…';
+        fontSelect.appendChild(placeholder);
+
+        families.forEach(family => {
+          const opt = document.createElement('option');
+          opt.value = family;
+          opt.textContent = family;
+          fontSelect.appendChild(opt);
+        });
+      } else {
+        // Fallback curated list
+        FALLBACK_FONTS.forEach(({ label, value }) => {
+          const opt = document.createElement('option');
+          opt.value = value;
+          opt.textContent = label;
+          fontSelect.appendChild(opt);
+        });
+      }
+    }
 
     function saveSelection() {
       const sel = window.getSelection();
@@ -2565,9 +2670,16 @@
     // Font family — save selection before dropdown steals focus, restore on change
     fontSelect.addEventListener('mousedown', saveSelection);
     fontSelect.addEventListener('change', () => {
+      if (!fontSelect.value) return;
       restoreSelection();
+      // When coming from Font Access API the value is a bare family name (no quotes/stack).
+      // Wrap it so execCommand + styleWithCSS produces correct CSS.
+      const rawVal = fontSelect.value;
+      const cssVal = rawVal.includes(',') || rawVal.startsWith("'") || rawVal.startsWith('"')
+        ? rawVal                        // already a CSS font-family stack
+        : `'${rawVal}'`;               // bare family name — quote it
       document.execCommand('styleWithCSS', false, true);
-      document.execCommand('fontName', false, fontSelect.value);
+      document.execCommand('fontName', false, cssVal);
       savedRange = null;
     });
 
