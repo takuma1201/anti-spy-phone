@@ -3258,7 +3258,7 @@
         <div class="cw-info-form">
           <input class="cw-field" id="cw-n" type="text"  placeholder="お名前（フルネーム）" autocomplete="name">
           <input class="cw-field" id="cw-e" type="email" placeholder="メールアドレス"       autocomplete="email">
-          <button class="cw-info-submit" id="cw-info-submit">次へ →</button>
+          <button class="cw-info-submit" id="cw-info-submit" type="button">次へ →</button>
         </div>
       </div>
 
@@ -3352,7 +3352,7 @@
     function removeTyping() { document.getElementById('cw-typing')?.remove(); }
 
     // ── Step 1: 名前・メール送信 ─────────────────────────────────
-    infoSubmit.addEventListener('click', () => {
+    function onInfoSubmit() {
       const nEl = document.getElementById('cw-n');
       const eEl = document.getElementById('cw-e');
       let ok = true;
@@ -3377,7 +3377,9 @@
         setTimeout(() => textarea.focus(), 50);
         msgs.scrollTop = msgs.scrollHeight;
       }, 800);
-    });
+    }
+    infoSubmit.addEventListener('click', onInfoSubmit);
+    infoSubmit.addEventListener('touchend', e => { e.preventDefault(); onInfoSubmit(); });
 
     // ── Step 2: 質問送信 ─────────────────────────────────────────
     textarea.addEventListener('input', () => {
