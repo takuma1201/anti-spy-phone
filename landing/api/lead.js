@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'name and email are required' });
   }
 
-  const FORMSPREE   = 'https://formspree.io/f/xdabbbzl';
+  const FORMSPREE   = 'https://formspree.io/f/mrejjjwz';
   const SUPABASE_URL = process.env.SUPABASE_URL;
   const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
 
