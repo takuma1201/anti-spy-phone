@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>特定商取引法に基づく表記 — AntiSpy Phone</title>
+  <meta name="description" content="AntiSpy Phone の特定商取引法に基づく表記">
+  <meta name="robots" content="noindex">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --font: -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --black:      #000000;
+      --surface:    #141414;
+      --surface-2:  #1c1c1e;
+      --border:     #2c2c2e;
+      --silver-1:   #F5F5F7;
+      --silver-2:   #C7C7CC;
+      --silver-3:   #AEAEB2;
+      --gray-1:     #86868B;
+      --gray-2:     #6E6E73;
+      --gray-3:     #48484A;
+      --blue:       #0071E3;
+      --nav-h:      52px;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--silver-1);
+      font-family: var(--font);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      height: var(--nav-h);
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 0 22px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--silver-1);
+      text-decoration: none;
+      background: linear-gradient(135deg, #F5F5F7 0%, #AEAEB2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-back {
+      font-size: 13px;
+      color: var(--blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.7; }
+    .nav-back::before { content: '‹'; font-size: 16px; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 60px) 22px 100px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-2);
+      margin-bottom: 12px;
+    }
+    .page-title {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .page-date {
+      font-size: 13px;
+      color: var(--gray-2);
+      margin-bottom: 48px;
+    }
+
+    /* ── TABLE ── */
+    .law-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .law-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .law-table tr:last-child { border-bottom: none; }
+    .law-table th {
+      width: 38%;
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--silver-3);
+      background: var(--surface);
+      vertical-align: top;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .law-table td {
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--silver-1);
+      background: var(--surface-2);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .law-table td small {
+      display: block;
+      font-size: 13px;
+      color: var(--gray-1);
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+    .law-table td a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .law-table td a:hover { text-decoration: underline; }
+
+    /* ── NOTE ── */
+    .law-note {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-size: 13px;
+      color: var(--gray-1);
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+    .law-note strong { color: var(--silver-3); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 22px;
+      text-align: center;
+    }
+    .footer-copy { font-size: 12px; color: var(--gray-2); }
+
+    @media (max-width: 600px) {
+      .law-table th { width: 42%; font-size: 12px; padding: 14px 14px; white-space: normal; }
+      .law-table td { font-size: 14px; padding: 14px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AntiSpy Phone</a>
+      <a href="index.html" class="nav-back">トップに戻る</a>
+    </div>
+  </nav>
+
+  <main>
+    <p class="page-eyebrow">Legal</p>
+    <h1 class="page-title">特定商取引法に<br>基づく表記</h1>
+    <p class="page-date">最終更新日：2026年5月12日</p>
+
+    <table class="law-table">
+      <tr>
+        <th>販売業者</th>
+        <td>SocialBoost</td>
+      </tr>
+      <tr>
+        <th>運営統括責任者</th>
+        <td>眞如 匠馬</td>
+      </tr>
+      <tr>
+        <th>所在地</th>
+        <td>〒244-0003<br>神奈川県横浜市戸塚区戸塚町4170<br>高橋ビル1F</td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td>
+          070-9175-3590
+          <small>受付時間：平日 10:00〜18:00（土日祝を除く）</small>
+        </td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><a href="mailto:info@socialboost.jp">info@socialboost.jp</a></td>
+      </tr>
+      <tr>
+        <th>ホームページ</th>
+        <td><a href="https://antispy-phone.vercel.app">https://antispy-phone.vercel.app</a></td>
+      </tr>
+      <tr>
+        <th>販売商品</th>
+        <td>
+          AntiSpy Phone
+          <small>Google Pixel 9 Pro + GrapheneOS カスタム設定済み</small>
+        </td>
+      </tr>
+      <tr>
+        <th>販売価格</th>
+        <td>
+          ¥220,000（税込）
+          <small>送料は別途かかります。ご注文後に個別にご案内いたします。</small>
+        </td>
+      </tr>
+      <tr>
+        <th>代金の支払時期</th>
+        <td>注文手続き完了時（クレジットカード即時決済）</td>
+      </tr>
+      <tr>
+        <th>代金の支払方法</th>
+        <td>
+          クレジットカード
+          <small>VISA・Mastercard・American Express・JCB<br>
+          決済処理：Stripe, Inc.</small>
+        </td>
+      </tr>
+      <tr>
+        <th>商品の引渡し時期</th>
+        <td>入金確認後、3〜5営業日以内に発送</td>
+      </tr>
+      <tr>
+        <th>返品・キャンセルについて</th>
+        <td>
+          <strong>初期不良の場合</strong>：商品到着後7日以内にご連絡ください。
+          同等品との交換対応いたします。<br><br>
+          <strong>お客様都合の返品</strong>：商品の性質上、開封後の返品・キャンセルはお受けできません。<br><br>
+          <strong>返品送料</strong>：初期不良の場合は当社負担。お客様都合の場合はお客様負担。
+        </td>
+      </tr>
+      <tr>
+        <th>動作環境</th>
+        <td>
+          本商品はAndroidスマートフォン（ハードウェア）です。
+          ソフトウェアはGrapheneOS（オープンソース）を使用しています。
+          <small>GrapheneOS は Google Pixel 9 Pro 上で動作します。</small>
+        </td>
+      </tr>
+      <tr>
+        <th>その他特記事項</th>
+        <td>
+          本商品はGrapheneOSを搭載したカスタム端末です。
+          Googleサービス（Playストア等）は標準では使用できません。
+          セキュリティ・プライバシー目的に特化した製品であることをご了承の上ご購入ください。
+        </td>
+      </tr>
+    </table>
+
+    <div class="law-note">
+      <strong>お問い合わせ先</strong><br>
+      ご不明な点がございましたら、メール（<a href="mailto:info@socialboost.jp" style="color:#0071E3;">info@socialboost.jp</a>）または電話（070-9175-3590）にてお気軽にお問い合わせください。平日10:00〜18:00にて対応いたします。
+    </div>
+  </main>
+
+  <footer>
+    <p class="footer-copy">© 2026 SocialBoost. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
