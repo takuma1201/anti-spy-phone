@@ -6,6 +6,9 @@
   <title>特定商取引法に基づく表記 — AntiSpy Phone</title>
   <meta name="description" content="AntiSpy Phone の特定商取引法に基づく表記">
   <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -22,7 +25,7 @@
       --gray-1:     #86868B;
       --gray-2:     #6E6E73;
       --gray-3:     #48484A;
-      --blue:       #0071E3;
+      --accent:     #C8A96E;
       --nav-h:      52px;
     }
 
@@ -70,7 +73,7 @@
     }
     .nav-back {
       font-size: 13px;
-      color: var(--blue);
+      color: var(--accent);
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -97,9 +100,10 @@
       margin-bottom: 12px;
     }
     .page-title {
+      font-family: "Space Grotesk", -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
       font-size: clamp(28px, 5vw, 40px);
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       line-height: 1.1;
       background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
       -webkit-background-clip: text;
@@ -155,7 +159,7 @@
       line-height: 1.6;
     }
     .law-table td a {
-      color: var(--blue);
+      color: var(--accent);
       text-decoration: none;
     }
     .law-table td a:hover { text-decoration: underline; }
@@ -288,7 +292,7 @@
 
     <div class="law-note">
       <strong>お問い合わせ先</strong><br>
-      ご不明な点がございましたら、メール（<a href="mailto:info@socialboost.jp" style="color:#0071E3;">info@socialboost.jp</a>）または電話（070-9175-3590）にてお気軽にお問い合わせください。平日10:00〜18:00にて対応いたします。
+      ご不明な点がございましたら、メール（<a href="mailto:info@socialboost.jp" style="color:#C8A96E;">info@socialboost.jp</a>）または電話（070-9175-3590）にてお気軽にお問い合わせください。平日10:00〜18:00にて対応いたします。
     </div>
   </main>
 
@@ -296,5 +300,294 @@
     <p class="footer-copy">© 2026 SocialBoost. All rights reserved.</p>
   </footer>
 
+  <!-- ══ CHAT SUPPORT WIDGET ════════════════════════════════════ -->
+  <style>
+    #cw-root {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9997;
+      font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    #cw-btn {
+      width: 56px; height: 56px; border-radius: 50%; background: #C8A96E;
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s; position: relative;
+    }
+    #cw-btn:hover { background:#B89858; transform:scale(1.06); box-shadow:0 6px 28px rgba(0,0,0,0.6),0 0 0 4px rgba(200,169,110,0.18); }
+    #cw-btn .cw-ico { position:absolute; transition:opacity 0.22s,transform 0.22s; }
+    #cw-btn .cw-ico-chat  { opacity:1; transform:scale(1) rotate(0); }
+    #cw-btn .cw-ico-close { opacity:0; transform:scale(0.6) rotate(-60deg); }
+    #cw-root.open #cw-btn .cw-ico-chat  { opacity:0; transform:scale(0.6) rotate(60deg); }
+    #cw-root.open #cw-btn .cw-ico-close { opacity:1; transform:scale(1) rotate(0); }
+    #cw-badge {
+      position:absolute; top:-3px; right:-3px; width:18px; height:18px;
+      background:#FF3B30; border:2px solid #000; border-radius:50%;
+      font-size:10px; font-weight:700; color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transform:scale(0.5);
+      transition:opacity 0.2s,transform 0.25s cubic-bezier(0.34,1.56,0.64,1); pointer-events:none;
+    }
+    #cw-badge.on { opacity:1; transform:scale(1); }
+
+    #cw-panel {
+      position:absolute; bottom:68px; right:0; width:320px;
+      background:#141414; border:1px solid rgba(255,255,255,0.09);
+      border-radius:18px; box-shadow:0 24px 64px rgba(0,0,0,0.75);
+      overflow:hidden; display:flex; flex-direction:column;
+      opacity:0; transform:translateY(10px) scale(0.96);
+      transform-origin:bottom right; pointer-events:none;
+      transition:opacity 0.26s cubic-bezier(0.25,0.1,0.25,1),transform 0.26s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    #cw-root.open #cw-panel { opacity:1; transform:translateY(0) scale(1); pointer-events:all; }
+
+    .cw-head { display:flex; align-items:center; gap:10px; padding:13px 15px; background:#1c1c1e; border-bottom:1px solid rgba(255,255,255,0.07); flex-shrink:0; }
+    .cw-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#C8A96E 0%,#7A5210 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cw-head-info { flex:1; min-width:0; }
+    .cw-head-name { font-size:13px; font-weight:600; color:#F5F5F7; letter-spacing:-0.01em; }
+    .cw-online { display:flex; align-items:center; gap:4px; margin-top:1px; }
+    .cw-dot { width:6px; height:6px; border-radius:50%; background:#30D158; animation:cw-pulse 2.5s ease-in-out infinite; }
+    @keyframes cw-pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .cw-online-lbl { font-size:11px; color:#86868B; }
+    .cw-head-line { display:flex; align-items:center; gap:5px; padding:5px 9px; background:rgba(6,199,85,0.12); border:1px solid rgba(6,199,85,0.25); border-radius:980px; text-decoration:none; font-size:11px; font-weight:600; color:#06C755; flex-shrink:0; transition:background 0.15s; }
+    .cw-head-line:hover { background:rgba(6,199,85,0.2); }
+
+    .cw-msgs { flex:1; padding:14px 13px 8px; display:flex; flex-direction:column; gap:9px; max-height:260px; overflow-y:auto; min-height:80px; }
+    .cw-msgs::-webkit-scrollbar { width:3px; }
+    .cw-msgs::-webkit-scrollbar-thumb { background:#3a3a3c; border-radius:2px; }
+
+    .cw-row { display:flex; gap:7px; align-items:flex-end; }
+    .cw-row.user { justify-content:flex-end; }
+    .cw-msg-av { width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#C8A96E 0%,#7A5210 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cw-bubble { background:#2c2c2e; border-radius:14px 14px 14px 4px; padding:9px 12px; font-size:12.5px; line-height:1.55; color:#C7C7CC; max-width:calc(100% - 34px); }
+    .cw-row.user .cw-bubble { background:#C8A96E; color:#000; border-radius:14px 14px 4px 14px; font-weight:500; }
+    .cw-typing { display:flex; gap:4px; align-items:center; padding:6px 2px; }
+    .cw-typing span { width:6px; height:6px; border-radius:50%; background:#86868B; animation:cw-bounce 1.2s ease-in-out infinite; }
+    .cw-typing span:nth-child(2) { animation-delay:0.18s; }
+    .cw-typing span:nth-child(3) { animation-delay:0.36s; }
+    @keyframes cw-bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+
+    /* Bottom area */
+    .cw-bottom { padding:10px 12px; border-top:1px solid rgba(255,255,255,0.07); background:#1c1c1e; flex-shrink:0; }
+    .cw-bottom.hide { display:none; }
+
+    /* Info form (name + email) */
+    .cw-info-form { display:flex; flex-direction:column; gap:7px; }
+    .cw-field { width:100%; padding:8px 12px; background:#2c2c2e; border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#F5F5F7; font-size:12.5px; font-family:inherit; outline:none; transition:border-color 0.18s; }
+    .cw-field:focus { border-color:rgba(200,169,110,0.45); }
+    .cw-field::placeholder { color:#48484A; }
+    .cw-field.err { border-color:rgba(255,59,48,0.55); }
+    .cw-info-submit { padding:9px; background:#C8A96E; border:none; border-radius:10px; font-size:12.5px; font-weight:600; color:#000; cursor:pointer; transition:background 0.15s; }
+    .cw-info-submit:hover { background:#B89858; }
+    .cw-info-submit:disabled { opacity:0.4; cursor:not-allowed; }
+
+    /* Chat input (message) */
+    .cw-chat-row { display:flex; gap:8px; align-items:flex-end; }
+    .cw-chat-input { flex:1; background:#2c2c2e; border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:8px 14px; color:#F5F5F7; font-size:13px; font-family:inherit; outline:none; resize:none; line-height:1.4; max-height:80px; overflow-y:auto; transition:border-color 0.18s; }
+    .cw-chat-input:focus { border-color:rgba(200,169,110,0.45); }
+    .cw-chat-input::placeholder { color:#48484A; }
+    .cw-chat-send { width:34px; height:34px; border-radius:50%; background:#C8A96E; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s,transform 0.12s; }
+    .cw-chat-send:hover { background:#B89858; transform:scale(1.08); }
+    .cw-chat-send:disabled { opacity:0.35; cursor:not-allowed; transform:none; }
+
+    @media (max-width:480px) {
+      #cw-root { bottom:72px; right:14px; }
+      #cw-panel { width:calc(100vw - 28px); right:0; bottom:66px; }
+    }
+  </style>
+
+  <div id="cw-root">
+    <div id="cw-panel" role="dialog" aria-modal="true" aria-label="サポートチャット">
+
+      <!-- Header -->
+      <div class="cw-head">
+        <div class="cw-avatar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="cw-head-info">
+          <div class="cw-head-name">AntiSpy サポート</div>
+          <div class="cw-online"><div class="cw-dot"></div><span class="cw-online-lbl">通常 数時間以内に返信</span></div>
+        </div>
+        <a id="cw-line-head" href="#" target="_blank" rel="noopener" class="cw-head-line" style="display:none">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          LINE
+        </a>
+      </div>
+
+      <!-- Messages -->
+      <div class="cw-msgs" id="cw-msgs">
+        <div class="cw-row">
+          <div class="cw-msg-av"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="cw-bubble">こんにちは！AntiSpy Phoneサポートです。<br>まず、お名前とメールアドレスをご入力ください。</div>
+        </div>
+      </div>
+
+      <!-- Step 1: 名前・メール -->
+      <div class="cw-bottom" id="cw-info-area">
+        <div class="cw-info-form">
+          <input class="cw-field" id="cw-n" type="text"  placeholder="お名前（フルネーム）" autocomplete="name">
+          <input class="cw-field" id="cw-e" type="email" placeholder="メールアドレス"       autocomplete="email">
+          <button class="cw-info-submit" id="cw-info-submit">次へ →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: 質問入力 (初期非表示) -->
+      <div class="cw-bottom hide" id="cw-chat-area">
+        <div class="cw-chat-row">
+          <textarea class="cw-chat-input" id="cw-text" rows="1" placeholder="ご質問・ご相談をどうぞ..."></textarea>
+          <button class="cw-chat-send" id="cw-send-msg" aria-label="送信">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <button id="cw-btn" aria-label="サポートチャットを開く">
+      <span id="cw-badge">1</span>
+      <svg class="cw-ico cw-ico-chat" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg class="cw-ico cw-ico-close" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <script>
+  (function () {
+    // ── 設定 ────────────────────────────────────────────────────
+    const CW_LINE_URL = ''; // 例: 'https://lin.ee/XXXXXXX'
+
+    // ── 要素 ────────────────────────────────────────────────────
+    const root      = document.getElementById('cw-root');
+    const btn       = document.getElementById('cw-btn');
+    const badge     = document.getElementById('cw-badge');
+    const msgs      = document.getElementById('cw-msgs');
+    const infoArea  = document.getElementById('cw-info-area');
+    const chatArea  = document.getElementById('cw-chat-area');
+    const infoSubmit= document.getElementById('cw-info-submit');
+    const textarea  = document.getElementById('cw-text');
+    const sendBtn   = document.getElementById('cw-send-msg');
+    const lineA     = document.getElementById('cw-line-head');
+
+    let lead = { name: '', email: '' };
+
+    // LINE
+    if (CW_LINE_URL) { lineA.href = CW_LINE_URL; } else { lineA.style.display = 'none'; }
+
+    // バッジ
+    setTimeout(() => badge.classList.add('on'), 2500);
+
+    // パネル開閉
+    btn.addEventListener('click', () => {
+      const opening = !root.classList.contains('open');
+      root.classList.toggle('open');
+      btn.setAttribute('aria-label', opening ? 'チャットを閉じる' : 'サポートチャットを開く');
+      if (opening) {
+        badge.classList.remove('on');
+        setTimeout(() => document.getElementById('cw-n').focus(), 300);
+      }
+    });
+
+    // 外側クリックで閉じる
+    document.addEventListener('click', e => {
+      if (root.classList.contains('open') && !root.contains(e.target)) {
+        root.classList.remove('open');
+        btn.setAttribute('aria-label', 'サポートチャットを開く');
+      }
+    });
+
+    // ── ヘルパー ────────────────────────────────────────────────
+    const avSVG = '<div class="cw-msg-av"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>';
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    }
+
+    function addBubble(html, isUser) {
+      const row = document.createElement('div');
+      row.className = 'cw-row' + (isUser ? ' user' : '');
+      row.innerHTML = isUser
+        ? `<div class="cw-bubble">${html}</div>`
+        : `${avSVG}<div class="cw-bubble">${html}</div>`;
+      msgs.appendChild(row);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function showTyping() {
+      const row = document.createElement('div');
+      row.className = 'cw-row'; row.id = 'cw-typing';
+      row.innerHTML = `${avSVG}<div class="cw-bubble"><div class="cw-typing"><span></span><span></span><span></span></div></div>`;
+      msgs.appendChild(row);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function removeTyping() { document.getElementById('cw-typing')?.remove(); }
+
+    // ── Step 1: 名前・メール送信 ─────────────────────────────────
+    infoSubmit.addEventListener('click', () => {
+      const nEl = document.getElementById('cw-n');
+      const eEl = document.getElementById('cw-e');
+      let ok = true;
+      nEl.classList.toggle('err', !nEl.value.trim()); if (!nEl.value.trim()) ok = false;
+      eEl.classList.toggle('err', !eEl.value.trim() || !eEl.value.includes('@')); if (!eEl.value.trim() || !eEl.value.includes('@')) ok = false;
+      if (!ok) return;
+
+      lead.name  = nEl.value.trim();
+      lead.email = eEl.value.trim().toLowerCase();
+
+      // ユーザーバブル表示
+      addBubble(`${esc(lead.name)} / ${esc(lead.email)}`, true);
+
+      // フォームを非表示 → タイピング
+      infoArea.classList.add('hide');
+      showTyping();
+
+      setTimeout(() => {
+        removeTyping();
+        addBubble(`ありがとうございます、<strong style="color:#F5F5F7">${esc(lead.name)}様</strong>！<br>ご質問・ご相談をどうぞ。`, false);
+        chatArea.classList.remove('hide');
+        setTimeout(() => textarea.focus(), 50);
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 800);
+    });
+
+    // ── Step 2: 質問送信 ─────────────────────────────────────────
+    textarea.addEventListener('input', () => {
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.min(textarea.scrollHeight, 80) + 'px';
+    });
+    textarea.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+    sendBtn.addEventListener('click', sendMessage);
+
+    async function sendMessage() {
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      addBubble(esc(text), true);
+      textarea.value = ''; textarea.style.height = 'auto';
+      sendBtn.disabled = true;
+      chatArea.classList.add('hide');
+      showTyping();
+
+      // DB保存
+      try {
+        await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:     lead.name,
+            email:    lead.email,
+            message:  text,
+            page_url: location.pathname,
+          }),
+        });
+      } catch { /* ネットワークエラーでもUIは続行 */ }
+
+      setTimeout(() => {
+        removeTyping();
+        addBubble('メッセージを受け取りました！<br>確認次第、<strong style="color:#F5F5F7">' + esc(lead.email) + '</strong> 宛にご返信いたします 🔒', false);
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 900);
+    }
+  })();
+  </script>
+
 </body>
-</html>

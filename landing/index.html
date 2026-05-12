@@ -15,7 +15,10 @@
       pixel-8a-2.png → Pixel 8a alternate angle
   -->
 
-  <!-- Fonts: SF Pro stack (renders as SF Pro on macOS — Apple's actual font) -->
+  <!-- Space Grotesk for display headings; SF Pro stack for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ── RESET ───────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,8 +26,9 @@
 
     /* ── DESIGN TOKENS ───────────────────────────────────────── */
     :root {
-      /* Typography — Apple SF Pro stack */
-      --font: -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      /* Typography — Space Grotesk for display, SF Pro for body */
+      --font:         -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-display: "Space Grotesk", -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
 
       /* Colors */
       --black:        #000000;
@@ -41,9 +45,12 @@
       --gray-2:       #6E6E73;   /* captions */
       --gray-3:       #48484A;   /* disabled */
 
-      /* Accent */
+      /* Accent — Classified Amber */
       --white:        #FFFFFF;
-      --blue:         #0071E3;   /* Apple blue for links */
+      --accent:       #C8A96E;   /* Classified Amber — luxury gold */
+      --accent-hover: #B89858;   /* hover state */
+      --accent-dim:   rgba(200,169,110,0.12);
+      --accent-glow:  rgba(200,169,110,0.25);
 
       /* Spacing */
       --nav-h:        52px;
@@ -131,7 +138,7 @@
       font-size: 12px;
       font-weight: 400;
       color: var(--white);
-      background: var(--blue);
+      background: var(--accent);
       border: none;
       border-radius: 980px;
       padding: 7px 16px;
@@ -140,7 +147,7 @@
       transition: background 0.2s;
       white-space: nowrap;
     }
-    .nav-buy:hover { background: #0077ED; }
+    .nav-buy:hover { background: #B89858; }
 
     /* ══════════════════════════════════════════════════════════
        HERO — Full viewport, product float
@@ -183,10 +190,11 @@
 
     /* PRIMARY — the silver gradient headline */
     .hero-title {
+      font-family: var(--font-display);
       font-size: clamp(48px, 7vw, 80px);
       font-weight: 700;
       line-height: 1.05;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.03em;
       text-align: center;
       background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
       -webkit-background-clip: text;
@@ -223,7 +231,7 @@
       font-size: 17px;
       font-weight: 400;
       color: var(--white);
-      background: var(--blue);
+      background: var(--accent);
       border: none;
       border-radius: 980px;
       padding: 12px 28px;
@@ -231,11 +239,11 @@
       text-decoration: none;
       transition: background 0.2s;
     }
-    .btn-blue:hover { background: #0077ED; }
+    .btn-blue:hover { background: #B89858; }
     .btn-ghost {
       font-size: 17px;
       font-weight: 400;
-      color: var(--blue);
+      color: var(--accent);
       background: transparent;
       border: none;
       cursor: pointer;
@@ -246,7 +254,7 @@
       transition: color 0.2s;
     }
     .btn-ghost::after { content: ' ›'; }
-    .btn-ghost:hover { color: #0077ED; }
+    .btn-ghost:hover { color: #B89858; }
 
     /* Hero product image — large, centered, floating */
     .hero-image {
@@ -375,7 +383,7 @@
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--accent);
       margin-bottom: 10px;
     }
     .tile-title {
@@ -399,13 +407,13 @@
       gap: 4px;
       font-size: 17px;
       font-weight: 400;
-      color: var(--blue);
+      color: var(--accent);
       text-decoration: none;
       margin-top: 14px;
       transition: color 0.2s;
     }
     .tile-link::after { content: ' ›'; }
-    .tile-link:hover { color: #0077ED; }
+    .tile-link:hover { color: #B89858; }
 
     /* Gradient overlay for readability over images */
     .tile-overlay {
@@ -466,14 +474,15 @@
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--accent);
       margin-bottom: 16px;
     }
     .feature-title {
+      font-family: var(--font-display);
       font-size: clamp(36px, 4vw, 56px);
       font-weight: 700;
       line-height: 1.07;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.03em;
       background: linear-gradient(180deg, #F5F5F7 0%, #AEAEB2 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -567,7 +576,7 @@
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--accent);
       margin-bottom: 12px;
     }
     .specs-title {
@@ -638,10 +647,11 @@
       margin-bottom: 16px;
     }
     .pricing-title {
+      font-family: var(--font-display);
       font-size: clamp(36px, 5vw, 64px);
       font-weight: 700;
       line-height: 1.05;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.03em;
       background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -705,7 +715,7 @@
       font-size: 17px;
       font-weight: 400;
       color: var(--white);
-      background: var(--blue);
+      background: var(--accent);
       border: none;
       border-radius: 980px;
       padding: 14px 32px;
@@ -713,11 +723,11 @@
       text-decoration: none;
       transition: background 0.2s;
     }
-    .btn-large-blue:hover { background: #0077ED; }
+    .btn-large-blue:hover { background: #B89858; }
     .btn-large-ghost {
       font-size: 17px;
       font-weight: 400;
-      color: var(--blue);
+      color: var(--accent);
       background: transparent;
       border: none;
       cursor: pointer;
@@ -728,7 +738,7 @@
       transition: color 0.2s;
     }
     .btn-large-ghost::after { content: ' ›'; }
-    .btn-large-ghost:hover { color: #0077ED; }
+    .btn-large-ghost:hover { color: #B89858; }
 
     /* ══════════════════════════════════════════════════════════
        FOOTER
@@ -845,7 +855,7 @@
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--accent);
       margin-bottom: 14px;
     }
     .contact-title {
@@ -888,8 +898,8 @@
     }
     .cf-input::placeholder { color: var(--gray-3); }
     .cf-input:focus {
-      border-color: var(--blue);
-      background: rgba(0,113,227,0.05);
+      border-color: var(--accent);
+      background: rgba(200,169,110,0.05);
     }
     .cf-input.invalid { border-color: #FF453A; }
     .cf-textarea { min-height: 120px; line-height: 1.6; }
@@ -898,7 +908,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: var(--blue);
+      background: var(--accent);
       color: #fff;
       border: none;
       border-radius: 980px;
@@ -910,7 +920,7 @@
       transition: background 0.2s, opacity 0.2s;
       align-self: flex-start;
     }
-    .cf-submit:hover { background: #0077ED; }
+    .cf-submit:hover { background: #B89858; }
     .cf-submit:disabled { opacity: 0.6; cursor: not-allowed; }
     @keyframes cf-spin { to { transform: rotate(360deg); } }
     .cf-error { font-size: 13px; color: #FF453A; margin-top: 4px; }
@@ -948,6 +958,7 @@
         <li><a href="#features">機能</a></li>
         <li><a href="#specs">仕様</a></li>
         <li><a href="#pricing">価格</a></li>
+        <li><a href="faq.html">FAQ</a></li>
         <li><a href="#contact">サポート</a></li>
       </ul>
       <a href="#pricing" class="nav-buy">今すぐ購入</a>
@@ -1324,10 +1335,10 @@
       <div class="footer-col">
         <p class="footer-col-title">サポート</p>
         <ul>
-          <li><a href="#">お問い合わせ</a></li>
-          <li><a href="#">よくある質問</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+          <li><a href="faq.html">よくある質問</a></li>
           <li><a href="#">初期設定ガイド</a></li>
-          <li><a href="#">保証について</a></li>
+          <li><a href="tokushoho.html">保証について</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1491,9 +1502,9 @@
       box-shadow: 0 6px 28px rgba(0,0,0,0.5);
     }
     #ed-btn.active {
-      background: #0071E3;
+      background: #C8A96E;
       border-color: transparent;
-      box-shadow: 0 4px 20px rgba(0,113,227,0.4);
+      box-shadow: 0 4px 20px rgba(200,169,110,0.4);
     }
     #ed-btn svg { flex-shrink: 0; }
 
@@ -1547,7 +1558,7 @@
       transition: border-color 0.15s;
       letter-spacing: 0.05em;
     }
-    #ed-pw-input:focus { border-color: #0071E3; }
+    #ed-pw-input:focus { border-color: #C8A96E; }
     #ed-pw-input.error { border-color: #FF453A; animation: ed-shake 0.3s; }
     @keyframes ed-shake {
       0%,100% { transform: translateX(0); }
@@ -1579,7 +1590,7 @@
     }
     #ed-dialog-btns button:hover { opacity: 0.85; }
     #ed-pw-cancel-btn { background: rgba(255,255,255,0.08); color: #AEAEB2; }
-    #ed-pw-ok-btn     { background: #0071E3; color: #fff; }
+    #ed-pw-ok-btn     { background: #C8A96E; color: #fff; }
 
     /* ── Floating toolbar (bottom-center, visible in edit mode) ── */
     #ed-bar {
@@ -1650,7 +1661,7 @@
       left: 50%;
       transform: translateX(-50%) translateY(-6px);
       z-index: 999999;
-      background: #0071E3;
+      background: #C8A96E;
       color: #fff;
       font-family: -apple-system,"SF Pro Text",sans-serif;
       font-size: 12px;
@@ -1676,10 +1687,10 @@
       transition: box-shadow 0.15s;
     }
     body.edit-mode [contenteditable="true"]:hover {
-      box-shadow: 0 0 0 2px rgba(0,113,227,0.4);
+      box-shadow: 0 0 0 2px rgba(200,169,110,0.4);
     }
     body.edit-mode [contenteditable="true"]:focus {
-      box-shadow: 0 0 0 2px #0071E3;
+      box-shadow: 0 0 0 2px #C8A96E;
     }
 
     /* ── Image replace highlight ── */
@@ -1688,7 +1699,7 @@
       transition: box-shadow 0.15s, transform 0.15s;
     }
     body.edit-mode img.ed-img:hover {
-      box-shadow: 0 0 0 3px #0071E3, 0 0 0 6px rgba(0,113,227,0.2);
+      box-shadow: 0 0 0 3px #C8A96E, 0 0 0 6px rgba(200,169,110,0.2);
       transform: scale(1.005);
     }
 
@@ -1790,8 +1801,8 @@
       cursor: text;
     }
     #ed-size-display:focus {
-      border-color: #0071E3;
-      background: rgba(0,113,227,0.1);
+      border-color: #C8A96E;
+      background: rgba(200,169,110,0.1);
     }
 
     /* Font family dropdown */
@@ -1810,7 +1821,7 @@
       max-width: 130px;
       transition: border-color 0.12s;
     }
-    #ed-font-select:focus { border-color: #0071E3; }
+    #ed-font-select:focus { border-color: #C8A96E; }
     #ed-font-select option { background: #1C1C1E; color: #F5F5F7; }
 
     /* ── Toast notification ── */
@@ -1861,7 +1872,7 @@
       transition: background 0.2s, transform 0.15s;
     }
     #cart-btn:hover { background: rgba(58,58,62,0.98); transform: scale(1.02); }
-    #cart-btn.has-items { background: #0071E3; border-color: transparent; box-shadow: 0 4px 20px rgba(0,113,227,0.4); }
+    #cart-btn.has-items { background: #C8A96E; border-color: transparent; box-shadow: 0 4px 20px rgba(200,169,110,0.4); }
     .cart-count-badge {
       background: #FF3B30;
       color: #fff;
@@ -2017,7 +2028,7 @@
     .cart-checkout-btn {
       display: block;
       width: 100%;
-      background: #0071E3;
+      background: #C8A96E;
       color: #fff;
       text-align: center;
       border: none;
@@ -2031,7 +2042,7 @@
       transition: background 0.2s;
       box-sizing: border-box;
     }
-    .cart-checkout-btn:hover { background: #0077ED; }
+    .cart-checkout-btn:hover { background: #B89858; }
     .cart-note { font-size: 12px; color: #6E6E73; text-align: center; margin-top: 10px; }
   </style>
 
@@ -2643,7 +2654,7 @@
       justify-content: center; font-size: 11px; font-weight: 700;
       transition: background 0.2s, color 0.2s;
     }
-    .co-step.active .co-step-num { background: #0071E3; color: #fff; }
+    .co-step.active .co-step-num { background: #C8A96E; color: #fff; }
     .co-step.done   .co-step-num { background: #30D158; color: #fff; }
     .co-step-line {
       width: 32px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 4px;
@@ -2674,7 +2685,7 @@
       transition: border-color 0.15s, background 0.15s;
     }
     .co-input::placeholder { color: #48484A; }
-    .co-input:focus { border-color: #0071E3; background: rgba(0,113,227,0.06); }
+    .co-input:focus { border-color: #C8A96E; background: rgba(200,169,110,0.06); }
     .co-input.invalid { border-color: #FF453A; }
     .co-select {
       appearance: none; -webkit-appearance: none;
@@ -2702,13 +2713,13 @@
 
     /* ── Bank info box ── */
     .co-bank-box {
-      background: rgba(0,113,227,0.08);
-      border: 1px solid rgba(0,113,227,0.25);
+      background: rgba(200,169,110,0.08);
+      border: 1px solid rgba(200,169,110,0.25);
       border-radius: 12px; padding: 16px;
       margin-bottom: 16px;
     }
-    .co-bank-box h4 { font-size: 12px; font-weight: 600; color: #0071E3; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 12px; }
-    .co-bank-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(0,113,227,0.15); font-size: 14px; }
+    .co-bank-box h4 { font-size: 12px; font-weight: 600; color: #C8A96E; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 12px; }
+    .co-bank-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(200,169,110,0.15); font-size: 14px; }
     .co-bank-row:last-child { border-bottom: none; }
     .co-bank-key { color: #6E6E73; }
     .co-bank-val { color: #F5F5F7; font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -2736,10 +2747,10 @@
     .co-order-num strong { font-size: 16px; color: #F5F5F7; font-variant-numeric: tabular-nums; letter-spacing: 0.05em; }
     .co-copy-btn {
       margin-left: auto; background: transparent; border: none;
-      color: #0071E3; font-size: 12px; font-family: inherit; cursor: pointer;
+      color: #C8A96E; font-size: 12px; font-family: inherit; cursor: pointer;
       padding: 4px 8px; border-radius: 6px; transition: background 0.12s;
     }
-    .co-copy-btn:hover { background: rgba(0,113,227,0.1); }
+    .co-copy-btn:hover { background: rgba(200,169,110,0.1); }
     .co-note-box {
       background: rgba(255,149,0,0.08);
       border: 1px solid rgba(255,149,0,0.2);
@@ -2762,13 +2773,13 @@
     }
     .co-btn-back:hover { background: rgba(255,255,255,0.12); }
     .co-btn-next {
-      flex: 2; background: #0071E3;
+      flex: 2; background: #C8A96E;
       border: none; border-radius: 12px; padding: 14px;
       font-size: 15px; font-family: inherit; font-weight: 500;
       color: #fff; cursor: pointer; transition: background 0.15s;
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .co-btn-next:hover { background: #0077ED; }
+    .co-btn-next:hover { background: #B89858; }
     .co-btn-next:disabled { opacity: 0.5; cursor: not-allowed; }
     .co-btn-full { flex: 1; }
 
@@ -3121,5 +3132,294 @@
   })();
   </script>
 
+  <!-- ══ CHAT SUPPORT WIDGET ════════════════════════════════════ -->
+  <style>
+    #cw-root {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9997;
+      font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    #cw-btn {
+      width: 56px; height: 56px; border-radius: 50%; background: #C8A96E;
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s; position: relative;
+    }
+    #cw-btn:hover { background:#B89858; transform:scale(1.06); box-shadow:0 6px 28px rgba(0,0,0,0.6),0 0 0 4px rgba(200,169,110,0.18); }
+    #cw-btn .cw-ico { position:absolute; transition:opacity 0.22s,transform 0.22s; }
+    #cw-btn .cw-ico-chat  { opacity:1; transform:scale(1) rotate(0); }
+    #cw-btn .cw-ico-close { opacity:0; transform:scale(0.6) rotate(-60deg); }
+    #cw-root.open #cw-btn .cw-ico-chat  { opacity:0; transform:scale(0.6) rotate(60deg); }
+    #cw-root.open #cw-btn .cw-ico-close { opacity:1; transform:scale(1) rotate(0); }
+    #cw-badge {
+      position:absolute; top:-3px; right:-3px; width:18px; height:18px;
+      background:#FF3B30; border:2px solid #000; border-radius:50%;
+      font-size:10px; font-weight:700; color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transform:scale(0.5);
+      transition:opacity 0.2s,transform 0.25s cubic-bezier(0.34,1.56,0.64,1); pointer-events:none;
+    }
+    #cw-badge.on { opacity:1; transform:scale(1); }
+
+    #cw-panel {
+      position:absolute; bottom:68px; right:0; width:320px;
+      background:#141414; border:1px solid rgba(255,255,255,0.09);
+      border-radius:18px; box-shadow:0 24px 64px rgba(0,0,0,0.75);
+      overflow:hidden; display:flex; flex-direction:column;
+      opacity:0; transform:translateY(10px) scale(0.96);
+      transform-origin:bottom right; pointer-events:none;
+      transition:opacity 0.26s cubic-bezier(0.25,0.1,0.25,1),transform 0.26s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    #cw-root.open #cw-panel { opacity:1; transform:translateY(0) scale(1); pointer-events:all; }
+
+    .cw-head { display:flex; align-items:center; gap:10px; padding:13px 15px; background:#1c1c1e; border-bottom:1px solid rgba(255,255,255,0.07); flex-shrink:0; }
+    .cw-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#C8A96E 0%,#7A5210 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cw-head-info { flex:1; min-width:0; }
+    .cw-head-name { font-size:13px; font-weight:600; color:#F5F5F7; letter-spacing:-0.01em; }
+    .cw-online { display:flex; align-items:center; gap:4px; margin-top:1px; }
+    .cw-dot { width:6px; height:6px; border-radius:50%; background:#30D158; animation:cw-pulse 2.5s ease-in-out infinite; }
+    @keyframes cw-pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .cw-online-lbl { font-size:11px; color:#86868B; }
+    .cw-head-line { display:flex; align-items:center; gap:5px; padding:5px 9px; background:rgba(6,199,85,0.12); border:1px solid rgba(6,199,85,0.25); border-radius:980px; text-decoration:none; font-size:11px; font-weight:600; color:#06C755; flex-shrink:0; transition:background 0.15s; }
+    .cw-head-line:hover { background:rgba(6,199,85,0.2); }
+
+    .cw-msgs { flex:1; padding:14px 13px 8px; display:flex; flex-direction:column; gap:9px; max-height:260px; overflow-y:auto; min-height:80px; }
+    .cw-msgs::-webkit-scrollbar { width:3px; }
+    .cw-msgs::-webkit-scrollbar-thumb { background:#3a3a3c; border-radius:2px; }
+
+    .cw-row { display:flex; gap:7px; align-items:flex-end; }
+    .cw-row.user { justify-content:flex-end; }
+    .cw-msg-av { width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#C8A96E 0%,#7A5210 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cw-bubble { background:#2c2c2e; border-radius:14px 14px 14px 4px; padding:9px 12px; font-size:12.5px; line-height:1.55; color:#C7C7CC; max-width:calc(100% - 34px); }
+    .cw-row.user .cw-bubble { background:#C8A96E; color:#000; border-radius:14px 14px 4px 14px; font-weight:500; }
+    .cw-typing { display:flex; gap:4px; align-items:center; padding:6px 2px; }
+    .cw-typing span { width:6px; height:6px; border-radius:50%; background:#86868B; animation:cw-bounce 1.2s ease-in-out infinite; }
+    .cw-typing span:nth-child(2) { animation-delay:0.18s; }
+    .cw-typing span:nth-child(3) { animation-delay:0.36s; }
+    @keyframes cw-bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+
+    /* Bottom area */
+    .cw-bottom { padding:10px 12px; border-top:1px solid rgba(255,255,255,0.07); background:#1c1c1e; flex-shrink:0; }
+    .cw-bottom.hide { display:none; }
+
+    /* Info form (name + email) */
+    .cw-info-form { display:flex; flex-direction:column; gap:7px; }
+    .cw-field { width:100%; padding:8px 12px; background:#2c2c2e; border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#F5F5F7; font-size:12.5px; font-family:inherit; outline:none; transition:border-color 0.18s; }
+    .cw-field:focus { border-color:rgba(200,169,110,0.45); }
+    .cw-field::placeholder { color:#48484A; }
+    .cw-field.err { border-color:rgba(255,59,48,0.55); }
+    .cw-info-submit { padding:9px; background:#C8A96E; border:none; border-radius:10px; font-size:12.5px; font-weight:600; color:#000; cursor:pointer; transition:background 0.15s; }
+    .cw-info-submit:hover { background:#B89858; }
+    .cw-info-submit:disabled { opacity:0.4; cursor:not-allowed; }
+
+    /* Chat input (message) */
+    .cw-chat-row { display:flex; gap:8px; align-items:flex-end; }
+    .cw-chat-input { flex:1; background:#2c2c2e; border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:8px 14px; color:#F5F5F7; font-size:13px; font-family:inherit; outline:none; resize:none; line-height:1.4; max-height:80px; overflow-y:auto; transition:border-color 0.18s; }
+    .cw-chat-input:focus { border-color:rgba(200,169,110,0.45); }
+    .cw-chat-input::placeholder { color:#48484A; }
+    .cw-chat-send { width:34px; height:34px; border-radius:50%; background:#C8A96E; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s,transform 0.12s; }
+    .cw-chat-send:hover { background:#B89858; transform:scale(1.08); }
+    .cw-chat-send:disabled { opacity:0.35; cursor:not-allowed; transform:none; }
+
+    @media (max-width:480px) {
+      #cw-root { bottom:72px; right:14px; }
+      #cw-panel { width:calc(100vw - 28px); right:0; bottom:66px; }
+    }
+  </style>
+
+  <div id="cw-root">
+    <div id="cw-panel" role="dialog" aria-modal="true" aria-label="サポートチャット">
+
+      <!-- Header -->
+      <div class="cw-head">
+        <div class="cw-avatar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="cw-head-info">
+          <div class="cw-head-name">AntiSpy サポート</div>
+          <div class="cw-online"><div class="cw-dot"></div><span class="cw-online-lbl">通常 数時間以内に返信</span></div>
+        </div>
+        <a id="cw-line-head" href="#" target="_blank" rel="noopener" class="cw-head-line" style="display:none">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          LINE
+        </a>
+      </div>
+
+      <!-- Messages -->
+      <div class="cw-msgs" id="cw-msgs">
+        <div class="cw-row">
+          <div class="cw-msg-av"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="cw-bubble">こんにちは！AntiSpy Phoneサポートです。<br>まず、お名前とメールアドレスをご入力ください。</div>
+        </div>
+      </div>
+
+      <!-- Step 1: 名前・メール -->
+      <div class="cw-bottom" id="cw-info-area">
+        <div class="cw-info-form">
+          <input class="cw-field" id="cw-n" type="text"  placeholder="お名前（フルネーム）" autocomplete="name">
+          <input class="cw-field" id="cw-e" type="email" placeholder="メールアドレス"       autocomplete="email">
+          <button class="cw-info-submit" id="cw-info-submit">次へ →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: 質問入力 (初期非表示) -->
+      <div class="cw-bottom hide" id="cw-chat-area">
+        <div class="cw-chat-row">
+          <textarea class="cw-chat-input" id="cw-text" rows="1" placeholder="ご質問・ご相談をどうぞ..."></textarea>
+          <button class="cw-chat-send" id="cw-send-msg" aria-label="送信">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <button id="cw-btn" aria-label="サポートチャットを開く">
+      <span id="cw-badge">1</span>
+      <svg class="cw-ico cw-ico-chat" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg class="cw-ico cw-ico-close" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <script>
+  (function () {
+    // ── 設定 ────────────────────────────────────────────────────
+    const CW_LINE_URL = ''; // 例: 'https://lin.ee/XXXXXXX'
+
+    // ── 要素 ────────────────────────────────────────────────────
+    const root      = document.getElementById('cw-root');
+    const btn       = document.getElementById('cw-btn');
+    const badge     = document.getElementById('cw-badge');
+    const msgs      = document.getElementById('cw-msgs');
+    const infoArea  = document.getElementById('cw-info-area');
+    const chatArea  = document.getElementById('cw-chat-area');
+    const infoSubmit= document.getElementById('cw-info-submit');
+    const textarea  = document.getElementById('cw-text');
+    const sendBtn   = document.getElementById('cw-send-msg');
+    const lineA     = document.getElementById('cw-line-head');
+
+    let lead = { name: '', email: '' };
+
+    // LINE
+    if (CW_LINE_URL) { lineA.href = CW_LINE_URL; } else { lineA.style.display = 'none'; }
+
+    // バッジ
+    setTimeout(() => badge.classList.add('on'), 2500);
+
+    // パネル開閉
+    btn.addEventListener('click', () => {
+      const opening = !root.classList.contains('open');
+      root.classList.toggle('open');
+      btn.setAttribute('aria-label', opening ? 'チャットを閉じる' : 'サポートチャットを開く');
+      if (opening) {
+        badge.classList.remove('on');
+        setTimeout(() => document.getElementById('cw-n').focus(), 300);
+      }
+    });
+
+    // 外側クリックで閉じる
+    document.addEventListener('click', e => {
+      if (root.classList.contains('open') && !root.contains(e.target)) {
+        root.classList.remove('open');
+        btn.setAttribute('aria-label', 'サポートチャットを開く');
+      }
+    });
+
+    // ── ヘルパー ────────────────────────────────────────────────
+    const avSVG = '<div class="cw-msg-av"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>';
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    }
+
+    function addBubble(html, isUser) {
+      const row = document.createElement('div');
+      row.className = 'cw-row' + (isUser ? ' user' : '');
+      row.innerHTML = isUser
+        ? `<div class="cw-bubble">${html}</div>`
+        : `${avSVG}<div class="cw-bubble">${html}</div>`;
+      msgs.appendChild(row);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function showTyping() {
+      const row = document.createElement('div');
+      row.className = 'cw-row'; row.id = 'cw-typing';
+      row.innerHTML = `${avSVG}<div class="cw-bubble"><div class="cw-typing"><span></span><span></span><span></span></div></div>`;
+      msgs.appendChild(row);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function removeTyping() { document.getElementById('cw-typing')?.remove(); }
+
+    // ── Step 1: 名前・メール送信 ─────────────────────────────────
+    infoSubmit.addEventListener('click', () => {
+      const nEl = document.getElementById('cw-n');
+      const eEl = document.getElementById('cw-e');
+      let ok = true;
+      nEl.classList.toggle('err', !nEl.value.trim()); if (!nEl.value.trim()) ok = false;
+      eEl.classList.toggle('err', !eEl.value.trim() || !eEl.value.includes('@')); if (!eEl.value.trim() || !eEl.value.includes('@')) ok = false;
+      if (!ok) return;
+
+      lead.name  = nEl.value.trim();
+      lead.email = eEl.value.trim().toLowerCase();
+
+      // ユーザーバブル表示
+      addBubble(`${esc(lead.name)} / ${esc(lead.email)}`, true);
+
+      // フォームを非表示 → タイピング
+      infoArea.classList.add('hide');
+      showTyping();
+
+      setTimeout(() => {
+        removeTyping();
+        addBubble(`ありがとうございます、<strong style="color:#F5F5F7">${esc(lead.name)}様</strong>！<br>ご質問・ご相談をどうぞ。`, false);
+        chatArea.classList.remove('hide');
+        setTimeout(() => textarea.focus(), 50);
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 800);
+    });
+
+    // ── Step 2: 質問送信 ─────────────────────────────────────────
+    textarea.addEventListener('input', () => {
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.min(textarea.scrollHeight, 80) + 'px';
+    });
+    textarea.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+    sendBtn.addEventListener('click', sendMessage);
+
+    async function sendMessage() {
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      addBubble(esc(text), true);
+      textarea.value = ''; textarea.style.height = 'auto';
+      sendBtn.disabled = true;
+      chatArea.classList.add('hide');
+      showTyping();
+
+      // DB保存
+      try {
+        await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:     lead.name,
+            email:    lead.email,
+            message:  text,
+            page_url: location.pathname,
+          }),
+        });
+      } catch { /* ネットワークエラーでもUIは続行 */ }
+
+      setTimeout(() => {
+        removeTyping();
+        addBubble('メッセージを受け取りました！<br>確認次第、<strong style="color:#F5F5F7">' + esc(lead.email) + '</strong> 宛にご返信いたします 🔒', false);
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 900);
+    }
+  })();
+  </script>
+
 </body>
-</html>

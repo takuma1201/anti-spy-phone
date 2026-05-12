@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>よくある質問 — AntiSpy Phone</title>
+  <meta name="description" content="AntiSpy Phone についてのよくある質問と回答。購入前の疑問から、GrapheneOSの詳しい技術仕様まで。">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --font:         -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-display: "Space Grotesk", -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      --black:        #000000;
+      --surface:      #141414;
+      --surface-2:    #1c1c1e;
+      --border:       #2c2c2e;
+      --silver-1:     #F5F5F7;
+      --silver-2:     #C7C7CC;
+      --silver-3:     #AEAEB2;
+      --gray-1:       #86868B;
+      --gray-2:       #6E6E73;
+      --gray-3:       #48484A;
+      --accent:       #C8A96E;
+      --accent-dim:   rgba(200,169,110,0.12);
+      --nav-h:        52px;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--silver-1);
+      font-family: var(--font);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      height: var(--nav-h);
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 0 22px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #F5F5F7 0%, #AEAEB2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-back {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.7; }
+    .nav-back::before { content: '‹'; font-size: 16px; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 60px) 22px 120px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.05s forwards;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+    .page-subtitle {
+      font-size: 17px;
+      color: var(--gray-1);
+      margin-bottom: 64px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.2s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SEARCH ── */
+    .faq-search-wrap {
+      position: relative;
+      margin-bottom: 56px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.25s forwards;
+    }
+    .faq-search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-2);
+      pointer-events: none;
+      font-size: 16px;
+    }
+    #faq-search {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--silver-1);
+      font-family: var(--font);
+      font-size: 15px;
+      padding: 14px 16px 14px 44px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #faq-search::placeholder { color: var(--gray-3); }
+    #faq-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200,169,110,0.15);
+    }
+
+    /* ── SECTION ── */
+    .faq-section {
+      margin-bottom: 56px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .faq-section:nth-child(1) { animation-delay: 0.3s; }
+    .faq-section:nth-child(2) { animation-delay: 0.4s; }
+    .faq-section:nth-child(3) { animation-delay: 0.5s; }
+
+    .faq-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .faq-section-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--silver-1);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── ACCORDION ── */
+    .faq-list {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-item.hidden { display: none; }
+
+    .faq-q {
+      width: 100%;
+      background: var(--surface);
+      border: none;
+      padding: 20px 22px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      transition: background 0.15s;
+    }
+    .faq-q:hover { background: var(--surface-2); }
+    .faq-item.open .faq-q { background: var(--surface-2); }
+
+    .faq-q-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--silver-2);
+      line-height: 1.5;
+      flex: 1;
+      transition: color 0.2s;
+    }
+    .faq-item.open .faq-q-text { color: var(--silver-1); }
+
+    .faq-q-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      transition: background 0.2s, border-color 0.2s, transform 0.3s;
+    }
+    .faq-q-icon svg {
+      width: 10px;
+      height: 10px;
+      stroke: var(--gray-1);
+      transition: stroke 0.2s;
+    }
+    .faq-item.open .faq-q-icon {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      transform: rotate(45deg);
+    }
+    .faq-item.open .faq-q-icon svg { stroke: var(--accent); }
+
+    .faq-a {
+      display: none;
+      background: var(--surface-2);
+      padding: 0 22px 22px;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    .faq-a-inner {
+      font-size: 14px;
+      color: var(--gray-1);
+      line-height: 1.8;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .faq-a-inner p { margin-bottom: 10px; }
+    .faq-a-inner p:last-child { margin-bottom: 0; }
+    .faq-a-inner ul {
+      padding-left: 18px;
+      margin-bottom: 10px;
+    }
+    .faq-a-inner ul li { margin-bottom: 6px; }
+    .faq-a-inner strong { color: var(--silver-3); }
+    .faq-a-inner a { color: var(--accent); text-decoration: none; }
+    .faq-a-inner a:hover { text-decoration: underline; }
+    .faq-a-inner code {
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 12px;
+      background: rgba(255,255,255,0.06);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--silver-3);
+    }
+
+    /* ── NO RESULTS ── */
+    #faq-no-results {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-2);
+      font-size: 15px;
+    }
+    #faq-no-results .icon { font-size: 32px; margin-bottom: 12px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 22px;
+      text-align: center;
+    }
+    .footer-copy { font-size: 12px; color: var(--gray-2); }
+
+    @media (max-width: 600px) {
+      .faq-q { padding: 16px 16px; }
+      .faq-q-text { font-size: 14px; }
+      .faq-a { padding: 0 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AntiSpy Phone</a>
+      <a href="index.html" class="nav-back">トップに戻る</a>
+    </div>
+  </nav>
+
+  <main>
+    <p class="page-eyebrow">Support</p>
+    <h1 class="page-title">よくある質問</h1>
+    <p class="page-subtitle">購入前の疑問から、GrapheneOSの詳しい技術仕様まで。<br>お探しの回答が見つからない場合は <a href="mailto:info@socialboost.jp" style="color:var(--accent);text-decoration:none;">info@socialboost.jp</a> までお問い合わせください。</p>
+
+    <div class="faq-search-wrap">
+      <span class="faq-search-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <input type="text" id="faq-search" placeholder="質問を検索…" autocomplete="off" spellcheck="false">
+    </div>
+
+    <!-- ─── SECTION 1: 購入前 ─── -->
+    <div class="faq-section" id="section-before">
+      <p class="faq-section-label">Section 01</p>
+      <h2 class="faq-section-title">購入前の疑問</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneとは何ですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>AntiSpy Phoneは、ジャーナリスト・弁護士・経営幹部・活動家・その他のプライバシーを必要とする方々が、デジタル監視から身を守るための手段として、プライバシーとセキュリティを最大限に重視して構築されたスマートフォンです。</p>
+            <p>ハードウェアにはGoogle Pixel 9 Proを採用し、プライバシー重視のオペレーティングシステム GrapheneOSを搭載しています。デバイスはお客様のもとに届く前に、プライバシーとセキュリティを強化するための綿密な設定と最適化が施されています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">なぜApple iPhoneやAndroidスマートフォンではなくAntiSpy Phoneなのですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>AppleのiOSとGoogle Android（標準搭載）は、いずれも大量のユーザーデータを収集します。iOSはAppleのプライベートなクローズドソースエコシステムに縛られており、バックドアの可能性やAppleへのデータ開示リクエストに対するリスクが伴います。標準Androidは広告のためのデータ収集で知られるGoogleサービスに依存しています。</p>
+            <p>AntiSpy PhoneはGrapheneOSを基盤としており、独立したセキュリティ研究者によって監査された真のオープンソースOSです。大手テクノロジー企業との接続を排除し、プライバシーとセキュリティを根本から優先するよう設計されています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneは完全に匿名ですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>AntiSpy Phoneは非常に高いプライバシー保護を提供しますが、完全な匿名性は保証されません。デバイスがセルラーネットワーク経由で通信する際には、ネットワーク事業者によって追跡可能なIMSIやIMEI情報が使用されます。</p>
+            <p>完全な匿名性を求める場合は、プリペイドSIM（実名登録なし）の使用、または音声・SMS通信を回避してデータのみのVPN接続を利用することをご検討ください。AntiSpy Phoneはあなたがすることを大幅に困難にしますが、既存のネットワークインフラの制約を超えることはできません。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneは技術に詳しくない人でも使えますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>ある程度の学習コストは伴いますが、ご安心ください。AntiSpy Phoneは、技術的な経験が限られているユーザーでも最大限のプライバシーを享受できるよう、最初から設定・最適化した状態でお届けします。</p>
+            <p>基本的な操作——通話、メッセージ、ウェブ閲覧——はいずれも直感的です。ただし、より高度なプライバシー機能を十分に活用するには、いくつかの新しい使い方を習得する必要があります。学習を支援するための詳細なドキュメントと継続的なサポートをご提供します。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneで通常の電話やSMSは使えますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>はい、通常の通話とSMSはどちらもご利用いただけます。ただし、標準的な通話とSMSはエンドツーエンドで暗号化されていないため、ネットワーク事業者や政府機関によるインターセプトが可能です。</p>
+            <p>より高いプライバシーを確保するため、Signal などのエンドツーエンド暗号化通信アプリの使用を強くお勧めします。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy PhoneにはどのSIMカードが使えますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>AntiSpy PhoneはGSM対応のどのSIMカードでも動作します。最大限のプライバシーを求める方には、本人確認不要で購入できるプリペイドSIMをお勧めします。なお、eSIMには対応していません（eSIMはIMEIとの紐付けが必要なため、デバイスの追跡性が高まります）。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneはどのようなメッセージングアプリやサービスをサポートしていますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>AntiSpy PhoneはSignal（おすすめ）、Wire、Briar、Session、Wickrなど、プライバシー重視の幅広いメッセージングアプリをサポートしています。</p>
+            <p>WhatsAppやTelegramのような主流アプリも使用できますが、これらはSignalほど包括的なプライバシー保護は提供されません。標準SMSアプリも含まれていますが、セキュアな通信には暗号化された代替手段を強くお勧めします。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy PhoneはソーシャルメディアアプリやNetflixなど、一般的なアプリに対応していますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Googleサービスを必要としないほとんどのアプリは動作します。Netflixは代替アプリストアから入手でき、多くのウェブサービスはブラウザ経由でアクセスできます。</p>
+            <p>ただし、Google PlayサービスやGoogleのフレームワークへの依存が強いアプリ（一部のソーシャルメディアアプリ、銀行アプリ、ゲームなど）は動作しない場合があります。Google関連サービスなしで動作するアプリの詳細リストをご提供できます。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy PhoneはどのようなOSアップデートを受けられますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>GrapheneOSは定期的なセキュリティアップデートとOSの機能改善を提供しており、これらのアップデートは自動的に受信され、簡単にインストールできます。GrapheneOSは標準AndroidよりもセキュリティパッチやOS改善の反映が迅速なことで知られています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">デバイスは保証付きですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>はい、ハードウェアの欠陥に対して1年間の保証を提供しています。ソフトウェアに関しては、GrapheneOSオープンソースコミュニティが継続的なサポートとアップデートを提供しています。お客様が引き起こした損傷や不正改変による問題は保証の対象外となります。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneを購入するにはどうすればいいですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>ウェブサイトから直接ご購入いただけます。デバイスは通常、ご注文から3〜5営業日以内に発送し、追跡番号を含む確認メールをお送りします。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">返品・返金ポリシーはどのようになっていますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>初期不良の場合は、お届けから7日以内にご連絡いただければ、同等品との交換対応をいたします。お客様都合による開封済みデバイスの返品・返金はお受けできません。ご不明な点はご注文前にお問い合わせください。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">デバイスを受け取った後、サポートは受けられますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>はい、メールによるカスタマーサポートをご提供しています（平日10:00〜18:00）。また、設定・最適化・使い方に関するガイドを含む包括的なドキュメントもご用意しています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneには月額費用がかかりますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>いいえ、月額サブスクリプション費用はありません。AntiSpy Phoneは一度ご購入いただければ、継続的な費用なくご利用いただけます。ただし、通信事業者のSIMカード料金は別途必要です。また、使用するVPNサービスによっては追加費用が発生する場合があります。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">デバイスはどのように配送されますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>デバイスは追跡番号付きの安全な梱包でお届けします。プライバシーを重視し、目立たない外装での配送をご希望の場合は、ご注文時にお申し付けください。</p>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── SECTION 2: 初めての方へ ─── -->
+    <div class="faq-section" id="section-beginners">
+      <p class="faq-section-label">Section 02</p>
+      <h2 class="faq-section-title">初めての方へ</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">GrapheneOSとは何ですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>GrapheneOSは、Google Pixelスマートフォン向けのオープンソースでプライバシー重視のモバイルOSです。Androidをベースとしつつも、プライバシーとセキュリティを最優先にゼロから再設計されています。</p>
+            <p>Googleサービスなしで動作し、セキュリティ研究者コミュニティによって独立して監査されています。高いプライバシーニーズを持つ方々——ジャーナリスト、弁護士、活動家、プライバシーを大切にするすべての人——に広く推奨されているOSです。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">なぜGoogle Pixelなのですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Google PixelはGrapheneOSが正式にサポートする唯一のデバイスです。PixelにはTitanセキュリティチップが搭載されており、強力なハードウェアレベルのセキュリティ機能を実現します。また、Pixelはブートローダーの安全なアンロック・リロックをサポートしており、悪意のある改変なしにGrapheneOSを正しくインストールできます。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Google Playストアからアプリをダウンロードできますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>標準のGoogle Playストアは搭載されていません。代わりに、オープンソースアプリの優れたリポジトリであるF-Droidと、Playストアのアプリにも対応できるAuroraストアを設定しています。</p>
+            <p>Google Playサービス（プッシュ通知や位置情報APIなどをGoogle経由で提供するサービス）なしで動作するアプリであれば、利用できます。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">既存のAndroidやiPhoneからデータを移行できますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>連絡先、写真、ファイル、メッセージ（Signal利用の場合）などのデータは移行できます。ただし、アプリデータの完全な移行（ゲームのセーブデータや設定など）はAppleやGoogleのクローズドなバックアップシステムへの依存から難しい場合があります。Google/Apple依存のシステムから離れる旅は、完璧ではなくとも、プライバシー保護のためには重要なステップです。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Google Mapsなどのサービスは使えますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Google Mapsアプリは動作しませんが、代替手段があります。OsmAnd（OpenStreetMapベースのオフライン地図）やMaps.meはプライバシーを保護しながら使用できます。Google Mapsはブラウザ経由でアクセスすることも可能ですが、トラッキングの懸念があります。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">このデバイスをメインスマートフォンとして使えますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>はい、メインスマートフォンとして十分に使えます。ただし、Google依存のアプリ（多くの銀行アプリ、特定のゲーム、Google製アプリなど）が使えないことに慣れる必要があります。多くのユーザーがAntiSpy Phoneをメイン端末として使用し、あらゆる日常的なニーズを満たしています。適応期間として2〜4週間を見込んでください。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">VPNはデバイスに搭載されていますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>ProtonVPNなどの信頼性の高いVPNアプリがプリインストールされています。VPNサービス自体はサブスクリプション料金が必要ですが（プロバイダーによります）、デバイスはVPN接続を常時優先するよう設定されています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneでバンキングアプリは使えますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>一部のバンキングアプリは動作しますが、すべてではありません。動作するかどうかは、各アプリがGoogle Play Integrityチェック（非rootデバイスであることの確認）をどの程度厳格に要求するかによります。</p>
+            <p>GrapheneOSにはこれを回避する手段がありますが、完全に保証できるわけではありません。ほとんどの銀行はウェブブラウザ経由でアクセスでき、安全な代替手段となります。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">このデバイスはどのくらいの期間サポートされますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Google Pixel 9 ProはGoogleから7年間のハードウェアサポートを受けており、GrapheneOSは特定モデルのサポートを7年間維持することを目指しています。ただし、オープンソースプロジェクトとして、GrapheneOSのサポート期間は公式にGoogleと同等とは言えません。長期的には、GrapheneOSがサポートを続ける限りアップデートを受け取ることができます。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">AntiSpy Phoneはどの国でも使えますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>AntiSpy Phoneはほとんどの国のGSMネットワークで使用できます。ただし、特定の国では暗号化ツールの使用に関する法律が異なります。また、一部の国や地域では特定の周波数帯がサポートされていない場合があります。お使いの国の法律や、デバイスが現地のネットワーク周波数に対応しているかを事前にご確認ください。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">デバイスのバッテリー持ちはどうですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Google Pixel 9 Proは優れたバッテリー性能を備えています。GrapheneOSではバックグラウンドプロセスを最小限に抑えているため、標準のAndroidよりもバッテリー持ちが改善することも多いです。ただし、常時VPN接続やTorの使用はバッテリー消費を増やします。実際の持続時間は使用状況によって異なりますが、通常の使用で1日は十分に持ちます。</p>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── SECTION 3: 上級者向け ─── -->
+    <div class="faq-section" id="section-advanced">
+      <p class="faq-section-label">Section 03</p>
+      <h2 class="faq-section-title">上級者向け</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">ブートローダーはロックされていますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>はい。GrapheneOSのインストール後、ブートローダーは再ロックされています。これにより、検証済みブートが有効化され、デバイスが改ざんされていない状態であることが確認できます。これはセキュリティにとって非常に重要な設定です。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">セキュアエンクレーブはどのように機能しますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Google PixelのTitanセキュリティチップが、主プロセッサから分離した安全なエンクレーブを提供します。このチップは、暗号鍵やバイオメトリクスデータなどの機密情報を安全に保管し、改ざんやコールドブート攻撃から保護します。たとえデバイスが押収されても、強力なパスフレーズがあれば暗号鍵が取り出されることはありません。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">GrapheneOSのベースバンドはどのように扱われていますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>ベースバンドプロセッサ（セルラー通信を担う部分）は依然としてクローズドソースですが、GrapheneOSはベースバンドを別プロセスに隔離する処理を実装しています。また、使用されていないときにセルラーラジオを完全に無効にできる機能も提供しています。ベースバンドは多くの高度なモバイルOSにとって共通の課題であり、完全な解決策は現時点では存在しません。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Torブラウジングはサポートされていますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>はい、TorブラウザとOrbot（全トラフィックをTor経由でルーティングするアプリ）がプリインストールされています。デバイスはTorをVPNと組み合わせて使用できるよう設定されており（VPN over TorまたはTor over VPN）、高度な匿名性が必要なシナリオに対応しています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">デバイスのファイルシステム暗号化について教えてください。</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>全ストレージはAES-256で暗号化されており、デバイスのロック解除に使用するPIN/パスワードに基づいて鍵が生成されます。GrapheneOSは強力なパスフレーズによる保護を採用しており（単純な6桁PINではなく、特殊文字を含む長いパスワードの使用を推奨）、ブルートフォース攻撃への耐性を高めています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">IMSIキャッチャー（StingRay）などの監視ツールから保護されますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>AntiSpy PhoneはIMSIキャッチャーのリスクを大幅に軽減しますが、完全な保護を保証するものではありません。GrapheneOSはIMSIキャッチャーからの保護に役立つセルラーネットワーク設定を提供しています。また、2G接続の無効化（2Gは傍受に脆弱）など追加の対策も施されています。究極的には、IMSIキャッチャーはセルラー通信自体に対して有効なため、完全な匿名性には必要に応じてWi-Fiのみを使用することが重要です。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">GrapheneOSは独立してセキュリティ監査を受けていますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>はい、GrapheneOSは独立したセキュリティ研究者や組織による複数の監査を受けています。コードはオープンソースであり、誰でもレビューできる透明性があります。これは、独自仕様のクローズドなOSに対する重要な優位点です。セキュリティコミュニティから強く推薦されており、EFFやPrivacy Guides（旧PrivacyTools.io）などの著名なプライバシー組織もGrapheneOSを支持しています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">マイクやカメラへのハードウェアレベルのアクセス制御はありますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>GrapheneOSはカメラとマイクへのソフトウェアレベルのアクセス制限を提供しており、アプリごとのきめ細かい権限管理が可能です。また、デバイス全体のカメラ・マイクを即時に無効化できるクイックトグルも搭載しています。なお、完全なハードウェアレベルの物理的な切り離しスイッチは搭載されていません（一部の超高セキュリティデバイスには存在しますが）。本当の意味での盗聴防止にはデバイスを別室に置くか、Faradayバッグの使用を推奨します。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">このデバイスはゼロデイ脆弱性から保護されますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>ゼロデイ脆弱性から100%保護できるデバイスは存在しません。ただし、AntiSpy PhoneはGrapheneOSの多層的なセキュリティアーキテクチャにより、このリスクを大幅に低減しています。強化されたメモリ保護、限定的な攻撃面、高速なセキュリティパッチ適用——これらの組み合わせにより、標準デバイスと比べてゼロデイ攻撃の成功を著しく困難にします。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">デバイスをルート化できますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>技術的には可能ですが、強くお勧めしません。ルート化はセキュリティモデルを大幅に損ない、検証済みブートが無効化され、悪意のあるアプリがシステム全体にアクセスできる可能性が生まれます。AntiSpy Phoneのセキュリティモデルはルートアクセスなしで構築されており、ルート化はこの保護を解除することになります。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">GrapheneOSはメタデータの漏洩を防ぎますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>GrapheneOSは多くのメタデータ漏洩を軽減しますが、すべてを防ぐことはできません。例えばMACアドレスのランダム化（Wi-Fiトラッキングを防止）が実装されています。しかし、セルラーネットワーク経由で通信する際にはIMSIやIMEIは依然として使用されます。Signal、Tor、VPNなどを組み合わせることで、メタデータ漏洩を最小限に抑えることができます。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">デバイスのファームウェアの整合性はどのように確認できますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>GrapheneOSの検証済みブート機能により、システムが起動するたびにすべてのシステムコンポーネントの暗号署名が検証されます。仮にシステムが改ざんされていれば、デバイスは起動時に警告を表示します。詳細な検証手順については、GrapheneOSの公式ドキュメントをご参照ください。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">GrapheneOSのプロファイル機能とは何ですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>GrapheneOSのマルチプロファイル機能を使うと、1台のデバイス上に複数の独立したユーザー空間を作成できます。それぞれのプロファイルは独自のアプリ、設定、データを持ち、互いに完全に隔離されています。</p>
+            <p>例えば、「仕事用プロファイル」と「個人用プロファイル」を使い分けたり、特定の用途（通常インターネット閲覧専用のプロファイルなど）のために完全に隔離された環境を作ることができます。これは機密性の高い業務に非常に有効な機能です。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">サンドボックス化されたGoogle Playサービスとは何ですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>GrapheneOSには、Google Play Servicesをサンドボックス環境内で実行できる機能があります。これにより、Googleへのアクセスを完全に隔離した状態で、Google Playサービスに依存するアプリを使用できます。</p>
+            <p>ただし、Google Playサービスを有効にすることはプライバシーの観点からトレードオフが生じます。セキュリティとアプリの互換性のバランスを取る手段として提供していますが、デフォルトでは無効化されています。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">グラフェンOSの攻撃面（アタックサーフェス）削減について教えてください。</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>GrapheneOSは複数の方法で攻撃面を削減しています：</p>
+            <ul>
+              <li>不要なシステムサービスやデーモンの無効化</li>
+              <li>より強固なアプリサンドボックスの実装</li>
+              <li>ネットワーク権限の強化（アプリ単位でのインターネットアクセス制御）</li>
+              <li>センサーアクセスの制限（アプリ単位でのカメラ・マイク・加速度センサーへのアクセス制御）</li>
+              <li>ハードウェアアイデンティファイア（MAC等）のランダム化</li>
+              <li>堅牢化されたメモリアロケータ（<code>hardened_malloc</code>）の採用</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">GrapheneOSはExploit Mitigations（脆弱性緩和機能）を備えていますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>はい、GrapheneOSはAndroidよりも大幅に強化された脆弱性緩和機能を備えています：</p>
+            <ul>
+              <li><strong>hardened_malloc</strong>：メモリの安全性を大幅に向上させるカスタムメモリアロケータ</li>
+              <li><strong>PIE（Position Independent Executable）の強制</strong>：コードインジェクション攻撃を困難にする</li>
+              <li><strong>スタックカナリア</strong>：スタックベースのバッファオーバーフロー攻撃を検出・防止</li>
+              <li><strong>CFI（Control Flow Integrity）</strong>：制御フローハイジャック攻撃を防止</li>
+              <li><strong>Shadow Callstack</strong>：リターンアドレス保護</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">このデバイスはForensic（フォレンジック）ツールに対してどの程度耐性がありますか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>AntiSpy PhoneはCellebrite UFEDやGrayKey（法執行機関が使用するフォレンジックツール）に対して高い耐性を持っています。強力なパスフレーズを使用し、未使用時にデバイスをロックした状態に保つことで、データへの不正アクセスを著しく困難にします。</p>
+            <p>ただし、絶対的な耐性を保証することはできません。フォレンジックツールは常に進化しています。法的なリスクがある環境では、デバイスの電源を切っておくことを推奨します（電源オフ状態では暗号鍵がメモリに存在しないため）。</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">デバイスの紛失や盗難に備えてリモートワイプは可能ですか？</span>
+            <span class="faq-q-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>従来の「Google Find My Device」によるリモートワイプはGoogle Playサービスがないため利用できません。ただし、GrapheneOSはデバイスを完全に暗号化しており、強力なパスフレーズを設定していれば、デバイスが盗まれてもデータへのアクセスは極めて困難です。</p>
+            <p>また、GrapheneOSには設定回数を超えた誤ったPINを入力すると自動的にデバイスを初期化する機能（デューレスPIN / Auto Wipe）があります。リモートワイプの代替として、この機能の活用を推奨しています。</p>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="faq-no-results">
+      <div class="icon">🔍</div>
+      <p>一致する質問が見つかりませんでした。<br>別のキーワードで検索するか、<a href="mailto:info@socialboost.jp" style="color:var(--accent);">直接お問い合わせください</a>。</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p class="footer-copy">© 2026 SocialBoost. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        // Close all open items in same list
+        item.closest('.faq-list').querySelectorAll('.faq-item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Search
+    const searchInput = document.getElementById('faq-search');
+    const noResults   = document.getElementById('faq-no-results');
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const text = item.querySelector('.faq-q-text').textContent.toLowerCase()
+                   + item.querySelector('.faq-a-inner').textContent.toLowerCase();
+        const match = !q || text.includes(q);
+        item.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+
+      // Show/hide sections
+      document.querySelectorAll('.faq-section').forEach(sec => {
+        const anyVisible = [...sec.querySelectorAll('.faq-item')].some(i => !i.classList.contains('hidden'));
+        sec.style.display = anyVisible ? '' : 'none';
+      });
+
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    });
+  </script>
+
+  <!-- ══ CHAT SUPPORT WIDGET ════════════════════════════════════ -->
+  <style>
+    #cw-root {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9997;
+      font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    #cw-btn {
+      width: 56px; height: 56px; border-radius: 50%; background: #C8A96E;
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s; position: relative;
+    }
+    #cw-btn:hover { background:#B89858; transform:scale(1.06); box-shadow:0 6px 28px rgba(0,0,0,0.6),0 0 0 4px rgba(200,169,110,0.18); }
+    #cw-btn .cw-ico { position:absolute; transition:opacity 0.22s,transform 0.22s; }
+    #cw-btn .cw-ico-chat  { opacity:1; transform:scale(1) rotate(0); }
+    #cw-btn .cw-ico-close { opacity:0; transform:scale(0.6) rotate(-60deg); }
+    #cw-root.open #cw-btn .cw-ico-chat  { opacity:0; transform:scale(0.6) rotate(60deg); }
+    #cw-root.open #cw-btn .cw-ico-close { opacity:1; transform:scale(1) rotate(0); }
+    #cw-badge {
+      position:absolute; top:-3px; right:-3px; width:18px; height:18px;
+      background:#FF3B30; border:2px solid #000; border-radius:50%;
+      font-size:10px; font-weight:700; color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transform:scale(0.5);
+      transition:opacity 0.2s,transform 0.25s cubic-bezier(0.34,1.56,0.64,1); pointer-events:none;
+    }
+    #cw-badge.on { opacity:1; transform:scale(1); }
+
+    #cw-panel {
+      position:absolute; bottom:68px; right:0; width:320px;
+      background:#141414; border:1px solid rgba(255,255,255,0.09);
+      border-radius:18px; box-shadow:0 24px 64px rgba(0,0,0,0.75);
+      overflow:hidden; display:flex; flex-direction:column;
+      opacity:0; transform:translateY(10px) scale(0.96);
+      transform-origin:bottom right; pointer-events:none;
+      transition:opacity 0.26s cubic-bezier(0.25,0.1,0.25,1),transform 0.26s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    #cw-root.open #cw-panel { opacity:1; transform:translateY(0) scale(1); pointer-events:all; }
+
+    .cw-head { display:flex; align-items:center; gap:10px; padding:13px 15px; background:#1c1c1e; border-bottom:1px solid rgba(255,255,255,0.07); flex-shrink:0; }
+    .cw-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#C8A96E 0%,#7A5210 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cw-head-info { flex:1; min-width:0; }
+    .cw-head-name { font-size:13px; font-weight:600; color:#F5F5F7; letter-spacing:-0.01em; }
+    .cw-online { display:flex; align-items:center; gap:4px; margin-top:1px; }
+    .cw-dot { width:6px; height:6px; border-radius:50%; background:#30D158; animation:cw-pulse 2.5s ease-in-out infinite; }
+    @keyframes cw-pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .cw-online-lbl { font-size:11px; color:#86868B; }
+    .cw-head-line { display:flex; align-items:center; gap:5px; padding:5px 9px; background:rgba(6,199,85,0.12); border:1px solid rgba(6,199,85,0.25); border-radius:980px; text-decoration:none; font-size:11px; font-weight:600; color:#06C755; flex-shrink:0; transition:background 0.15s; }
+    .cw-head-line:hover { background:rgba(6,199,85,0.2); }
+
+    .cw-msgs { flex:1; padding:14px 13px 8px; display:flex; flex-direction:column; gap:9px; max-height:260px; overflow-y:auto; min-height:80px; }
+    .cw-msgs::-webkit-scrollbar { width:3px; }
+    .cw-msgs::-webkit-scrollbar-thumb { background:#3a3a3c; border-radius:2px; }
+
+    .cw-row { display:flex; gap:7px; align-items:flex-end; }
+    .cw-row.user { justify-content:flex-end; }
+    .cw-msg-av { width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#C8A96E 0%,#7A5210 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cw-bubble { background:#2c2c2e; border-radius:14px 14px 14px 4px; padding:9px 12px; font-size:12.5px; line-height:1.55; color:#C7C7CC; max-width:calc(100% - 34px); }
+    .cw-row.user .cw-bubble { background:#C8A96E; color:#000; border-radius:14px 14px 4px 14px; font-weight:500; }
+    .cw-typing { display:flex; gap:4px; align-items:center; padding:6px 2px; }
+    .cw-typing span { width:6px; height:6px; border-radius:50%; background:#86868B; animation:cw-bounce 1.2s ease-in-out infinite; }
+    .cw-typing span:nth-child(2) { animation-delay:0.18s; }
+    .cw-typing span:nth-child(3) { animation-delay:0.36s; }
+    @keyframes cw-bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+
+    /* Bottom area */
+    .cw-bottom { padding:10px 12px; border-top:1px solid rgba(255,255,255,0.07); background:#1c1c1e; flex-shrink:0; }
+    .cw-bottom.hide { display:none; }
+
+    /* Info form (name + email) */
+    .cw-info-form { display:flex; flex-direction:column; gap:7px; }
+    .cw-field { width:100%; padding:8px 12px; background:#2c2c2e; border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#F5F5F7; font-size:12.5px; font-family:inherit; outline:none; transition:border-color 0.18s; }
+    .cw-field:focus { border-color:rgba(200,169,110,0.45); }
+    .cw-field::placeholder { color:#48484A; }
+    .cw-field.err { border-color:rgba(255,59,48,0.55); }
+    .cw-info-submit { padding:9px; background:#C8A96E; border:none; border-radius:10px; font-size:12.5px; font-weight:600; color:#000; cursor:pointer; transition:background 0.15s; }
+    .cw-info-submit:hover { background:#B89858; }
+    .cw-info-submit:disabled { opacity:0.4; cursor:not-allowed; }
+
+    /* Chat input (message) */
+    .cw-chat-row { display:flex; gap:8px; align-items:flex-end; }
+    .cw-chat-input { flex:1; background:#2c2c2e; border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:8px 14px; color:#F5F5F7; font-size:13px; font-family:inherit; outline:none; resize:none; line-height:1.4; max-height:80px; overflow-y:auto; transition:border-color 0.18s; }
+    .cw-chat-input:focus { border-color:rgba(200,169,110,0.45); }
+    .cw-chat-input::placeholder { color:#48484A; }
+    .cw-chat-send { width:34px; height:34px; border-radius:50%; background:#C8A96E; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s,transform 0.12s; }
+    .cw-chat-send:hover { background:#B89858; transform:scale(1.08); }
+    .cw-chat-send:disabled { opacity:0.35; cursor:not-allowed; transform:none; }
+
+    @media (max-width:480px) {
+      #cw-root { bottom:72px; right:14px; }
+      #cw-panel { width:calc(100vw - 28px); right:0; bottom:66px; }
+    }
+  </style>
+
+  <div id="cw-root">
+    <div id="cw-panel" role="dialog" aria-modal="true" aria-label="サポートチャット">
+
+      <!-- Header -->
+      <div class="cw-head">
+        <div class="cw-avatar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="cw-head-info">
+          <div class="cw-head-name">AntiSpy サポート</div>
+          <div class="cw-online"><div class="cw-dot"></div><span class="cw-online-lbl">通常 数時間以内に返信</span></div>
+        </div>
+        <a id="cw-line-head" href="#" target="_blank" rel="noopener" class="cw-head-line" style="display:none">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          LINE
+        </a>
+      </div>
+
+      <!-- Messages -->
+      <div class="cw-msgs" id="cw-msgs">
+        <div class="cw-row">
+          <div class="cw-msg-av"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="cw-bubble">こんにちは！AntiSpy Phoneサポートです。<br>まず、お名前とメールアドレスをご入力ください。</div>
+        </div>
+      </div>
+
+      <!-- Step 1: 名前・メール -->
+      <div class="cw-bottom" id="cw-info-area">
+        <div class="cw-info-form">
+          <input class="cw-field" id="cw-n" type="text"  placeholder="お名前（フルネーム）" autocomplete="name">
+          <input class="cw-field" id="cw-e" type="email" placeholder="メールアドレス"       autocomplete="email">
+          <button class="cw-info-submit" id="cw-info-submit">次へ →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: 質問入力 (初期非表示) -->
+      <div class="cw-bottom hide" id="cw-chat-area">
+        <div class="cw-chat-row">
+          <textarea class="cw-chat-input" id="cw-text" rows="1" placeholder="ご質問・ご相談をどうぞ..."></textarea>
+          <button class="cw-chat-send" id="cw-send-msg" aria-label="送信">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <button id="cw-btn" aria-label="サポートチャットを開く">
+      <span id="cw-badge">1</span>
+      <svg class="cw-ico cw-ico-chat" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg class="cw-ico cw-ico-close" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <script>
+  (function () {
+    // ── 設定 ────────────────────────────────────────────────────
+    const CW_LINE_URL = ''; // 例: 'https://lin.ee/XXXXXXX'
+
+    // ── 要素 ────────────────────────────────────────────────────
+    const root      = document.getElementById('cw-root');
+    const btn       = document.getElementById('cw-btn');
+    const badge     = document.getElementById('cw-badge');
+    const msgs      = document.getElementById('cw-msgs');
+    const infoArea  = document.getElementById('cw-info-area');
+    const chatArea  = document.getElementById('cw-chat-area');
+    const infoSubmit= document.getElementById('cw-info-submit');
+    const textarea  = document.getElementById('cw-text');
+    const sendBtn   = document.getElementById('cw-send-msg');
+    const lineA     = document.getElementById('cw-line-head');
+
+    let lead = { name: '', email: '' };
+
+    // LINE
+    if (CW_LINE_URL) { lineA.href = CW_LINE_URL; } else { lineA.style.display = 'none'; }
+
+    // バッジ
+    setTimeout(() => badge.classList.add('on'), 2500);
+
+    // パネル開閉
+    btn.addEventListener('click', () => {
+      const opening = !root.classList.contains('open');
+      root.classList.toggle('open');
+      btn.setAttribute('aria-label', opening ? 'チャットを閉じる' : 'サポートチャットを開く');
+      if (opening) {
+        badge.classList.remove('on');
+        setTimeout(() => document.getElementById('cw-n').focus(), 300);
+      }
+    });
+
+    // 外側クリックで閉じる
+    document.addEventListener('click', e => {
+      if (root.classList.contains('open') && !root.contains(e.target)) {
+        root.classList.remove('open');
+        btn.setAttribute('aria-label', 'サポートチャットを開く');
+      }
+    });
+
+    // ── ヘルパー ────────────────────────────────────────────────
+    const avSVG = '<div class="cw-msg-av"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>';
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    }
+
+    function addBubble(html, isUser) {
+      const row = document.createElement('div');
+      row.className = 'cw-row' + (isUser ? ' user' : '');
+      row.innerHTML = isUser
+        ? `<div class="cw-bubble">${html}</div>`
+        : `${avSVG}<div class="cw-bubble">${html}</div>`;
+      msgs.appendChild(row);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function showTyping() {
+      const row = document.createElement('div');
+      row.className = 'cw-row'; row.id = 'cw-typing';
+      row.innerHTML = `${avSVG}<div class="cw-bubble"><div class="cw-typing"><span></span><span></span><span></span></div></div>`;
+      msgs.appendChild(row);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function removeTyping() { document.getElementById('cw-typing')?.remove(); }
+
+    // ── Step 1: 名前・メール送信 ─────────────────────────────────
+    infoSubmit.addEventListener('click', () => {
+      const nEl = document.getElementById('cw-n');
+      const eEl = document.getElementById('cw-e');
+      let ok = true;
+      nEl.classList.toggle('err', !nEl.value.trim()); if (!nEl.value.trim()) ok = false;
+      eEl.classList.toggle('err', !eEl.value.trim() || !eEl.value.includes('@')); if (!eEl.value.trim() || !eEl.value.includes('@')) ok = false;
+      if (!ok) return;
+
+      lead.name  = nEl.value.trim();
+      lead.email = eEl.value.trim().toLowerCase();
+
+      // ユーザーバブル表示
+      addBubble(`${esc(lead.name)} / ${esc(lead.email)}`, true);
+
+      // フォームを非表示 → タイピング
+      infoArea.classList.add('hide');
+      showTyping();
+
+      setTimeout(() => {
+        removeTyping();
+        addBubble(`ありがとうございます、<strong style="color:#F5F5F7">${esc(lead.name)}様</strong>！<br>ご質問・ご相談をどうぞ。`, false);
+        chatArea.classList.remove('hide');
+        setTimeout(() => textarea.focus(), 50);
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 800);
+    });
+
+    // ── Step 2: 質問送信 ─────────────────────────────────────────
+    textarea.addEventListener('input', () => {
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.min(textarea.scrollHeight, 80) + 'px';
+    });
+    textarea.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+    sendBtn.addEventListener('click', sendMessage);
+
+    async function sendMessage() {
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      addBubble(esc(text), true);
+      textarea.value = ''; textarea.style.height = 'auto';
+      sendBtn.disabled = true;
+      chatArea.classList.add('hide');
+      showTyping();
+
+      // DB保存
+      try {
+        await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:     lead.name,
+            email:    lead.email,
+            message:  text,
+            page_url: location.pathname,
+          }),
+        });
+      } catch { /* ネットワークエラーでもUIは続行 */ }
+
+      setTimeout(() => {
+        removeTyping();
+        addBubble('メッセージを受け取りました！<br>確認次第、<strong style="color:#F5F5F7">' + esc(lead.email) + '</strong> 宛にご返信いたします 🔒', false);
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 900);
+    }
+  })();
+  </script>
+
+</body>
