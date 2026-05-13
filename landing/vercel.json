@@ -2,12 +2,17 @@
   "version": 2,
   "name": "antispy-phone",
   "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" },
-    { "src": "*.html",      "use": "@vercel/static" },
-    { "src": "images/**",   "use": "@vercel/static" }
+    { "src": "api/**/*.js",  "use": "@vercel/node" },
+    { "src": "*.html",       "use": "@vercel/static" },
+    { "src": "*.xml",        "use": "@vercel/static" },
+    { "src": "*.txt",        "use": "@vercel/static" },
+    { "src": "images/**",    "use": "@vercel/static" },
+    { "src": "blog/*.html",  "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)",     "dest": "/$1" }
+    { "src": "/api/webhook", "dest": "/api/webhook" },
+    { "src": "/api/(.*)",    "dest": "/api/$1" },
+    { "src": "/success",     "dest": "/success.html" },
+    { "src": "/(.*)",        "dest": "/$1" }
   ]
 }

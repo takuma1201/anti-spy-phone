@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ご注文ありがとうございます — AntiSpy Phone</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C8A96E;
+      --gold-dark: #B89858;
+      --bg: #000;
+      --surface: #111;
+      --surface-2: #1a1a1a;
+      --border: rgba(255,255,255,0.08);
+      --text: #F5F5F7;
+      --text-secondary: #86868B;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 52px;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo {
+      font-size: 17px; font-weight: 600; letter-spacing: -0.3px;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    /* ── MAIN ────────────────────────────────────────────────── */
+    main {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 24px 60px;
+    }
+
+    .card {
+      width: 100%; max-width: 560px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    /* ── ICON ────────────────────────────────────────────────── */
+    .icon-wrap {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(200,169,110,0.12);
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px;
+    }
+    .icon-wrap svg { width: 36px; height: 36px; color: var(--gold); }
+
+    h1 {
+      font-size: 26px; font-weight: 700; letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 15px; color: var(--text-secondary); line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    /* ── ORDER NUMBER ────────────────────────────────────────── */
+    .order-block {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .order-label { font-size: 12px; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase; }
+    .order-num { font-size: 20px; font-weight: 700; letter-spacing: 0.04em; color: var(--gold); }
+    .copy-btn {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary);
+      padding: 6px 14px; border-radius: 8px; font-size: 13px; cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .copy-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+    /* ── STEPS ───────────────────────────────────────────────── */
+    .steps { text-align: left; margin-bottom: 32px; }
+    .steps-title {
+      font-size: 12px; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: 1px solid var(--border); }
+    .step-num {
+      flex-shrink: 0;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(200,169,110,0.15);
+      border: 1px solid rgba(200,169,110,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--gold);
+    }
+    .step-body { padding-top: 2px; }
+    .step-head { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .step-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ── CTA ─────────────────────────────────────────────────── */
+    .btn-home {
+      display: block; width: 100%;
+      background: var(--gold); color: #000;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.02em;
+      padding: 14px 24px; border-radius: 12px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-home:hover { background: var(--gold-dark); }
+
+    @media (max-width: 600px) {
+      .card { padding: 36px 24px; }
+      h1 { font-size: 22px; }
+      .order-block { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">AntiSpy<span>Phone</span></a>
+  </nav>
+
+  <main>
+    <div class="card">
+
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+
+      <h1>ご注文ありがとうございます</h1>
+      <p class="subtitle">
+        決済が完了しました。<br>
+        確認メールを <strong id="js-email">ご登録のアドレス</strong> に送信しています。
+      </p>
+
+      <div class="order-block">
+        <div>
+          <div class="order-label">注文番号</div>
+          <div class="order-num" id="js-order-num">—</div>
+        </div>
+        <button class="copy-btn" id="js-copy-btn">コピー</button>
+      </div>
+
+      <div class="steps">
+        <div class="steps-title">次のステップ</div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-head">確認メールをご確認ください</div>
+            <div class="step-desc">ご注文内容をメールでお送りします（数分以内）。</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-head">発送準備</div>
+            <div class="step-desc">ご入金確認後、セットアップを行い発送いたします（通常 2〜5 営業日）。</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-head">お届け・サポート</div>
+            <div class="step-desc">お届け後のセットアップサポートもお気軽にご連絡ください。</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/" class="btn-home">トップページへ戻る</a>
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const orderNum = params.get('order');
+      const numEl  = document.getElementById('js-order-num');
+      const copyBtn = document.getElementById('js-copy-btn');
+
+      if (orderNum) {
+        numEl.textContent = decodeURIComponent(orderNum);
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(decodeURIComponent(orderNum)).then(() => {
+            copyBtn.textContent = 'コピー済 ✓';
+            setTimeout(() => { copyBtn.textContent = 'コピー'; }, 2000);
+          });
+        });
+      } else {
+        document.querySelector('.order-block').style.display = 'none';
+      }
+
+      // メールアドレスは Stripe の success_url には含まれないため非表示化
+      document.getElementById('js-email').textContent = 'ご登録のアドレス';
+    })();
+  </script>
+
+</body>
+</html>

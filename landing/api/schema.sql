@@ -1,6 +1,26 @@
 -- Supabase で実行してください
 -- Dashboard > SQL Editor に貼り付けて Run
 
+-- ── Orders (Stripe Checkout 完了後に webhook が INSERT) ──────────
+create table if not exists orders (
+  id                uuid        default gen_random_uuid() primary key,
+  order_num         text        not null unique,
+  name              text,
+  email             text        not null,
+  tel               text,
+  address           text,
+  total_jpy         integer,
+  stripe_session_id text        unique,
+  status            text        not null default 'paid',
+  created_at        timestamptz default now()
+);
+
+create index if not exists orders_email_idx     on orders (email);
+create index if not exists orders_order_num_idx on orders (order_num);
+
+alter table orders enable row level security;
+
+-- ── Chat leads ────────────────────────────────────────────────────
 create table if not exists chat_leads (
   id         uuid        default gen_random_uuid() primary key,
   name       text        not null,
