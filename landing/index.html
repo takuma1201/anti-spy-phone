@@ -105,7 +105,7 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 9999;
+      z-index: 100;
       height: var(--nav-h);
       background: rgba(0, 0, 0, 0.72);
       backdrop-filter: saturate(180%) blur(20px);
@@ -728,28 +728,53 @@
 
     /* 付加価値バナー */
     .pricing-value-banner {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
       align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      background: rgba(200,169,110,0.06);
-      border: 1px solid rgba(200,169,110,0.2);
-      border-radius: 16px;
-      padding: 20px 32px;
-      max-width: 760px;
+      gap: 0;
+      background: rgba(200,169,110,0.04);
+      border: 1px solid rgba(200,169,110,0.18);
+      border-radius: 20px;
+      padding: 0;
+      max-width: 780px;
       margin: 0 auto 60px;
+      overflow: hidden;
     }
     .pvb-item {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 16px;
       text-align: left;
+      padding: 28px 32px;
     }
-    .pvb-icon { font-size: 24px; }
-    .pvb-text { font-size: 13px; font-weight: 600; color: var(--gray-1); line-height: 1.4; }
-    .pvb-text small { font-weight: 400; color: var(--gray-2); font-size: 11px; }
-    .pvb-sep { font-size: 22px; font-weight: 700; color: var(--accent); opacity: 0.6; }
+    .pvb-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(200,169,110,0.1);
+      border-radius: 10px;
+      color: var(--accent);
+    }
+    .pvb-icon svg { display: block; }
+    .pvb-text { font-size: 13px; font-weight: 600; color: var(--silver-2); line-height: 1.5; }
+    .pvb-text small { display: block; font-weight: 400; color: var(--gray-2); font-size: 11px; margin-top: 1px; }
+    .pvb-sep {
+      width: 1px;
+      height: 48px;
+      background: rgba(200,169,110,0.15);
+      margin: 0;
+      flex-shrink: 0;
+    }
+    @media (max-width: 700px) {
+      .pricing-value-banner {
+        grid-template-columns: 1fr;
+      }
+      .pvb-sep { width: 100%; height: 1px; }
+      .pvb-item { padding: 20px 24px; }
+    }
 
     /* 商品グリッド */
     .product-grid {
@@ -807,7 +832,16 @@
     .pc-name {
       font-size: 13px;
       color: var(--gray-2);
-      margin-bottom: 20px;
+      margin-bottom: 6px;
+    }
+    .pc-spec-line {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--gray-3);
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
     }
     .pc-official-price {
       display: flex;
@@ -888,8 +922,6 @@
 
     @media (max-width: 700px) {
       .product-grid { grid-template-columns: 1fr; max-width: 440px; }
-      .pricing-value-banner { gap: 12px; padding: 16px 20px; }
-      .pvb-sep { display: none; }
     }
 
     .pricing-actions {
@@ -1132,6 +1164,48 @@
       .cf-row { grid-template-columns: 1fr; }
       .cf-success { grid-column: 1; }
     }
+
+    /* ── Button active / press states ──────────────────────────── */
+    .btn-blue:active,
+    .btn-large-blue:active,
+    .nav-buy:active,
+    .pc-btn:active,
+    .cf-submit:active {
+      transform: scale(0.97);
+      transition: transform 0.08s, background 0.2s;
+    }
+
+    /* ── Focus rings (keyboard accessibility) ──────────────────── */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .btn-blue:focus-visible,
+    .btn-ghost:focus-visible,
+    .btn-large-blue:focus-visible,
+    .nav-buy:focus-visible,
+    .pc-btn:focus-visible,
+    .cf-submit:focus-visible {
+      outline-offset: 4px;
+      border-radius: 980px;
+    }
+    .pc-btn:focus-visible { border-radius: 12px; }
+
+    /* ── Subtle noise grain overlay ─────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ── z-index cleanup ────────────────────────────────────────── */
+    nav { z-index: 100; }
   </style>
 </head>
 
@@ -1355,13 +1429,15 @@
     <div class="specs-inner">
       <div class="specs-header reveal">
         <p class="specs-eyebrow">Specifications</p>
-        <h2 class="specs-title">全仕様</h2>
+        <h2 class="specs-title">全モデル共通スペック</h2>
       </div>
       <div class="specs-table reveal reveal-delay-1">
 
         <div class="specs-row">
-          <span class="specs-key">本体</span>
-          <span class="specs-val"><strong>Google Pixel 9 Pro</strong></span>
+          <span class="specs-key">対応モデル</span>
+          <span class="specs-val"><strong>Google Pixel 8a / 9 / 10 / 10 Pro</strong><br>
+            <span style="font-size:12px;color:var(--gray-2);">RAM・ストレージ・カメラは各モデルの公式スペックに準拠</span>
+          </span>
         </div>
         <div class="specs-row">
           <span class="specs-key">OS</span>
@@ -1378,43 +1454,27 @@
           </span>
         </div>
         <div class="specs-row">
-          <span class="specs-key">プロセッサ</span>
-          <span class="specs-val">Google Tensor G4</span>
-        </div>
-        <div class="specs-row">
           <span class="specs-key">セキュリティチップ</span>
-          <span class="specs-val">Titan M2 コプロセッサ</span>
+          <span class="specs-val">Titan M2 コプロセッサ（全モデル搭載）</span>
         </div>
         <div class="specs-row">
           <span class="specs-key">ディスプレイ</span>
-          <span class="specs-val">6.3インチ OLED · 1,280 × 2,856</span>
-        </div>
-        <div class="specs-row">
-          <span class="specs-key">RAM / ROM</span>
-          <span class="specs-val">16 GB / 128 GB</span>
+          <span class="specs-val">OLED（8a: 6.1" / 9・10・10 Pro: 6.3"）</span>
         </div>
         <div class="specs-row">
           <span class="specs-key">通信</span>
-          <span class="specs-val">4G / 5G · nanoSIM × 1 + eSIM</span>
+          <span class="specs-val">4G / 5G · SIMフリー（全キャリア対応）</span>
         </div>
         <div class="specs-row">
           <span class="specs-key">SIM</span>
           <span class="specs-val">
-            SIMフリー — 全キャリア対応
+            nanoSIM + eSIM
             <span class="badge">制約なし</span>
           </span>
         </div>
         <div class="specs-row">
           <span class="specs-key">認証</span>
           <span class="specs-val">画面内指紋センサー</span>
-        </div>
-        <div class="specs-row">
-          <span class="specs-key">バッテリー</span>
-          <span class="specs-val">4,700 mAh</span>
-        </div>
-        <div class="specs-row">
-          <span class="specs-key">重量</span>
-          <span class="specs-val">199 g</span>
         </div>
         <div class="specs-row">
           <span class="specs-key">管理台数</span>
@@ -1438,18 +1498,33 @@
     <!-- 独自付加価値バナー -->
     <div class="pricing-value-banner reveal reveal-delay-2">
       <div class="pvb-item">
-        <span class="pvb-icon">🔒</span>
-        <span class="pvb-text">公式 GrapheneOS<br><small>完全プライバシーOS</small></span>
+        <span class="pvb-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </span>
+        <span class="pvb-text">公式 GrapheneOS<small>完全プライバシーOS · 設定済み</small></span>
       </div>
-      <div class="pvb-sep">+</div>
+      <div class="pvb-sep"></div>
       <div class="pvb-item">
-        <span class="pvb-icon">🛡️</span>
-        <span class="pvb-text">厳選セキュリティアプリ<br><small>当店が独自選定・設定済み</small></span>
+        <span class="pvb-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </span>
+        <span class="pvb-text">厳選セキュリティアプリ<small>当店独自選定 · 導入済み</small></span>
       </div>
-      <div class="pvb-sep">+</div>
+      <div class="pvb-sep"></div>
       <div class="pvb-item">
-        <span class="pvb-icon">📱</span>
-        <span class="pvb-text">プライバシー対応 SNS<br><small>Signal / Element など導入済み</small></span>
+        <span class="pvb-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <path d="M8 10h8M8 13h5"/>
+          </svg>
+        </span>
+        <span class="pvb-text">プライバシー SNS<small>Signal / Element 導入済み</small></span>
       </div>
     </div>
 
@@ -1460,15 +1535,16 @@
         <div class="pc-badge">エントリー</div>
         <div class="pc-model">Pixel 8a</div>
         <div class="pc-name">AntiSpy Phone</div>
+        <div class="pc-spec-line">Tensor G3 · 6.1" OLED · 8GB RAM</div>
         <div class="pc-official-price"><span class="pc-official-label">公式サイト価格</span><span class="pc-official-val">¥150,000</span></div>
-        <div class="pc-our-price">¥132,000<span class="pc-tax">税込</span></div>
+        <div class="pc-our-price">¥132,000<span class="pc-tax">税込 · 送料無料</span></div>
         <div class="pc-save">¥18,000 お得</div>
         <ul class="pc-features">
           <li>GrapheneOS 設定済み</li>
           <li>厳選セキュリティアプリ搭載</li>
           <li>プライバシー SNS 導入済み</li>
           <li>匿名 VPN 設定済み</li>
-          <li>SIMフリー・導入サポート付き</li>
+          <li>SIMフリー · 導入サポート付き</li>
         </ul>
         <button class="pc-btn" onclick="window.__addProductToCart({id:'antispy-pixel8a',name:'AntiSpy Phone',subtitle:'Pixel 8a + GrapheneOS',price:132000})">カートに追加</button>
       </div>
@@ -1477,15 +1553,16 @@
         <div class="pc-badge">スタンダード</div>
         <div class="pc-model">Pixel 9</div>
         <div class="pc-name">AntiSpy Phone</div>
+        <div class="pc-spec-line">Tensor G4 · 6.3" OLED · 12GB RAM · Titan M2</div>
         <div class="pc-official-price"><span class="pc-official-label">公式サイト価格</span><span class="pc-official-val">¥170,000</span></div>
-        <div class="pc-our-price">¥154,000<span class="pc-tax">税込</span></div>
+        <div class="pc-our-price">¥154,000<span class="pc-tax">税込 · 送料無料</span></div>
         <div class="pc-save">¥16,000 お得</div>
         <ul class="pc-features">
           <li>GrapheneOS 設定済み</li>
           <li>厳選セキュリティアプリ搭載</li>
           <li>プライバシー SNS 導入済み</li>
           <li>匿名 VPN 設定済み</li>
-          <li>SIMフリー・導入サポート付き</li>
+          <li>SIMフリー · 導入サポート付き</li>
         </ul>
         <button class="pc-btn" onclick="window.__addProductToCart({id:'antispy-pixel9',name:'AntiSpy Phone',subtitle:'Pixel 9 + GrapheneOS',price:154000})">カートに追加</button>
       </div>
@@ -1495,15 +1572,16 @@
         <div class="pc-badge">プレミアム</div>
         <div class="pc-model">Pixel 10</div>
         <div class="pc-name">AntiSpy Phone</div>
+        <div class="pc-spec-line">Tensor G5 · 6.3" OLED · 12GB RAM · 256GB</div>
         <div class="pc-official-price"><span class="pc-official-label">公式サイト価格</span><span class="pc-official-val">¥220,000</span></div>
-        <div class="pc-our-price">¥209,000<span class="pc-tax">税込</span></div>
+        <div class="pc-our-price">¥209,000<span class="pc-tax">税込 · 送料無料</span></div>
         <div class="pc-save">¥11,000 お得</div>
         <ul class="pc-features">
           <li>GrapheneOS 設定済み</li>
           <li>厳選セキュリティアプリ搭載</li>
           <li>プライバシー SNS 導入済み</li>
           <li>匿名 VPN 設定済み</li>
-          <li>SIMフリー・導入サポート付き</li>
+          <li>SIMフリー · 導入サポート付き</li>
         </ul>
         <button class="pc-btn" onclick="window.__addProductToCart({id:'antispy-pixel10',name:'AntiSpy Phone',subtitle:'Pixel 10 + GrapheneOS',price:209000})">カートに追加</button>
       </div>
@@ -1512,22 +1590,23 @@
         <div class="pc-badge">最上位</div>
         <div class="pc-model">Pixel 10 Pro</div>
         <div class="pc-name">AntiSpy Phone</div>
+        <div class="pc-spec-line">Tensor G5 · 6.3" OLED · 16GB RAM · 望遠カメラ</div>
         <div class="pc-official-price"><span class="pc-official-label">公式サイト価格</span><span class="pc-official-val">¥250,000</span></div>
-        <div class="pc-our-price">¥242,000<span class="pc-tax">税込</span></div>
+        <div class="pc-our-price">¥242,000<span class="pc-tax">税込 · 送料無料</span></div>
         <div class="pc-save">¥8,000 お得</div>
         <ul class="pc-features">
           <li>GrapheneOS 設定済み</li>
           <li>厳選セキュリティアプリ搭載</li>
           <li>プライバシー SNS 導入済み</li>
           <li>匿名 VPN 設定済み</li>
-          <li>SIMフリー・導入サポート付き</li>
+          <li>SIMフリー · 導入サポート付き</li>
         </ul>
         <button class="pc-btn" onclick="window.__addProductToCart({id:'antispy-pixel10pro',name:'AntiSpy Phone',subtitle:'Pixel 10 Pro + GrapheneOS',price:242000})">カートに追加</button>
       </div>
 
     </div><!-- /product-grid -->
 
-    <p class="pricing-note reveal" style="margin-top:32px;">すべて税込 · 送料別 · 初期不良時 同等品交換保証</p>
+    <p class="pricing-note reveal" style="margin-top:32px;">すべて税込 · 送料無料 · 初期不良時 同等品交換保証</p>
   </section>
 
   <!-- ══ CONTACT ══════════════════════════════════════════════ -->
@@ -4034,7 +4113,7 @@
               "offers": {
                 "@type": "Offer",
                 "priceCurrency": "JPY",
-                "price": "176000",
+                "price": "154000",
                 "priceValidUntil": "2026-12-31",
                 "availability": "https://schema.org/InStock",
                 "seller": { "@id": "https://antispy.socialboost.jp/#organization" },
@@ -4061,7 +4140,7 @@
               "offers": {
                 "@type": "Offer",
                 "priceCurrency": "JPY",
-                "price": "198000",
+                "price": "209000",
                 "priceValidUntil": "2026-12-31",
                 "availability": "https://schema.org/InStock",
                 "seller": { "@id": "https://antispy.socialboost.jp/#organization" },
