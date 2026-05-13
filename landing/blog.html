@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ブログ — AntiSpy Phone | プライバシー・セキュリティ情報</title>
+  <meta name="description" content="GrapheneOS、スマートフォン監視リスク、プライバシー保護の最新情報。ジャーナリスト・弁護士・経営幹部のためのデジタルセキュリティガイド。">
+  <link rel="canonical" href="https://antispy.socialboost.jp/blog.html">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://antispy.socialboost.jp/blog.html">
+  <meta property="og:title"       content="ブログ — AntiSpy Phone | プライバシー・セキュリティ情報">
+  <meta property="og:description" content="GrapheneOS、スマートフォン監視リスク、プライバシー保護の最新情報。ジャーナリスト・弁護士・経営幹部のためのデジタルセキュリティガイド。">
+  <meta property="og:image"       content="https://antispy.socialboost.jp/images/ogp.png">
+  <meta property="og:locale"      content="ja_JP">
+  <meta property="og:site_name"   content="AntiSpy Phone">
+  <meta name="twitter:card"       content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --font:         -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-display: "Space Grotesk", -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      --black:        #000000;
+      --surface:      #141414;
+      --surface-2:    #1c1c1e;
+      --border:       #2c2c2e;
+      --silver-1:     #F5F5F7;
+      --silver-2:     #C7C7CC;
+      --silver-3:     #AEAEB2;
+      --gray-1:       #86868B;
+      --gray-2:       #6E6E73;
+      --gray-3:       #48484A;
+      --accent:       #C8A96E;
+      --nav-h:        52px;
+    }
+    body {
+      background: var(--black);
+      color: var(--silver-1);
+      font-family: var(--font);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      height: var(--nav-h);
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 22px; width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 17px; font-weight: 700; letter-spacing: -0.5px;
+      color: var(--silver-1); text-decoration: none;
+      background: linear-gradient(135deg, #F5F5F7 0%, #AEAEB2 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-links { list-style: none; display: flex; gap: 28px; }
+    .nav-links a { font-size: 13px; color: var(--silver-3); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--silver-1); }
+    .nav-buy {
+      font-size: 13px; font-weight: 600; background: var(--accent);
+      color: #000; padding: 7px 16px; border-radius: 980px; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-buy:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .blog-hero {
+      padding: calc(var(--nav-h) + 80px) 22px 64px;
+      text-align: center;
+    }
+    .blog-hero-eyebrow {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+    }
+    .blog-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.05;
+      background: linear-gradient(180deg, #F5F5F7 0%, #6E6E73 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 20px;
+    }
+    .blog-hero-desc {
+      font-size: 17px; color: var(--gray-1); max-width: 480px; margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ── GRID ── */
+    .blog-grid {
+      max-width: 1100px; margin: 0 auto; padding: 0 22px 120px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    @media (max-width: 860px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
+
+    /* Featured card — spans full width */
+    .card-featured { grid-column: 1 / -1; }
+
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      display: flex; flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .blog-card:hover { border-color: rgba(200,169,110,0.4); transform: translateY(-3px); }
+
+    .card-img {
+      aspect-ratio: 16 / 7;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative; flex-shrink: 0;
+    }
+    .card-featured .card-img { aspect-ratio: 16 / 6; }
+    .card-img-bg {
+      position: absolute; inset: 0;
+      opacity: 0.4;
+    }
+    .card-img-icon {
+      font-size: 48px; position: relative; z-index: 1; line-height: 1;
+    }
+    .card-featured .card-img-icon { font-size: 64px; }
+
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .card-featured .card-body { padding: 32px; }
+
+    .card-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 19px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--silver-1); line-height: 1.3; margin-bottom: 10px;
+    }
+    .card-featured .card-title { font-size: 26px; }
+    .card-excerpt {
+      font-size: 14px; color: var(--gray-1); line-height: 1.65; flex: 1; margin-bottom: 18px;
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; color: var(--gray-3);
+    }
+    .card-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray-3); }
+    .card-arrow {
+      font-size: 13px; color: var(--accent); margin-left: auto;
+      transition: transform 0.2s;
+    }
+    .blog-card:hover .card-arrow { transform: translateX(4px); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 28px 22px; text-align: center; }
+    .footer-copy { font-size: 12px; color: var(--gray-2); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AntiSpy Phone</a>
+      <ul class="nav-links">
+        <li><a href="index.html#features">機能</a></li>
+        <li><a href="index.html#specs">仕様</a></li>
+        <li><a href="index.html#pricing">価格</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="blog.html" style="color:var(--silver-1)">ブログ</a></li>
+      </ul>
+      <a href="index.html#pricing" class="nav-buy">今すぐ購入</a>
+    </div>
+  </nav>
+
+  <div class="blog-hero">
+    <p class="blog-hero-eyebrow">Privacy Intelligence</p>
+    <h1 class="blog-hero-title">知識が、<br>あなたを守る。</h1>
+    <p class="blog-hero-desc">デジタル監視の実態、GrapheneOSの技術、プライバシー保護の最前線。プロが知るべき情報を届けます。</p>
+  </div>
+
+  <div class="blog-grid">
+
+    <!-- Featured Article -->
+    <a href="blog/smartphone-kanshi.html" class="blog-card card-featured">
+      <div class="card-img">
+        <div class="card-img-bg" style="background: radial-gradient(ellipse at 30% 50%, #1a0a00 0%, #000 70%);"></div>
+        <div class="card-img-icon">🔍</div>
+      </div>
+      <div class="card-body">
+        <p class="card-tag">監視リスク</p>
+        <h2 class="card-title">あなたのスマートフォンは今日も監視されている──<br>デジタル追跡の全貌と自衛策</h2>
+        <p class="card-excerpt">iPhoneもAndroidも、毎日膨大なデータを収集・送信している。Cellebriteなどのフォレンジックツールは端末を押収するだけでデータを解析できる。指紋認証・顔認証が法廷で武器にされるリスクとは。そして、GrapheneOSはこれらの脅威にどう対抗するのか。</p>
+        <div class="card-meta">
+          <span>2026年5月13日</span>
+          <span class="card-meta-dot"></span>
+          <span>読了時間：約8分</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Article 2 -->
+    <a href="blog/grapheneos-toha.html" class="blog-card">
+      <div class="card-img">
+        <div class="card-img-bg" style="background: radial-gradient(ellipse at 60% 40%, #001a0a 0%, #000 70%);"></div>
+        <div class="card-img-icon">🛡️</div>
+      </div>
+      <div class="card-body">
+        <p class="card-tag">技術解説</p>
+        <h2 class="card-title">GrapheneOSとは？プライバシーを根本から守るOSの全貌</h2>
+        <p class="card-excerpt">標準AndroidとiOSとの決定的な違い、hardened malloc・MTE・検証済みブートの技術的意味、Cellebriteさえ対応できない理由を徹底解説。</p>
+        <div class="card-meta">
+          <span>2026年5月13日</span>
+          <span class="card-meta-dot"></span>
+          <span>読了時間：約7分</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Article 3 -->
+    <a href="blog/privacy-phone-professional.html" class="blog-card">
+      <div class="card-img">
+        <div class="card-img-bg" style="background: radial-gradient(ellipse at 50% 30%, #0a0a1a 0%, #000 70%);"></div>
+        <div class="card-img-icon">💼</div>
+      </div>
+      <div class="card-body">
+        <p class="card-tag">ユースケース</p>
+        <h2 class="card-title">ジャーナリスト・弁護士・経営幹部がプライバシーフォンを選ぶ理由</h2>
+        <p class="card-excerpt">職業によって異なるデジタルリスク。情報源の保護、依頼人の秘密、企業機密——それぞれが直面する脅威と、具体的な防衛策を解説する。</p>
+        <div class="card-meta">
+          <span>2026年5月13日</span>
+          <span class="card-meta-dot"></span>
+          <span>読了時間：約6分</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    <p class="footer-copy">© 2026 SocialBoost. All rights reserved.</p>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "url": "https://antispy.socialboost.jp/blog.html",
+    "name": "AntiSpy Phone ブログ",
+    "description": "プライバシー・セキュリティに関する情報を届けるAntiSpy Phoneの公式ブログ",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SocialBoost",
+      "url": "https://antispy.socialboost.jp/"
+    },
+    "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "headline": "あなたのスマートフォンは今日も監視されている──デジタル追跡の全貌と自衛策",
+        "url": "https://antispy.socialboost.jp/blog/smartphone-kanshi.html",
+        "datePublished": "2026-05-13",
+        "inLanguage": "ja"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "GrapheneOSとは？プライバシーを根本から守るOSの全貌",
+        "url": "https://antispy.socialboost.jp/blog/grapheneos-toha.html",
+        "datePublished": "2026-05-13",
+        "inLanguage": "ja"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "ジャーナリスト・弁護士・経営幹部がプライバシーフォンを選ぶ理由",
+        "url": "https://antispy.socialboost.jp/blog/privacy-phone-professional.html",
+        "datePublished": "2026-05-13",
+        "inLanguage": "ja"
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>

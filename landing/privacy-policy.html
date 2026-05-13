@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー — AntiSpy Phone</title>
+  <meta name="description" content="AntiSpy Phone のプライバシーポリシー。お客様の個人情報の取り扱いについて。">
+  <link rel="canonical" href="https://antispy.socialboost.jp/privacy-policy.html">
+  <meta property="og:type"      content="website">
+  <meta property="og:url"       content="https://antispy.socialboost.jp/privacy-policy.html">
+  <meta property="og:title"     content="プライバシーポリシー — AntiSpy Phone">
+  <meta property="og:site_name" content="AntiSpy Phone">
+  <meta property="og:locale"    content="ja_JP">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --font: -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --black:      #000000;
+      --surface:    #141414;
+      --surface-2:  #1c1c1e;
+      --border:     #2c2c2e;
+      --silver-1:   #F5F5F7;
+      --silver-2:   #C7C7CC;
+      --silver-3:   #AEAEB2;
+      --gray-1:     #86868B;
+      --gray-2:     #6E6E73;
+      --gray-3:     #48484A;
+      --accent:     #C8A96E;
+      --nav-h:      52px;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--silver-1);
+      font-family: var(--font);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      height: var(--nav-h);
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 0 22px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--silver-1);
+      text-decoration: none;
+      background: linear-gradient(135deg, #F5F5F7 0%, #AEAEB2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-back {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.7; }
+    .nav-back::before { content: '‹'; font-size: 16px; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 60px) 22px 100px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-2);
+      margin-bottom: 12px;
+    }
+    .page-title {
+      font-family: "Space Grotesk", -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .page-date {
+      font-size: 13px;
+      color: var(--gray-2);
+      margin-bottom: 48px;
+    }
+
+    /* ── SECTIONS ── */
+    .pp-section {
+      margin-bottom: 40px;
+    }
+    .pp-section h2 {
+      font-family: "Space Grotesk", -apple-system, sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--silver-1);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .pp-section p {
+      font-size: 15px;
+      color: var(--silver-2);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .pp-section ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 12px;
+    }
+    .pp-section ul li {
+      font-size: 15px;
+      color: var(--silver-2);
+      line-height: 1.75;
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+    .pp-section ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--gray-1);
+    }
+    .pp-section a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .pp-section a:hover { text-decoration: underline; }
+
+    /* ── NOTE ── */
+    .law-note {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-size: 13px;
+      color: var(--gray-1);
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+    .law-note strong { color: var(--silver-3); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 22px;
+      text-align: center;
+    }
+    .footer-copy { font-size: 12px; color: var(--gray-2); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AntiSpy Phone</a>
+      <a href="index.html" class="nav-back">トップに戻る</a>
+    </div>
+  </nav>
+
+  <main>
+    <p class="page-eyebrow">Legal</p>
+    <h1 class="page-title">プライバシー<br>ポリシー</h1>
+    <p class="page-date">最終更新日：2026年5月13日</p>
+
+    <div class="pp-section">
+      <h2>1. 基本方針</h2>
+      <p>SocialBoost（以下「当社」）は、AntiSpy Phone（以下「本サービス」）の運営において、お客様の個人情報の保護を重要な責務と認識し、適切な管理・保護に努めます。</p>
+    </div>
+
+    <div class="pp-section">
+      <h2>2. 収集する情報</h2>
+      <p>当社は以下の情報をお客様から収集することがあります。</p>
+      <ul>
+        <li>氏名、メールアドレス（お問い合わせ・ご注文時）</li>
+        <li>配送先住所、電話番号（ご注文時）</li>
+        <li>決済情報（クレジットカード情報はStripe, Inc.が処理し、当社サーバーには保存されません）</li>
+        <li>お問い合わせ内容・メッセージ</li>
+        <li>ウェブサイトのアクセスログ（IPアドレス、ブラウザ情報等）</li>
+      </ul>
+    </div>
+
+    <div class="pp-section">
+      <h2>3. 情報の利用目的</h2>
+      <p>収集した個人情報は、以下の目的でのみ使用します。</p>
+      <ul>
+        <li>ご注文の処理・商品の発送</li>
+        <li>お客様へのサポート・問い合わせ対応</li>
+        <li>サービス改善のための分析（匿名化した統計データのみ）</li>
+        <li>法令に基づく対応</li>
+      </ul>
+    </div>
+
+    <div class="pp-section">
+      <h2>4. 第三者への提供</h2>
+      <p>当社は、以下の場合を除き、お客様の個人情報を第三者に提供・開示しません。</p>
+      <ul>
+        <li>お客様の同意がある場合</li>
+        <li>法令に基づき開示が必要な場合</li>
+        <li>商品配送のために配送業者に必要最低限の情報を提供する場合</li>
+        <li>決済処理のためStripe, Inc.に必要な情報を提供する場合</li>
+      </ul>
+    </div>
+
+    <div class="pp-section">
+      <h2>5. 第三者サービスの利用</h2>
+      <p>本ウェブサイトでは、以下の第三者サービスを利用しています。各サービスのプライバシーポリシーをご確認ください。</p>
+      <ul>
+        <li><strong>Stripe, Inc.</strong>（決済処理）— <a href="https://stripe.com/jp/privacy" target="_blank" rel="noopener">stripe.com/jp/privacy</a></li>
+        <li><strong>Vercel, Inc.</strong>（ウェブホスティング）— <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a></li>
+        <li><strong>Google Fonts</strong>（フォント配信）— <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+        <li><strong>Formspree</strong>（お問い合わせフォーム）— <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">formspree.io/legal/privacy-policy</a></li>
+      </ul>
+    </div>
+
+    <div class="pp-section">
+      <h2>6. Cookieについて</h2>
+      <p>本ウェブサイトでは、現時点でトラッキング目的のCookieを使用していません。サービス改善のために将来的にCookieを導入する場合は、本ポリシーを更新した上でお知らせします。</p>
+    </div>
+
+    <div class="pp-section">
+      <h2>7. 情報の保管・セキュリティ</h2>
+      <p>お客様の個人情報は、不正アクセス・紛失・破壊・改ざん・漏洩を防ぐため、適切な技術的・組織的対策を講じて管理します。</p>
+    </div>
+
+    <div class="pp-section">
+      <h2>8. 個人情報の開示・訂正・削除</h2>
+      <p>お客様は、当社が保有する自己の個人情報について、開示・訂正・削除を請求する権利を有します。ご希望の場合は、下記のお問い合わせ先までご連絡ください。</p>
+    </div>
+
+    <div class="pp-section">
+      <h2>9. プライバシーポリシーの変更</h2>
+      <p>本ポリシーは、法令の変更やサービス内容の変更に伴い、予告なく改定されることがあります。改定後のポリシーは本ページに掲載した時点で効力を生じます。</p>
+    </div>
+
+    <div class="law-note">
+      <strong>お問い合わせ先</strong><br>
+      個人情報の取り扱いに関するお問い合わせは、メール（<a href="mailto:info@socialboost.jp" style="color:#C8A96E;">info@socialboost.jp</a>）または電話（070-9175-3590）にてお受けしています。平日10:00〜18:00にて対応いたします。<br><br>
+      <strong>事業者：</strong>SocialBoost（代表：眞如 匠馬）<br>
+      〒244-0003 神奈川県横浜市戸塚区戸塚町4170 高橋ビル1F
+    </div>
+  </main>
+
+  <footer>
+    <p class="footer-copy">© 2026 SocialBoost. All rights reserved.</p>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "https://antispy.socialboost.jp/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "プライバシーポリシー",
+        "item": "https://antispy.socialboost.jp/privacy-policy.html"
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>

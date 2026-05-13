@@ -1,0 +1,37 @@
+# AntiSpy Phone
+
+> 司法機関・通信会社・Google・Apple・Metaに追跡されないプライバシー特化スマートフォン。Google Pixel 9 Pro に GrapheneOS を搭載し、デジタル監視から完全保護。¥220,000（税込・送料込）。月額費用なし。
+
+AntiSpy Phone は、ジャーナリスト・弁護士・経営幹部・活動家など、強力なプライバシー保護を必要とするユーザー向けに構築されたスマートフォンです。GrapheneOS（独立したセキュリティ研究者によって監査されたオープンソース OS）を搭載した Google Pixel 9 Pro を、お届け前に徹底的に設定・最適化した状態でお届けします。
+
+## 製品情報
+
+- [AntiSpy Phone（トップページ）](https://antispy.socialboost.jp/): 製品概要・購入・問い合わせ
+- [よくある質問](https://antispy.socialboost.jp/faq.html): 購入前の疑問・初心者向けガイド・上級者向け技術情報（GrapheneOS、ブートローダー、暗号化など）
+- [特定商取引法に基づく表記](https://antispy.socialboost.jp/tokushoho.html): 販売者情報・返品ポリシー・配送情報
+
+## 主な特徴
+
+- ベースデバイス: Google Pixel 9 Pro
+- OS: GrapheneOS（オープンソース・プライバシー特化）
+- Google サービスなし（Titan セキュリティチップ搭載）
+- Signal / Tor / ProtonVPN プリインストール
+- AES-256 全ストレージ暗号化・検証済みブート
+- MAC アドレスランダム化・2G 接続無効化
+- サポート: メール（平日10:00〜18:00）、1年ハードウェア保証
+
+## 価格・購入条件
+
+- 価格: ¥220,000（税込・送料込）
+- 月額費用: なし（買い切り）
+- 配送: 注文から3〜5営業日
+- 返品: 初期不良のみ7日以内に交換対応
+- 支払い: Stripe（Visa / Mastercard / Amex / JCB）
+
+## 販売者
+
+- 事業者名: SocialBoost（代表: 眞如匠馬）
+- 所在地: 〒244-0003 神奈川県横浜市戸塚区戸塚町4170 高橋ビル1F
+- 電話: 070-9175-3590
+- メール: info@socialboost.jp
+- 営業時間: 平日 10:00〜18:00

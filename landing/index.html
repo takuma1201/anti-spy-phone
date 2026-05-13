@@ -1439,6 +1439,272 @@
     @media (max-width: 900px) {
       .perm-wrap { height: auto; padding: 48px 24px; }
     }
+
+    /* ── Crypto Asset Section ───────────────────────────────── */
+    .crypto-section { background: var(--black); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .crypto-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .crypto-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .crypto-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 24px; }
+    .crypto-body { font-size: 15px; line-height: 1.75; color: var(--gray-2); margin-bottom: 40px; }
+    .crypto-wallet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .cwg-item { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 16px; display: flex; flex-direction: column; gap: 8px; }
+    .cwg-num { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--accent); }
+    .cwg-label { font-size: 12px; color: var(--gray-2); line-height: 1.4; }
+    .cwg-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #30D158; background: rgba(48,209,88,0.1); border: 1px solid rgba(48,209,88,0.2); border-radius: 20px; padding: 3px 8px; width: fit-content; }
+
+    /* ── Encryption Section ──────────────────────────────────── */
+    .encryption-section { background: var(--surface); padding: 120px 22px 100px; border-top: 1px solid var(--border); }
+    .encryption-inner { max-width: 1100px; margin: 0 auto; }
+    .encryption-header { text-align: center; margin-bottom: 64px; }
+    .encryption-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .encryption-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .encryption-subtitle { font-size: 15px; color: var(--gray-2); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+    .encryption-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .eg-item { background: var(--near-black); padding: 28px 24px; display: flex; flex-direction: column; gap: 10px; }
+    .eg-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--accent-dim); color: var(--accent); flex-shrink: 0; }
+    .eg-title { font-size: 13px; font-weight: 600; color: var(--white); }
+    .eg-body { font-size: 12px; color: var(--gray-3); line-height: 1.6; }
+
+    /* ── Japanese IME Section ────────────────────────────────── */
+    .ime-section { background: var(--black); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .ime-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .ime-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .ime-title { font-family: var(--font-display); font-size: clamp(36px, 5.5vw, 60px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 28px; }
+    .ime-body { font-size: 15px; color: var(--gray-2); line-height: 1.8; margin-bottom: 48px; }
+    .ime-risks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+    .ime-risk { background: rgba(255,69,58,0.06); border: 1px solid rgba(255,69,58,0.2); border-radius: 14px; padding: 20px 14px; text-align: left; }
+    .ime-risk-icon { font-size: 18px; margin-bottom: 8px; }
+    .ime-risk-label { font-size: 12px; font-weight: 600; color: #FF453A; margin-bottom: 6px; }
+    .ime-risk-body { font-size: 11px; color: var(--gray-3); line-height: 1.6; }
+    .ime-solution { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px; display: flex; align-items: flex-start; gap: 20px; text-align: left; }
+    .ime-solution-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.3); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ime-solution-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .ime-solution-text span { font-size: 13px; color: var(--gray-2); line-height: 1.7; }
+
+    @media (max-width: 768px) {
+      .crypto-inner { grid-template-columns: 1fr; gap: 48px; }
+      .crypto-wallet-grid { grid-template-columns: 1fr 1fr; }
+      .encryption-grid { grid-template-columns: 1fr 1fr; }
+      .ime-risks { grid-template-columns: 1fr; }
+      .crypto-section, .encryption-section, .ime-section { padding: 80px 20px; }
+    }
+
+    /* ── Vanadium Browser Section ───────────────────────────── */
+    .vanadium-section { background: var(--black); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .vanadium-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .vanadium-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .vanadium-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 24px; }
+    .vanadium-body { font-size: 15px; line-height: 1.75; color: var(--gray-2); margin-bottom: 36px; }
+    .vanadium-chrome-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 24px; padding: 8px 16px; font-size: 12px; color: var(--gray-2); margin-bottom: 36px; }
+    .vanadium-chrome-badge strong { color: var(--white); }
+    .vanadium-features { display: flex; flex-direction: column; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .vf-row { display: flex; align-items: flex-start; gap: 16px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+    .vf-row:last-child { border-bottom: none; }
+    .vf-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.2); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .vf-text strong { display: block; font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+    .vf-text span { font-size: 12px; color: var(--gray-3); line-height: 1.6; }
+    .vanadium-vs { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .vvs-header { display: grid; grid-template-columns: 1fr 1fr 1fr; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border); }
+    .vvs-col { padding: 14px 16px; font-size: 11px; font-weight: 600; text-align: center; letter-spacing: 0.05em; }
+    .vvs-col.label { text-align: left; color: var(--gray-3); }
+    .vvs-col.vanadium { color: var(--accent); }
+    .vvs-col.chrome { color: var(--gray-3); }
+    .vvs-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+    .vvs-row:last-child { border-bottom: none; }
+    .vvs-cell { padding: 13px 16px; font-size: 12px; text-align: center; display: flex; align-items: center; justify-content: center; }
+    .vvs-cell.label { text-align: left; justify-content: flex-start; color: var(--gray-2); font-size: 12px; }
+    .vvs-cell.good { color: #30D158; font-weight: 600; }
+    .vvs-cell.bad { color: #FF453A; }
+    @media (max-width: 768px) {
+      .vanadium-inner { grid-template-columns: 1fr; gap: 48px; }
+      .vanadium-section { padding: 80px 20px; }
+      .vvs-col, .vvs-cell { padding: 10px 8px; font-size: 11px; }
+    }
+
+    /* ── Auto Maintenance Section ───────────────────────────── */
+    .maintenance-section { background: var(--black); padding: 120px 22px 100px; border-top: 1px solid var(--border); }
+    .maintenance-inner { max-width: 1100px; margin: 0 auto; }
+    .maintenance-header { max-width: 640px; margin: 0 auto 56px; text-align: center; }
+    .maintenance-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .maintenance-title { font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 48px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .maintenance-subtitle { font-size: 14px; color: var(--gray-2); line-height: 1.75; }
+    .maintenance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .mg-item { background: var(--surface); padding: 26px 22px; display: flex; flex-direction: column; gap: 10px; }
+    .mg-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.2); color: var(--accent); display: flex; align-items: center; justify-content: center; }
+    .mg-title { font-size: 13px; font-weight: 600; color: var(--white); }
+    .mg-body { font-size: 12px; color: var(--gray-3); line-height: 1.65; }
+
+    /* ── MAC Randomization Section ───────────────────────────── */
+    .mac-section { background: var(--surface); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .mac-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .mac-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .mac-title { font-family: var(--font-display); font-size: clamp(34px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .mac-body { font-size: 15px; color: var(--gray-2); line-height: 1.75; margin-bottom: 32px; }
+    .mac-explainer { background: var(--near-black); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 32px; }
+    .mac-explainer-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 10px; }
+    .mac-address-display { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 6px; }
+    .mac-address-note { font-size: 11px; color: var(--gray-3); }
+    .mac-benefits { display: flex; flex-direction: column; gap: 0; }
+    .mac-benefit { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .mac-benefit:last-child { border-bottom: none; }
+    .mac-benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: #30D158; flex-shrink: 0; }
+    .mac-benefit-text { font-size: 13px; color: var(--gray-2); }
+    .mac-wifi-mock { background: var(--near-black); border: 1px solid var(--border); border-radius: 20px; padding: 24px; }
+    .mac-wifi-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 16px; }
+    .mac-wifi-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .mac-wifi-row:last-child { border-bottom: none; }
+    .mac-wifi-name { font-size: 13px; color: var(--white); display: flex; align-items: center; gap: 8px; }
+    .mac-wifi-mac { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 10px; color: var(--accent); background: var(--accent-dim); padding: 3px 8px; border-radius: 4px; }
+    @media (max-width: 768px) {
+      .maintenance-grid { grid-template-columns: 1fr 1fr; }
+      .mac-inner { grid-template-columns: 1fr; gap: 48px; }
+      .maintenance-section, .mac-section { padding: 80px 20px; }
+    }
+
+    /* ── Localization Section ────────────────────────────────── */
+    .locale-section { background: var(--surface); padding: 120px 22px 100px; border-top: 1px solid var(--border); }
+    .locale-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .locale-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .locale-title { font-family: var(--font-display); font-size: clamp(34px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .locale-body { font-size: 15px; color: var(--gray-2); line-height: 1.75; margin-bottom: 36px; }
+    .locale-features { display: flex; flex-direction: column; gap: 0; }
+    .lf-row { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .lf-row:last-child { border-bottom: none; }
+    .lf-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+    .lf-text strong { display: block; font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+    .lf-text span { font-size: 12px; color: var(--gray-3); line-height: 1.6; }
+    .locale-lang-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .lang-tag { font-size: 12px; color: var(--gray-2); background: var(--near-black); border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px; }
+    .lang-tag.featured { color: var(--accent); background: var(--accent-dim); border-color: rgba(200,169,110,0.3); font-weight: 600; }
+    .locale-note { margin-top: 20px; font-size: 12px; color: var(--gray-3); line-height: 1.6; }
+
+    /* ── PIN Randomization Section ───────────────────────────── */
+    .pin-section { background: var(--black); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .pin-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .pin-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .pin-title { font-family: var(--font-display); font-size: clamp(34px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 24px; }
+    .pin-body { font-size: 15px; color: var(--gray-2); line-height: 1.75; margin-bottom: 36px; }
+    .pin-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .pin-feat { display: flex; align-items: flex-start; gap: 12px; }
+    .pin-feat-dot { width: 6px; height: 6px; border-radius: 50%; background: #30D158; flex-shrink: 0; margin-top: 7px; }
+    .pin-feat-text { font-size: 13px; color: var(--gray-2); line-height: 1.6; }
+    .duress-card { background: rgba(255,69,58,0.06); border: 1px solid rgba(255,69,58,0.25); border-radius: 16px; padding: 22px; }
+    .duress-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF453A; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .duress-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .duress-body { font-size: 12px; color: var(--gray-2); line-height: 1.7; }
+    .pin-mock { background: var(--surface); border: 1px solid var(--border); border-radius: 28px; padding: 36px 28px; max-width: 300px; margin: 0 auto; }
+    .pin-mock-lock { text-align: center; margin-bottom: 24px; }
+    .pin-mock-dots { display: flex; gap: 10px; justify-content: center; margin-bottom: 28px; }
+    .pin-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+    .pin-dot.filled { background: var(--white); }
+    .pin-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .pin-key { aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--white); background: rgba(255,255,255,0.07); border: 1px solid var(--border); cursor: default; }
+    .pin-key.empty { background: transparent; border: none; }
+    .pin-key.fp { color: var(--gray-2); }
+    .pin-shuffle-note { text-align: center; margin-top: 16px; font-size: 11px; color: var(--gray-3); }
+    @media (max-width: 768px) {
+      .locale-inner { grid-template-columns: 1fr; gap: 48px; }
+      .pin-inner { grid-template-columns: 1fr; gap: 48px; }
+      .locale-section, .pin-section { padding: 80px 20px; }
+    }
+
+    /* ── USB Control Section ─────────────────────────────────── */
+    .usb-section { background: var(--surface); padding: 120px 22px 100px; border-top: 1px solid var(--border); }
+    .usb-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .usb-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .usb-title { font-family: var(--font-display); font-size: clamp(32px, 4.5vw, 48px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .usb-body { font-size: 15px; color: var(--gray-2); line-height: 1.75; margin-bottom: 32px; }
+    .usb-modes { display: flex; flex-direction: column; gap: 0; background: var(--near-black); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+    .usb-mode { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+    .usb-mode:last-child { border-bottom: none; }
+    .usb-mode-label { font-size: 13px; color: var(--white); font-weight: 500; }
+    .usb-mode-badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+    .usb-mode-badge.on { background: rgba(48,209,88,0.14); color: #30D158; border: 1px solid rgba(48,209,88,0.25); }
+    .usb-mode-badge.off { background: rgba(255,255,255,0.05); color: var(--gray-3); border: 1px solid var(--border); }
+    .usb-mode-badge.default { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(200,169,110,0.3); }
+    .usb-note { font-size: 12px; color: var(--gray-3); line-height: 1.7; background: var(--near-black); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
+    .usb-visual { background: var(--near-black); border: 1px solid var(--border); border-radius: 24px; padding: 40px 32px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .usb-port-icon { width: 80px; height: 80px; border-radius: 20px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent); }
+    .usb-toggle-row { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+    .usb-toggle-label { font-size: 13px; font-weight: 500; color: var(--white); }
+    .usb-toggle-switch { width: 44px; height: 26px; border-radius: 13px; background: #30D158; position: relative; flex-shrink: 0; }
+    .usb-toggle-switch::after { content: ''; position: absolute; right: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--white); }
+    .usb-toggle-switch.off { background: rgba(255,255,255,0.1); }
+    .usb-toggle-switch.off::after { right: auto; left: 3px; }
+    @media (max-width: 768px) {
+      .usb-inner { grid-template-columns: 1fr; gap: 48px; }
+      .usb-section { padding: 80px 20px; }
+    }
+
+    /* ── Comparison Table Section ────────────────────────────── */
+    .compare-section { background: var(--black); padding: 120px 22px 100px; border-top: 1px solid var(--border); }
+    .compare-inner { max-width: 1100px; margin: 0 auto; }
+    .compare-header { text-align: center; margin-bottom: 56px; }
+    .compare-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .compare-title { font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 48px); font-weight: 700; color: var(--white); line-height: 1.1; }
+    .compare-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .compare-table thead th { padding: 20px 20px; font-size: 13px; font-weight: 700; text-align: center; border-bottom: 1px solid var(--border); }
+    .compare-table thead th.th-asp { background: var(--accent-dim); color: var(--accent); border-right: 1px solid rgba(200,169,110,0.2); font-family: var(--font-display); letter-spacing: 0.02em; }
+    .compare-table thead th.th-android { background: rgba(255,255,255,0.02); color: var(--gray-2); border-right: 1px solid var(--border); }
+    .compare-table thead th.th-iphone { background: rgba(255,255,255,0.02); color: var(--gray-2); }
+    .compare-table thead th.th-feature { background: rgba(255,255,255,0.02); color: var(--gray-3); text-align: left; width: 18%; border-right: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .compare-table tbody tr { border-bottom: 1px solid var(--border); }
+    .compare-table tbody tr:last-child { border-bottom: none; }
+    .compare-table tbody td { padding: 18px 20px; vertical-align: top; font-size: 12px; line-height: 1.65; }
+    .compare-table tbody td.td-feature { font-size: 12px; font-weight: 600; color: var(--gray-2); border-right: 1px solid var(--border); background: rgba(255,255,255,0.01); }
+    .compare-table tbody td.td-asp { background: rgba(200,169,110,0.04); border-right: 1px solid rgba(200,169,110,0.12); color: var(--gray-2); }
+    .compare-table tbody td.td-other { background: transparent; color: var(--gray-3); border-right: 1px solid var(--border); }
+    .compare-table tbody td.td-other:last-child { border-right: none; }
+    .compare-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; margin-bottom: 6px; }
+    .compare-badge.good { background: rgba(48,209,88,0.12); color: #30D158; }
+    .compare-badge.bad { background: rgba(255,69,58,0.1); color: #FF453A; }
+    .compare-badge.mid { background: rgba(255,159,10,0.1); color: #FF9F0A; }
+    @media (max-width: 768px) {
+      .compare-section { padding: 64px 12px; }
+      .compare-table thead th, .compare-table tbody td { padding: 12px 10px; font-size: 11px; }
+      .compare-table thead th.th-feature, .compare-table tbody td.td-feature { display: none; }
+    }
+
+    /* ── Hardware Foundation Section ────────────────────────── */
+    .hardware-section { background: var(--surface); padding: 120px 22px 100px; border-top: 1px solid var(--border); }
+    .hardware-inner { max-width: 1100px; margin: 0 auto; }
+    .hardware-top { max-width: 680px; margin: 0 auto 64px; text-align: center; }
+    .hardware-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .hardware-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .hardware-body { font-size: 15px; color: var(--gray-2); line-height: 1.75; }
+    .hardware-reasons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin-bottom: 32px; }
+    .hw-reason { background: var(--near-black); padding: 28px 24px; display: flex; flex-direction: column; gap: 10px; }
+    .hw-reason-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.2); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .hw-reason-title { font-size: 13px; font-weight: 600; color: var(--white); }
+    .hw-reason-body { font-size: 12px; color: var(--gray-3); line-height: 1.65; }
+    .hardware-notes { background: var(--black); border: 1px solid var(--border); border-radius: 20px; padding: 8px 0; }
+    .hw-note { display: flex; align-items: flex-start; gap: 14px; padding: 16px 24px; border-bottom: 1px solid var(--border); }
+    .hw-note:last-child { border-bottom: none; }
+    .hw-note-mark { font-size: 11px; font-weight: 700; color: var(--accent); flex-shrink: 0; padding-top: 1px; }
+    .hw-note-text { font-size: 13px; color: var(--gray-2); line-height: 1.7; }
+    @media (max-width: 768px) {
+      .hardware-reasons { grid-template-columns: 1fr; }
+      .hardware-section { padding: 80px 20px; }
+    }
+
+    /* ── FAQ Section ─────────────────────────────────────────── */
+    .faq-section { background: var(--surface); padding: 120px 22px 100px; border-top: 1px solid var(--border); }
+    .faq-inner { max-width: 800px; margin: 0 auto; }
+    .faq-header { text-align: center; margin-bottom: 64px; }
+    .faq-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .faq-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); font-weight: 700; color: var(--white); }
+    .faq-item { border-top: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+    .faq-q { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 24px 0; cursor: pointer; font-size: 15px; font-weight: 500; color: var(--white); line-height: 1.5; }
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-q::after { content: '+'; flex-shrink: 0; font-family: var(--font-display); font-size: 22px; font-weight: 300; color: var(--accent); transition: transform 0.25s ease; }
+    .faq-item[open] .faq-q::after { transform: rotate(45deg); }
+    .faq-a { padding: 0 0 24px; }
+    .faq-a p { font-size: 14px; line-height: 1.85; color: var(--gray-2); }
+    @media (max-width: 768px) {
+      .faq-section { padding: 80px 20px 64px; }
+      .faq-q { font-size: 14px; padding: 20px 0; }
+    }
   </style>
 </head>
 
@@ -1584,7 +1850,7 @@
     <div class="ready-inner">
       <p class="ready-eyebrow reveal">Ready Out of Box</p>
       <h2 class="ready-title reveal reveal-delay-1">届いたその日から、<br>すぐ使える。</h2>
-      <p class="ready-body reveal reveal-delay-2">電源を入れた瞬間から匿名通信を開始できます。VPN設定からセキュリティ制御まで、専門スタッフが完全セットアップ済みで出荷。設定は一切不要です。</p>
+      <p class="ready-body reveal reveal-delay-2">「GrapheneOSって設定が難しそう…」「ITが苦手でも使えるか不安」——そのご心配は不要です。プライバシー保護VPN・アプリ権限管理・日本語環境まで、専門スタッフが出荷前に完全セットアップ。箱を開けて電源を入れた瞬間から、<strong>追跡されないスマートフォン</strong>として使えます。</p>
 
       <div class="ready-steps reveal reveal-delay-2">
         <div class="ready-step">
@@ -1688,7 +1954,7 @@
       <p class="feature-eyebrow">Google-Free Ecosystem</p>
       <h2 class="feature-title">Googleゼロ。<br>Androidそのままに。</h2>
       <p class="feature-body">
-        Google のデータ収集を一切受け入れません。サンドボックス化した Google Play により、Google へのログインなしでアプリを利用可能。Aurora Store で Play Store のほぼすべてのアプリを匿名ダウンロードできます。Apple ID も不要です。
+        「スマホで話しかけた内容が、翌日の広告に出てきた」——それはGoogleによる常時データ収集の結果です。AntiSpy PhoneはGoogleサービスをOSから完全排除。サンドボックス型Google Playで、<strong>GoogleアカウントなしにLINE・Instagram・Netflixが動作</strong>。Aurora Storeから匿名でPlay Storeの9割以上のアプリを入手できます。
       </p>
       <div class="feature-specs">
         <div class="feature-spec-row">
@@ -1762,13 +2028,116 @@
     </div>
   </section>
 
+  <!-- ══ VANADIUM BROWSER ═══════════════════════════════════════ -->
+  <section class="vanadium-section">
+    <div class="vanadium-inner">
+
+      <div class="vanadium-text reveal">
+        <p class="vanadium-eyebrow">Secure Browser</p>
+        <h2 class="vanadium-title">Vanadium。<br>最強の<br>プライベートブラウザ。</h2>
+        <span class="vanadium-chrome-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <strong>Chrome と同じ操作感</strong>で使える Chromium ベース
+        </span>
+        <p class="vanadium-body">「広告をブロックしたいのに、広告ブロッカー自体がデータを収集している」——多くのブラウザ拡張は別の形でトラッキングします。VanadiumはOSレベルで設計されたプライバシーブラウザです。拡張機能なしで、Googleアカウント不要で、最高水準のプライバシー防御を実現します。</p>
+        <div class="vanadium-features">
+          <div class="vf-row">
+            <div class="vf-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </div>
+            <div class="vf-text">
+              <strong>完全トラッキング防止</strong>
+              <span>広告トラッカー・フィンガープリント・クッキートラッキングをOSレベルでブロック。</span>
+            </div>
+          </div>
+          <div class="vf-row">
+            <div class="vf-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="vf-text">
+              <strong>自動HTTPS接続</strong>
+              <span>すべての通信を自動でHTTPS化。暗号化されていないサイトへの接続を防止します。</span>
+            </div>
+          </div>
+          <div class="vf-row">
+            <div class="vf-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="vf-text">
+              <strong>広告・YouTube広告ブロック</strong>
+              <span>広告ネットワークをブロックし、YouTubeを含む動画サイトでも広告なしで視聴できます。</span>
+            </div>
+          </div>
+          <div class="vf-row">
+            <div class="vf-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="vf-text">
+              <strong>内蔵パスワードマネージャー</strong>
+              <span>クラウド同期なしでパスワードを安全に端末内管理。外部サービスへの送信はゼロ。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vanadium-vs reveal reveal-delay-2">
+        <div class="vvs-header">
+          <div class="vvs-col label">機能</div>
+          <div class="vvs-col vanadium">Vanadium</div>
+          <div class="vvs-col chrome">Chrome</div>
+        </div>
+        <div class="vvs-row">
+          <div class="vvs-cell label">Googleアカウント不要</div>
+          <div class="vvs-cell good">不要</div>
+          <div class="vvs-cell bad">必要</div>
+        </div>
+        <div class="vvs-row">
+          <div class="vvs-cell label">行動履歴の収集</div>
+          <div class="vvs-cell good">なし</div>
+          <div class="vvs-cell bad">あり</div>
+        </div>
+        <div class="vvs-row">
+          <div class="vvs-cell label">広告ブロック</div>
+          <div class="vvs-cell good">標準搭載</div>
+          <div class="vvs-cell bad">なし</div>
+        </div>
+        <div class="vvs-row">
+          <div class="vvs-cell label">YouTube広告ブロック</div>
+          <div class="vvs-cell good">対応</div>
+          <div class="vvs-cell bad">非対応</div>
+        </div>
+        <div class="vvs-row">
+          <div class="vvs-cell label">自動HTTPS</div>
+          <div class="vvs-cell good">常時</div>
+          <div class="vvs-cell bad">部分的</div>
+        </div>
+        <div class="vvs-row">
+          <div class="vvs-cell label">フィンガープリント防止</div>
+          <div class="vvs-cell good">OSレベル</div>
+          <div class="vvs-cell bad">なし</div>
+        </div>
+        <div class="vvs-row">
+          <div class="vvs-cell label">パスワード管理</div>
+          <div class="vvs-cell good">端末内のみ</div>
+          <div class="vvs-cell bad">クラウド同期</div>
+        </div>
+        <div class="vvs-row">
+          <div class="vvs-cell label">操作感</div>
+          <div class="vvs-cell good">Chrome同等</div>
+          <div class="vvs-cell" style="color:var(--gray-2);">Chrome</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ══ 32 USER PROFILES ═════════════════════════════════════════ -->
   <section class="profiles-section" id="profiles">
     <div class="profiles-inner">
       <p class="profiles-eyebrow reveal">Multiple User Profiles</p>
       <h2 class="profiles-title reveal reveal-delay-1">1台で、32人分。</h2>
       <p class="profiles-body reveal reveal-delay-2">
-        最大32の独立したユーザープロファイルを1台に設定できます。個人・法人・プライベート・ゲストなど用途ごとに完全分離。LINEを32アカウント同時利用も可能。ワンタップで切り替えられます。
+        「仕事用とプライベートのLINEを1台で分けたい」「複数の番号を使い分けたい」——AntiSpy Phoneは1台に<strong>最大32の独立したプロファイル</strong>を設定できます。LINEを32アカウント同時利用可能で、プロファイル間のデータ漏れはゼロ。スマホを複数台持ち歩く必要がなくなります。
       </p>
 
       <!-- プロファイルグリッド -->
@@ -1837,6 +2206,513 @@
           <div class="puc-num">0</div>
           <div class="puc-label">誤送信リスク</div>
           <div class="puc-sub">プロファイル間は完全遮断</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CRYPTO ASSET PROTECTION ══════════════════════════════ -->
+  <section class="crypto-section">
+    <div class="crypto-inner">
+      <div class="crypto-text reveal">
+        <p class="crypto-eyebrow">Crypto Asset Protection</p>
+        <h2 class="crypto-title">ウォレットも、<br>守る。</h2>
+        <p class="crypto-body">「ウォレットのシードフレーズを入力したら資産が消えた」「マルウェアに感染して全額盗まれた」——暗号資産へのハッキングは、スマートフォンのセキュリティホールから始まることがほとんどです。<br><br>AntiSpy PhoneはGoogleサービスを完全排除し、OS自体を監視フリーに再設計。マルウェアが潜む通常のAndroid環境とは根本的に異なります。</p>
+        <div class="feature-specs" style="margin:0;">
+          <div class="feature-spec-row">
+            <span class="spec-label">シードフレーズ保護</span>
+            <span class="spec-value good">端末内のみ・外部送信ゼロ</span>
+          </div>
+          <div class="feature-spec-row">
+            <span class="spec-label">マルウェア感染リスク</span>
+            <span class="spec-value" style="color:#FF453A;">通常Android比 大幅低減</span>
+          </div>
+          <div class="feature-spec-row">
+            <span class="spec-label">プロファイル分離</span>
+            <span class="spec-value good">ウォレット間の完全遮断</span>
+          </div>
+          <div class="feature-spec-row">
+            <span class="spec-label">ネットワーク</span>
+            <span class="spec-value good">Anonymous VPN 常時接続</span>
+          </div>
+        </div>
+      </div>
+      <div class="crypto-wallet-grid reveal reveal-delay-2">
+        <div class="cwg-item">
+          <div class="cwg-num">32</div>
+          <div class="cwg-label">独立したウォレット<br>環境を1台に</div>
+          <span class="cwg-badge">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            完全分離
+          </span>
+        </div>
+        <div class="cwg-item">
+          <div class="cwg-num">0</div>
+          <div class="cwg-label">プロファイル間の<br>データ共有</div>
+          <span class="cwg-badge">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            漏洩なし
+          </span>
+        </div>
+        <div class="cwg-item">
+          <div class="cwg-num">AES</div>
+          <div class="cwg-label">256ビット軍事レベル<br>暗号化で保護</div>
+          <span class="cwg-badge">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            標準搭載
+          </span>
+        </div>
+        <div class="cwg-item">
+          <div class="cwg-num">E2E</div>
+          <div class="cwg-label">エンドツーエンド<br>完全暗号化通信</div>
+          <span class="cwg-badge">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            常時有効
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ENCRYPTION ════════════════════════════════════════════ -->
+  <section class="encryption-section">
+    <div class="encryption-inner">
+      <div class="encryption-header reveal">
+        <p class="encryption-eyebrow">Military-Grade Encryption</p>
+        <h2 class="encryption-title">最強の暗号化技術。<br>あらゆる脅威から守る。</h2>
+        <p class="encryption-subtitle">追跡技術・ハッキング・データ盗難——AntiSpy Phoneは複数層の暗号化でこれらすべてに対抗します。</p>
+      </div>
+      <div class="encryption-grid reveal reveal-delay-2">
+        <div class="eg-item">
+          <div class="eg-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="eg-title">AES-256暗号化</div>
+          <div class="eg-body">すべてのデータがデフォルトで軍事レベルのAES-256で暗号化。バックドアなし。</div>
+        </div>
+        <div class="eg-item">
+          <div class="eg-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="eg-title">E2E完全暗号化</div>
+          <div class="eg-body">エンドツーエンドの完全暗号化通信。通信会社も・政府機関も傍受不可能。</div>
+        </div>
+        <div class="eg-item">
+          <div class="eg-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <div class="eg-title">Googleサービス完全排除</div>
+          <div class="eg-body">Googleによるデータ追跡が技術的に不可能。テレメトリー・広告IDをOSレベルで無効化。</div>
+        </div>
+        <div class="eg-item">
+          <div class="eg-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div class="eg-title">セキュリティ自動監査</div>
+          <div class="eg-body">定期的なセキュリティ監査を自動実施。脆弱性が発見されると即座にアップデートを適用。</div>
+        </div>
+        <div class="eg-item">
+          <div class="eg-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="eg-title">暗号化自動バックアップ</div>
+          <div class="eg-body">バックアップデータも完全暗号化。クロスデバイス互換で復元も安全かつ簡単。</div>
+        </div>
+        <div class="eg-item">
+          <div class="eg-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div class="eg-title">セキュアeSIM実装</div>
+          <div class="eg-body">eSIMも暗号化で保護。データ保護法・PDPA準拠。個人情報・機密情報を完全保護。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AUTO MAINTENANCE ═════════════════════════════════════════ -->
+  <section class="maintenance-section">
+    <div class="maintenance-inner">
+      <div class="maintenance-header reveal">
+        <p class="maintenance-eyebrow">Auto Maintenance</p>
+        <h2 class="maintenance-title">自動で守る。<br>自動で最適化する。</h2>
+        <p class="maintenance-subtitle">「気づかないうちにデバイスが脆弱になっていた」——AntiSpy Phoneはセキュリティと性能を自動で維持します。ユーザーが操作しなくても、常に最新・最強の状態を保ちます。</p>
+      </div>
+      <div class="maintenance-grid reveal reveal-delay-2">
+        <div class="mg-item">
+          <div class="mg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          </div>
+          <div class="mg-title">自動アップデート</div>
+          <div class="mg-body">GrapheneOSおよびアプリのセキュリティパッチを自動適用。脆弱性が公開された瞬間に対応します。</div>
+        </div>
+        <div class="mg-item">
+          <div class="mg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+          </div>
+          <div class="mg-title">スケジュール自動再起動</div>
+          <div class="mg-body">定期的な自動再起動により最適なパフォーマンスを維持。タイミングは自由に設定可能です。</div>
+        </div>
+        <div class="mg-item">
+          <div class="mg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          </div>
+          <div class="mg-title">メモリ定期クリア</div>
+          <div class="mg-body">再起動のたびにRAMを完全クリア。バックグラウンドで動作するスパイウェアの残留を防ぎます。</div>
+        </div>
+        <div class="mg-item">
+          <div class="mg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <div class="mg-title">セキュアブート</div>
+          <div class="mg-body">起動のたびにOSの整合性を検証。改ざんされたOSやマルウェアが起動することを防ぎます。</div>
+        </div>
+        <div class="mg-item">
+          <div class="mg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          </div>
+          <div class="mg-title">ファイルシュレッダー</div>
+          <div class="mg-body">削除したファイルをゴミ箱以外から復元不可能な状態に完全破壊。フォレンジック調査にも対応。</div>
+        </div>
+        <div class="mg-item">
+          <div class="mg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <div class="mg-title">スケジュール自由設定</div>
+          <div class="mg-body">再起動・アップデートの実行タイミングをユーザーが自由にカスタマイズ可能。日常業務を妨げません。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MAC RANDOMIZATION ══════════════════════════════════════ -->
+  <section class="mac-section">
+    <div class="mac-inner">
+      <div class="mac-text reveal">
+        <p class="mac-eyebrow">Network Anonymity</p>
+        <h2 class="mac-title">MACアドレスを<br>毎回ランダム化。</h2>
+        <p class="mac-body">MACアドレスとはWi-Fiや有線LAN機器に固有の識別番号です。通常のスマートフォンはこれが固定されているため、カフェや駅・ショッピングモールのWi-Fiに接続するたびに「いつ・どこにいたか」が追跡されます。<br><br>AntiSpy Phoneは新規Wi-Fi接続ごとにMACアドレスをランダム生成。デバイスのアイデンティティーを断ち、位置追跡・プロファイリング・ターゲティングをすべて無効化します。</p>
+        <div class="mac-explainer">
+          <div class="mac-explainer-label">MACアドレスの例</div>
+          <div class="mac-address-display" id="mac-demo">A3:7F:2B:91:C4:E0</div>
+          <div class="mac-address-note">接続ごとに自動でランダム生成されます</div>
+        </div>
+        <div class="mac-benefits">
+          <div class="mac-benefit"><span class="mac-benefit-dot"></span><span class="mac-benefit-text">デバイスのアイデンティティー保護</span></div>
+          <div class="mac-benefit"><span class="mac-benefit-dot"></span><span class="mac-benefit-text">匿名性の向上——同一端末と特定不可能</span></div>
+          <div class="mac-benefit"><span class="mac-benefit-dot"></span><span class="mac-benefit-text">Wi-Fiトラッカーからの防御</span></div>
+          <div class="mac-benefit"><span class="mac-benefit-dot"></span><span class="mac-benefit-text">位置追跡の完全ブロック</span></div>
+          <div class="mac-benefit"><span class="mac-benefit-dot"></span><span class="mac-benefit-text">行動プロファイリングの回避</span></div>
+          <div class="mac-benefit"><span class="mac-benefit-dot"></span><span class="mac-benefit-text">広告ターゲティングの無効化</span></div>
+        </div>
+      </div>
+      <div class="mac-wifi-mock reveal reveal-delay-2">
+        <div class="mac-wifi-title">接続履歴シミュレーション</div>
+        <div class="mac-wifi-row">
+          <div class="mac-wifi-name">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+            Starbucks_WiFi
+          </div>
+          <div class="mac-wifi-mac">B2:4D:1A:78:F3:9C</div>
+        </div>
+        <div class="mac-wifi-row">
+          <div class="mac-wifi-name">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+            Airport_Free_WiFi
+          </div>
+          <div class="mac-wifi-mac">E7:92:3F:C1:0B:5A</div>
+        </div>
+        <div class="mac-wifi-row">
+          <div class="mac-wifi-name">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+            Hotel_Guest
+          </div>
+          <div class="mac-wifi-mac">A3:7F:2B:91:C4:E0</div>
+        </div>
+        <div class="mac-wifi-row">
+          <div class="mac-wifi-name">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+            Office_Network
+          </div>
+          <div class="mac-wifi-mac">6C:D4:88:2E:A5:17</div>
+        </div>
+        <div class="mac-wifi-row">
+          <div class="mac-wifi-name">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+            Shinkansen_WiFi
+          </div>
+          <div class="mac-wifi-mac">F1:0C:56:3B:D9:72</div>
+        </div>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+          <div style="font-size:11px;color:var(--gray-3);line-height:1.7;">どの接続でもMACアドレスが異なるため、<br>同一端末として追跡することは不可能です。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ JAPANESE IME ════════════════════════════════════════════ -->
+  <section class="ime-section">
+    <div class="ime-inner">
+      <p class="ime-eyebrow reveal">Offline Japanese Input</p>
+      <h2 class="ime-title reveal reveal-delay-1">予測変換も、<br>端末の中だけ。</h2>
+      <p class="ime-body reveal reveal-delay-2">スマートフォンの日本語予測変換は、多くの場合オンラインでクラウドサーバーに送信されています。あなたが打ち込んだ文字は、知らぬ間に企業のサーバーに蓄積されているかもしれません。</p>
+
+      <div class="ime-risks reveal reveal-delay-2">
+        <div class="ime-risk">
+          <div class="ime-risk-icon">💬</div>
+          <div class="ime-risk-label">プライバシーの漏洩</div>
+          <div class="ime-risk-body">異性とのやり取りや、本名・住所・電話番号が予測変換として残り、誤って第三者に表示される</div>
+        </div>
+        <div class="ime-risk">
+          <div class="ime-risk-icon">🔑</div>
+          <div class="ime-risk-label">資産の喪失</div>
+          <div class="ime-risk-body">暗号資産のパスフレーズやシードフレーズが予測変換に残り、ハッキングに悪用されウォレットが空になる</div>
+        </div>
+        <div class="ime-risk">
+          <div class="ime-risk-icon">📤</div>
+          <div class="ime-risk-label">誤爆・誤送信</div>
+          <div class="ime-risk-body">機密情報・内部情報が予測変換として誤って別の相手に送信される企業事故が多発</div>
+        </div>
+      </div>
+
+      <div class="ime-solution reveal reveal-delay-3">
+        <div class="ime-solution-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <div class="ime-solution-text">
+          <strong>AntiSpy Phoneは日本語予測変換がオフライン完結</strong>
+          <span>予測変換データは端末内にのみ保存され、外部サーバーへの送信はゼロ。入力した文字列が外部に流出することはありません。シードフレーズを入力しても、クラウドには残らない。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ LOCALIZATION ══════════════════════════════════════════ -->
+  <section class="locale-section">
+    <div class="locale-inner">
+      <div class="locale-text reveal">
+        <p class="locale-eyebrow">Multilingual Support</p>
+        <h2 class="locale-title">日本語で、<br>すべてが使える。</h2>
+        <p class="locale-body">「英語だらけで何がなんだかわからない」——プライバシーOSは難解というイメージがありますが、AntiSpy Phoneは設定画面・アプリ・メニューをすべて日本語化済みです。日常的に使うほとんどの画面が日本語で表示されます。</p>
+        <div class="locale-features">
+          <div class="lf-row">
+            <div class="lf-dot"></div>
+            <div class="lf-text">
+              <strong>設定画面の日本語化</strong>
+              <span>GrapheneOSの設定メニューの大部分が日本語に翻訳済み。順次更新されています。</span>
+            </div>
+          </div>
+          <div class="lf-row">
+            <div class="lf-dot"></div>
+            <div class="lf-text">
+              <strong>プリインストールアプリの日本語対応</strong>
+              <span>Signal・Aurora Store・Vanadium・カメラ・カレンダーなどすべて日本語で使用可能。</span>
+            </div>
+          </div>
+          <div class="lf-row">
+            <div class="lf-dot"></div>
+            <div class="lf-text">
+              <strong>多言語対応</strong>
+              <span>Androidで利用できる主要言語のほぼすべてに対応。外国語での使用も問題ありません。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="locale-lang-grid">
+          <span class="lang-tag featured">🇯🇵 日本語</span>
+          <span class="lang-tag">🇺🇸 English</span>
+          <span class="lang-tag">🇨🇳 中文（簡体）</span>
+          <span class="lang-tag">🇹🇼 中文（繁體）</span>
+          <span class="lang-tag">🇰🇷 한국어</span>
+          <span class="lang-tag">🇩🇪 Deutsch</span>
+          <span class="lang-tag">🇫🇷 Français</span>
+          <span class="lang-tag">🇪🇸 Español</span>
+          <span class="lang-tag">🇵🇹 Português</span>
+          <span class="lang-tag">🇮🇹 Italiano</span>
+          <span class="lang-tag">🇳🇱 Nederlands</span>
+          <span class="lang-tag">🇷🇺 Русский</span>
+          <span class="lang-tag">🇦🇪 العربية</span>
+          <span class="lang-tag">🇹🇭 ภาษาไทย</span>
+          <span class="lang-tag">🇻🇳 Tiếng Việt</span>
+          <span class="lang-tag">🇮🇳 हिन्दी</span>
+          <span class="lang-tag">🇮🇩 Bahasa</span>
+          <span class="lang-tag">+ 多数対応</span>
+        </div>
+        <p class="locale-note">※ GrapheneOSの日本語対応は継続的に改善されています。<br>一部画面が英語表示となる場合があります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PIN RANDOMIZATION ═══════════════════════════════════════ -->
+  <section class="pin-section">
+    <div class="pin-inner">
+      <div class="pin-text reveal">
+        <p class="pin-eyebrow">Physical Security</p>
+        <h2 class="pin-title">PINを<br>毎回シャッフル。</h2>
+        <p class="pin-body">「後ろから覗かれてPINを盗まれる」——ショルダーサーフィンは実際に使われる攻撃手法です。AntiSpy PhoneはPINのキーパッド配置を解錠のたびにランダムに入れ替えます。指の動きを見ても特定できないため、盗み見による解析が不可能です。</p>
+        <div class="pin-features">
+          <div class="pin-feat"><span class="pin-feat-dot"></span><span class="pin-feat-text">解錠のたびに番号配置を完全ランダム化</span></div>
+          <div class="pin-feat"><span class="pin-feat-dot"></span><span class="pin-feat-text">指の動きを見てもPINを特定できない</span></div>
+          <div class="pin-feat"><span class="pin-feat-dot"></span><span class="pin-feat-text">ランダム配置でPINの推測も困難</span></div>
+          <div class="pin-feat"><span class="pin-feat-dot"></span><span class="pin-feat-text">指紋認証にも対応（画面内センサー）</span></div>
+        </div>
+        <div class="duress-card">
+          <div class="duress-label">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Duress PIN — 緊急消去コード
+          </div>
+          <div class="duress-title">特定のPINを入力すると全データを即時消去</div>
+          <div class="duress-body">任意のDuress Passを設定しておくことで、そのコードを入力した瞬間にAntiSpy Phoneは自動初期化されます。押収・強制解除の際にデータを完全に保護。復元は不可能です。</div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="pin-mock">
+          <div class="pin-mock-lock">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="pin-mock-dots">
+            <div class="pin-dot filled"></div>
+            <div class="pin-dot filled"></div>
+            <div class="pin-dot"></div>
+            <div class="pin-dot"></div>
+            <div class="pin-dot"></div>
+            <div class="pin-dot"></div>
+          </div>
+          <div class="pin-pad">
+            <div class="pin-key">7</div>
+            <div class="pin-key">2</div>
+            <div class="pin-key">5</div>
+            <div class="pin-key">0</div>
+            <div class="pin-key">9</div>
+            <div class="pin-key">4</div>
+            <div class="pin-key">1</div>
+            <div class="pin-key">8</div>
+            <div class="pin-key">3</div>
+            <div class="pin-key empty"></div>
+            <div class="pin-key">6</div>
+            <div class="pin-key fp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-1.7.7-3.3 1.8-4.5"/><path d="M17.5 4.5c.5 1 .5 2 .5 3.5 0 3-1 6-1 9"/><path d="M10 9c.5.5 1 1 1 2v5"/><path d="M14 9.5c1 .5 2 1.5 2 3.5 0 1-.5 2-.5 3"/><path d="M10 18c.5.5 1 1 2 1"/></svg>
+            </div>
+          </div>
+          <div class="pin-shuffle-note">解錠のたびに配置がランダム変更されます</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ USB CONTROL ═══════════════════════════════════════════ -->
+  <section class="usb-section">
+    <div class="usb-inner">
+      <div class="usb-text reveal">
+        <p class="usb-eyebrow">USB-C Data Control</p>
+        <h2 class="usb-title">USB接続も、<br>あなたが制御する。</h2>
+        <p class="usb-body">「充電ケーブルを繋いだだけでデータを抜かれる」——Juice Jacking（不正USB充電攻撃）は実際に確認されている攻撃手法です。AntiSpy PhoneはUSBポートのデータ通信をハードウェアレベルで制御。デフォルトで「充電のみ」モードに設定でき、外部からの干渉を物理的にブロックします。</p>
+        <div class="usb-modes">
+          <div class="usb-mode">
+            <span class="usb-mode-label">充電のみモード（デフォルト）</span>
+            <span class="usb-mode-badge default">推奨設定</span>
+          </div>
+          <div class="usb-mode">
+            <span class="usb-mode-label">ファイル転送モード</span>
+            <span class="usb-mode-badge off">必要時のみ有効化</span>
+          </div>
+          <div class="usb-mode">
+            <span class="usb-mode-label">USBテザリング</span>
+            <span class="usb-mode-badge on">任意で有効化</span>
+          </div>
+          <div class="usb-mode">
+            <span class="usb-mode-label">データ接続（一時的無効化）</span>
+            <span class="usb-mode-badge off">ワンタップで切替</span>
+          </div>
+        </div>
+        <div class="usb-note">※ Qi（ワイヤレス）充電のみ使用する運用では、USBポートを物理的に塞いでも完全に稼働可能です。最高水準のポートセキュリティを実現できます。</div>
+      </div>
+      <div class="usb-visual reveal reveal-delay-2">
+        <div class="usb-port-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22V12"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><path d="M8 12V7l4-4 4 4v5"/>
+            <line x1="8" y1="9" x2="16" y2="9"/>
+          </svg>
+        </div>
+        <div class="usb-toggle-row">
+          <span class="usb-toggle-label">データ接続</span>
+          <div class="usb-toggle-switch off"></div>
+        </div>
+        <div class="usb-toggle-row">
+          <span class="usb-toggle-label">充電のみ</span>
+          <div class="usb-toggle-switch"></div>
+        </div>
+        <div class="usb-toggle-row">
+          <span class="usb-toggle-label">ファイル転送</span>
+          <div class="usb-toggle-switch off"></div>
+        </div>
+        <div class="usb-toggle-row">
+          <span class="usb-toggle-label">USBテザリング</span>
+          <div class="usb-toggle-switch off"></div>
+        </div>
+        <div style="font-size:11px;color:var(--gray-3);text-align:center;line-height:1.6;">ハードウェアレベルで制御<br>外部からの干渉を受けません</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HARDWARE FOUNDATION ═══════════════════════════════════ -->
+  <section class="hardware-section">
+    <div class="hardware-inner">
+      <div class="hardware-top reveal">
+        <p class="hardware-eyebrow">Hardware Foundation</p>
+        <h2 class="hardware-title">Pixel6a以上。<br>なぜ Pixel を選ぶのか。</h2>
+        <p class="hardware-body">「GoogleのPixelをプライバシーのために使う」——矛盾に聞こえるかもしれません。しかしPixel本体のハードウェアセキュリティはAndroid端末の中で突出しています。GrapheneOSはPixelの強固なハードウェア基盤の上で動作することで初めて最大の効力を発揮します。AntiSpy Phoneは、Googleのソフトウェアを完全排除しながら、Googleのハードウェア品質を最大限に活用します。</p>
+      </div>
+
+      <div class="hardware-reasons reveal reveal-delay-2">
+        <div class="hw-reason">
+          <div class="hw-reason-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </div>
+          <div class="hw-reason-title">Androidで最強クラスのハードウェアセキュリティ</div>
+          <div class="hw-reason-body">Titan M2セキュリティチップ搭載。OSが侵害されてもハードウェアレベルで暗号鍵を保護。Android端末の中で最高水準のセキュアブートを実現します。</div>
+        </div>
+        <div class="hw-reason">
+          <div class="hw-reason-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <div class="hw-reason-title">GoogleのハードウェアサポートとOS更新保証</div>
+          <div class="hw-reason-body">Pixel端末はGoogleが直接ファームウェアと長期セキュリティアップデートを提供。GrapheneOSもPixelへの公式サポートを明示しており、最も信頼性の高い組み合わせです。</div>
+        </div>
+        <div class="hw-reason">
+          <div class="hw-reason-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="hw-reason-title">中古品でも品質保証——グレードA以上を使用</div>
+          <div class="hw-reason-body">機能に支障なく外観も綺麗なグレードA以上の中古Pixel端末のみを使用。購入者情報と端末を紐づけないための意図的な中古品採用です。</div>
+        </div>
+      </div>
+
+      <div class="hardware-notes reveal reveal-delay-3">
+        <div class="hw-note">
+          <span class="hw-note-mark">※</span>
+          <span class="hw-note-text">機能に支障なく、特に目立つ傷などがないグレードA以上の中古品を使用しています。</span>
+        </div>
+        <div class="hw-note">
+          <span class="hw-note-mark">※</span>
+          <span class="hw-note-text">購入者情報と端末を紐づけないため、意図的に中古品を採用しています。新品端末には購入者の個人情報が流通段階で記録されるリスクがあります。</span>
+        </div>
+        <div class="hw-note">
+          <span class="hw-note-mark">※</span>
+          <span class="hw-note-text">スマートフォン本体以外の付属品はありません。USBケーブル・充電器などは別途ご用意ください。</span>
+        </div>
+        <div class="hw-note">
+          <span class="hw-note-mark">※</span>
+          <span class="hw-note-text">対応モデル：Google Pixel 6a / 8a / 9 / 10 / 10 Pro（Pixel 6a以上のPixel端末に対応）</span>
         </div>
       </div>
     </div>
@@ -1985,6 +2861,84 @@
     </div>
   </section>
 
+  <!-- ══ COMPARISON TABLE ═══════════════════════════════════════ -->
+  <section class="compare-section">
+    <div class="compare-inner">
+      <div class="compare-header reveal">
+        <p class="compare-eyebrow">Why AntiSpy Phone</p>
+        <h2 class="compare-title">他のスマートフォンとの<br>決定的な違い</h2>
+      </div>
+      <div class="reveal reveal-delay-1" style="overflow-x:auto;">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th class="th-feature">機能</th>
+              <th class="th-asp">AntiSpy Phone</th>
+              <th class="th-android">Android</th>
+              <th class="th-iphone">iPhone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-feature">アカウント</td>
+              <td class="td-asp"><span class="compare-badge good">◎ 不要</span><br>誰からも追跡されません</td>
+              <td class="td-other"><span class="compare-badge bad">✗ 必須</span><br>Googleアカウント必須。あなたはGoogleに監視されます</td>
+              <td class="td-other"><span class="compare-badge bad">✗ 必須</span><br>Apple ID必須。あなたはAppleに監視されます</td>
+            </tr>
+            <tr>
+              <td class="td-feature">マイク・カメラ制御</td>
+              <td class="td-asp"><span class="compare-badge good">◎ 物理レベル</span><br>すべてのマイク・カメラをアプリ単位・OS全体で完全制御</td>
+              <td class="td-other"><span class="compare-badge mid">△ 一部可</span><br>一部設定可能だが完全制御はできない</td>
+              <td class="td-other"><span class="compare-badge bad">✗ 不可</span><br>OSレベルでの制御はできない</td>
+            </tr>
+            <tr>
+              <td class="td-feature">Google追跡</td>
+              <td class="td-asp"><span class="compare-badge good">◎ 完全排除</span><br>Googleによる追跡はゼロ</td>
+              <td class="td-other"><span class="compare-badge bad">✗ 常時追跡</span><br>常にGoogleに追跡されています</td>
+              <td class="td-other"><span class="compare-badge bad">✗ 常時追跡</span><br>常にGoogleに追跡されています</td>
+            </tr>
+            <tr>
+              <td class="td-feature">監視防止設定</td>
+              <td class="td-asp"><span class="compare-badge good">◎ 全設定解放</span><br>ユーザーがすべての権限を持ちます</td>
+              <td class="td-other"><span class="compare-badge bad">✗ 不可</span><br>根本的な監視防止設定は存在しない</td>
+              <td class="td-other"><span class="compare-badge mid">△ 一部可</span><br>一部設定可能だが不完全</td>
+            </tr>
+            <tr>
+              <td class="td-feature">暗号化</td>
+              <td class="td-asp"><span class="compare-badge good">◎ 完全</span><br>パスワードを知るあなただけが唯一の権利者</td>
+              <td class="td-other"><span class="compare-badge mid">△ 不完全</span><br>Googleによるバックドアの危険性は拭えません</td>
+              <td class="td-other"><span class="compare-badge mid">△ 不完全</span><br>Appleによるバックドアの危険性は拭えません</td>
+            </tr>
+            <tr>
+              <td class="td-feature">プライバシーコントロール</td>
+              <td class="td-asp"><span class="compare-badge good">◎ 完全</span><br>あなたがすべての設定をコントロールできます</td>
+              <td class="td-other"><span class="compare-badge bad">✗ 不完全</span><br>設定をオフにしても個人情報は収集され続けます</td>
+              <td class="td-other"><span class="compare-badge bad">✗ 不完全</span><br>設定をオフにしても個人情報は収集され続けます</td>
+            </tr>
+            <tr>
+              <td class="td-feature">データ保護</td>
+              <td class="td-asp"><span class="compare-badge good">◎ Duress対応</span><br>隠されたパスコードで即座にデバイスを完全初期化</td>
+              <td class="td-other"><span class="compare-badge mid">△ 10回失敗</span><br>自分で設定が必要で即座の初期化はできない</td>
+              <td class="td-other"><span class="compare-badge mid">△ 10回失敗</span><br>自分で設定が必要で即座の初期化はできない</td>
+            </tr>
+            <tr>
+              <td class="td-feature">ブラウザ</td>
+              <td class="td-asp"><span class="compare-badge good">◎ Vanadium</span><br>Chrome同等の操作感。すべての追跡・YouTube広告をブロック</td>
+              <td class="td-other"><span class="compare-badge bad">Chrome</span><br>常に追跡。広告があなたの時間と安全を奪います</td>
+              <td class="td-other"><span class="compare-badge bad">Safari</span><br>常に追跡。広告があなたの時間と安全を奪います</td>
+            </tr>
+            <tr>
+              <td class="td-feature">アプリ入手</td>
+              <td class="td-asp"><span class="compare-badge good">◎ Aurora Store</span><br>Google Playと同等。Googleアカウント不要で匿名入手</td>
+              <td class="td-other"><span class="compare-badge bad">Google Play</span><br>プライバシーは収集。いつどこで何を使ったか把握されます</td>
+              <td class="td-other"><span class="compare-badge bad">App Store</span><br>プライバシーは収集。いつどこで何を使ったか把握されます</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- ══ PRICING ════════════════════════════════════════════════ -->
   <section class="pricing-section" id="pricing">
     <p class="pricing-eyebrow reveal">今すぐ手に入れる</p>
@@ -2103,6 +3057,69 @@
     </div><!-- /product-grid -->
 
     <p class="pricing-note reveal" style="margin-top:32px;">すべて税込 · 送料無料 · 初期不良時 同等品交換保証</p>
+  </section>
+
+  <!-- ══ FAQ ═══════════════════════════════════════════════════ -->
+  <section class="faq-section" id="faq-inline">
+    <div class="faq-inner">
+      <div class="faq-header reveal">
+        <p class="faq-eyebrow">よくある質問</p>
+        <h2 class="faq-title">FAQ</h2>
+      </div>
+      <div class="faq-list">
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">GrapheneOSとは何ですか？普通のAndroidと何が違いますか？</summary>
+          <div class="faq-a"><p>GrapheneOSはGoogleのサービスを一切含まない、セキュリティ・プライバシー特化のAndroid互換OSです。通常のAndroidはGoogleが位置情報・通話・アプリ利用履歴を収集しますが、GrapheneOSはこれを技術的に遮断します。LINE・YouTube・Instagramなど一般的なアプリは引き続き利用できます。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">LINEやInstagram、Netflixは使えますか？</summary>
+          <div class="faq-a"><p>はい、利用できます。GrapheneOSのサンドボックス型Google Play機能を使うことで、LINEやInstagram、Netflix、YouTubeなど主要アプリを、Googleアカウントなしで安全にインストール・使用できます。Aurora StoreではPlay Storeの9割以上のアプリを匿名で入手可能です。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">設定が難しくありませんか？ITが苦手でも使えますか？</summary>
+          <div class="faq-a"><p>ご安心ください。AntiSpy PhoneはVPN・アプリ・日本語環境のすべてをプロが出荷前に設定済みです。箱を開けて電源を入れるだけで即日ご利用いただけます。操作感は通常のAndroidスマートフォンとほぼ同じです。購入後のサポートも48時間以内にご返信します。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">LINEを複数アカウント同時に使えますか？</summary>
+          <div class="faq-a"><p>はい。GrapheneOSのユーザープロファイル機能により、最大32の独立した環境を1台に作れます。それぞれのプロファイルにLINEをインストールすれば、32アカウントを1台で完全に分離して利用できます。仕事用・プライベート用・副業用など、用途ごとに使い分けが可能です。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">GoogleやAppleによる追跡を本当に遮断できますか？</summary>
+          <div class="faq-a"><p>はい。GrapheneOSはGoogleサービスをOSから完全に排除しています。広告ID・位置情報の収集・クラッシュログの送信などのテレメトリーが技術的に不可能です。通信はAnonymous VPN経由となり、通信会社（ISP）による通信記録の把握も防ぎます。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">どのSIMカード・キャリアが使えますか？</summary>
+          <div class="faq-a"><p>SIMフリー端末のため、NTTドコモ・au・ソフトバンク・楽天モバイルおよびMVNO（格安SIM）全般で利用可能です。Dual SIMに対応しており、物理SIMとeSIMを併用できるモデルもあります。ご不明な点はお問い合わせください。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">盗聴・盗撮を防止できますか？</summary>
+          <div class="faq-a"><p>GrapheneOSはカメラ・マイクへのアクセス権限をアプリ単位で完全制御できます。特定のアプリがマイクやカメラにアクセスしようとした際、OSレベルでブロックが可能です。また「センサーオフ」機能により内蔵センサーをOSから一括無効化できます。通信は常にVPN経由となり、中間者攻撃による盗聴も防ぎます。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">保証やアフターサポートはありますか？</summary>
+          <div class="faq-a"><p>初期不良が発生した場合は同等品への交換対応を行います。購入後のご質問はメールにて48時間以内にご返信します（平日10:00〜18:00）。GrapheneOSのアップデートや操作方法など、継続的なサポートもご提供しています。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">iPhoneや通常のAndroidスマホとの違いは何ですか？</summary>
+          <div class="faq-a"><p>iPhoneはApple ID・iCloudにより端末・通話・アプリ使用状況がAppleサーバーに送信されます。通常のAndroidはGoogleアカウントに同様のデータが収集されます。AntiSpy PhoneはこれらのクラウドIDを一切使わず、端末内データは端末のみに保存されます。一般的なアプリの使いやすさはほぼ同等です。</p></div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary class="faq-q">日本語で使えますか？サポートは日本語ですか？</summary>
+          <div class="faq-a"><p>はい。メニュー・設定画面・プリインストールアプリはすべて日本語に設定済みです。カスタマーサポートも日本語のみでご対応します。日本国内でのご利用を前提に設計されています。</p></div>
+        </details>
+
+      </div>
+    </div>
   </section>
 
   <!-- ══ CONTACT ══════════════════════════════════════════════ -->
@@ -4685,6 +5702,123 @@
         "isPartOf": { "@id": "https://antispy.socialboost.jp/#website" },
         "about": { "@id": "https://antispy.socialboost.jp/#product-list" },
         "inLanguage": "ja"
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://antispy.socialboost.jp/#localbusiness",
+        "name": "AntiSpy Phone（SocialBoost）",
+        "image": "https://antispy.socialboost.jp/images/og.jpg",
+        "url": "https://antispy.socialboost.jp/",
+        "telephone": "+81-70-9175-3590",
+        "email": "info@socialboost.jp",
+        "priceRange": "¥¥¥",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "戸塚町4170 高橋ビル1F",
+          "addressLocality": "戸塚区",
+          "addressRegion": "神奈川県",
+          "postalCode": "244-0003",
+          "addressCountry": "JP"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 35.3981,
+          "longitude": 139.5341
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "10:00",
+          "closes": "18:00"
+        },
+        "areaServed": { "@type": "Country", "name": "Japan" },
+        "description": "GrapheneOS搭載のプライバシー特化スマートフォン「AntiSpy Phone」を販売。追跡・盗聴・監視から身を守るセキュリティスマホを完全セットアップ済みで提供。"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://antispy.socialboost.jp/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "GrapheneOSとは何ですか？普通のAndroidと何が違いますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "GrapheneOSはGoogleのサービスを一切含まない、セキュリティ・プライバシー特化のAndroid互換OSです。通常のAndroidはGoogleが位置情報・通話・アプリ利用履歴を収集しますが、GrapheneOSはこれを技術的に遮断します。LINE・YouTube・Instagramなど一般的なアプリは引き続き利用できます。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "LINEやInstagram、Netflixは使えますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "はい、利用できます。GrapheneOSのサンドボックス型Google Play機能を使うことで、LINEやInstagram、Netflix、YouTubeなど主要アプリを、Googleアカウントなしで安全にインストール・使用できます。Aurora StoreではPlay Storeの9割以上のアプリを匿名で入手可能です。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "設定が難しくありませんか？ITが苦手でも使えますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "ご安心ください。AntiSpy PhoneはVPN・アプリ・日本語環境のすべてをプロが出荷前に設定済みです。箱を開けて電源を入れるだけで即日ご利用いただけます。操作感は通常のAndroidスマートフォンとほぼ同じです。購入後のサポートも48時間以内にご返信します。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "LINEを複数アカウント同時に使えますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "はい。GrapheneOSのユーザープロファイル機能により、最大32の独立した環境を1台に作れます。それぞれのプロファイルにLINEをインストールすれば、32アカウントを1台で完全に分離して利用できます。仕事用・プライベート用・副業用など、用途ごとに使い分けが可能です。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "GoogleやAppleによる追跡を本当に遮断できますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "はい。GrapheneOSはGoogleサービスをOSから完全に排除しています。広告ID・位置情報の収集・クラッシュログの送信などのテレメトリーが技術的に不可能です。通信はAnonymous VPN経由となり、通信会社（ISP）による通信記録の把握も防ぎます。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "どのSIMカード・キャリアが使えますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SIMフリー端末のため、NTTドコモ・au・ソフトバンク・楽天モバイルおよびMVNO（格安SIM）全般で利用可能です。Dual SIMに対応しており、物理SIMとeSIMを併用できるモデルもあります。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "盗聴・盗撮を防止できますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "GrapheneOSはカメラ・マイクへのアクセス権限をアプリ単位で完全制御できます。センサーオフ機能により内蔵センサーをOSから一括無効化でき、通信は常にVPN経由となり中間者攻撃による盗聴も防ぎます。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "保証やアフターサポートはありますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "初期不良が発生した場合は同等品への交換対応を行います。購入後のご質問はメールにて48時間以内にご返信します（平日10:00〜18:00）。GrapheneOSのアップデートや操作方法など、継続的なサポートもご提供しています。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "iPhoneや通常のAndroidスマホとの違いは何ですか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "iPhoneはApple IDとiCloudにより端末・通話・アプリ使用状況がAppleサーバーに送信されます。通常のAndroidはGoogleアカウントに同様のデータが収集されます。AntiSpy PhoneはこれらのクラウドIDを一切使わず、端末内データは端末のみに保存されます。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "日本語で使えますか？サポートは日本語ですか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "はい。メニュー・設定画面・プリインストールアプリはすべて日本語に設定済みです。カスタマーサポートも日本語のみでご対応します。日本国内でのご利用を前提に設計されています。"
+            }
+          }
+        ]
       }
     ]
   }
