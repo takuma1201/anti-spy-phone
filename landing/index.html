@@ -1206,6 +1206,132 @@
 
     /* ── z-index cleanup ────────────────────────────────────────── */
     nav { z-index: 100; }
+
+    /* ══════════════════════════════════════════════════════════
+       READY OUT OF BOX — 届いたその日から使える
+    ══════════════════════════════════════════════════════════ */
+    .ready-section {
+      background: var(--surface);
+      padding: 120px 22px 100px;
+      border-top: 1px solid var(--border);
+    }
+    .ready-inner { max-width: 1000px; margin: 0 auto; }
+    .ready-eyebrow {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 16px; text-align: center;
+    }
+    .ready-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5.5vw, 66px); font-weight: 700;
+      line-height: 1.06; letter-spacing: -0.03em; text-align: center;
+      background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 20px;
+    }
+    .ready-body {
+      font-size: 19px; font-weight: 500; line-height: 1.6;
+      color: var(--gray-1); text-align: center;
+      max-width: 580px; margin: 0 auto 72px;
+    }
+    .ready-steps {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr 40px 1fr;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 72px;
+    }
+    .ready-step {
+      text-align: center; padding: 36px 24px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border); border-radius: 20px;
+    }
+    .ready-step-num {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .ready-step h3 {
+      font-size: 17px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--silver-1); margin-bottom: 8px;
+    }
+    .ready-step p { font-size: 13px; color: var(--gray-1); line-height: 1.5; }
+    .ready-connector {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); opacity: 0.35; font-size: 22px;
+    }
+    .ready-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+    }
+    .rg-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 24px 20px; background: var(--near-black);
+    }
+    .rg-icon {
+      width: 34px; height: 34px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--accent-dim); border-radius: 9px; color: var(--accent);
+    }
+    .rg-icon svg { display: block; }
+    .rg-text strong {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--silver-2); margin-bottom: 3px;
+    }
+    .rg-text span { font-size: 12px; color: var(--gray-2); line-height: 1.4; }
+    @media (max-width: 900px) {
+      .ready-steps { grid-template-columns: 1fr; gap: 12px; }
+      .ready-connector { transform: rotate(90deg); height: 28px; }
+      .ready-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .ready-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       PERMISSION MOCKUP — Google排除 右パネル
+    ══════════════════════════════════════════════════════════ */
+    .perm-wrap {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--near-black); padding: 60px 48px;
+      height: 100svh;
+    }
+    .perm-card {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 24px; padding: 28px;
+      width: 100%; max-width: 400px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+    }
+    .perm-card-title {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gray-2);
+      margin-bottom: 18px; padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .perm-legend-row {
+      display: grid; grid-template-columns: 1fr repeat(4, 46px);
+      gap: 2px; margin-bottom: 4px;
+    }
+    .perm-legend-row span {
+      font-size: 9px; font-weight: 500; letter-spacing: 0.04em;
+      color: var(--gray-2); text-align: center; text-transform: uppercase;
+    }
+    .perm-row {
+      display: grid; grid-template-columns: 1fr repeat(4, 46px);
+      gap: 2px; align-items: center;
+      padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .perm-app { font-size: 13px; font-weight: 500; color: var(--silver-3); }
+    .perm-cell {
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 20px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; margin: 0 auto;
+    }
+    .perm-cell.on { background: rgba(48,209,88,0.14); color: #30D158; }
+    .perm-cell.off { background: rgba(255,255,255,0.04); color: var(--gray-3); }
+    @media (max-width: 900px) {
+      .perm-wrap { height: auto; padding: 48px 24px; }
+    }
   </style>
 </head>
 
@@ -1343,6 +1469,189 @@
         <div class="tile-overlay" style="background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);"></div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ══ READY OUT OF BOX ════════════════════════════════════════ -->
+  <section class="ready-section">
+    <div class="ready-inner">
+      <p class="ready-eyebrow reveal">Ready Out of Box</p>
+      <h2 class="ready-title reveal reveal-delay-1">届いたその日から、<br>すぐ使える。</h2>
+      <p class="ready-body reveal reveal-delay-2">電源を入れた瞬間から匿名通信を開始できます。VPN設定からセキュリティ制御まで、専門スタッフが完全セットアップ済みで出荷。設定は一切不要です。</p>
+
+      <div class="ready-steps reveal reveal-delay-2">
+        <div class="ready-step">
+          <div class="ready-step-num">STEP 01</div>
+          <h3>注文・購入</h3>
+          <p>モデルを選んで購入するだけ。難しい手続きはありません。</p>
+        </div>
+        <div class="ready-connector">›</div>
+        <div class="ready-step">
+          <div class="ready-step-num">STEP 02</div>
+          <h3>受取</h3>
+          <p>専門スタッフが完全設定済みの状態で出荷します。</p>
+        </div>
+        <div class="ready-connector">›</div>
+        <div class="ready-step">
+          <div class="ready-step-num">STEP 03</div>
+          <h3>電源オン</h3>
+          <p>即日、匿名通信スタート。設定は不要です。</p>
+        </div>
+      </div>
+
+      <div class="ready-grid reveal reveal-delay-3">
+        <div class="rg-item">
+          <span class="rg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </span>
+          <div class="rg-text">
+            <strong>匿名 VPN</strong>
+            <span>DNS・WebRTC リーク防止。設定済み。</span>
+          </div>
+        </div>
+        <div class="rg-item">
+          <span class="rg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </span>
+          <div class="rg-text">
+            <strong>GrapheneOS</strong>
+            <span>プライバシー OS。カスタム設定済み。</span>
+          </div>
+        </div>
+        <div class="rg-item">
+          <span class="rg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </span>
+          <div class="rg-text">
+            <strong>アプリ権限制御</strong>
+            <span>カメラ・通信・位置情報をアプリ単位で管理。</span>
+          </div>
+        </div>
+        <div class="rg-item">
+          <span class="rg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </span>
+          <div class="rg-text">
+            <strong>日本語対応</strong>
+            <span>メニュー・設定画面すべて日本語。</span>
+          </div>
+        </div>
+        <div class="rg-item">
+          <span class="rg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              <path d="M8 10h8M8 13h5"/>
+            </svg>
+          </span>
+          <div class="rg-text">
+            <strong>プライバシー SNS 導入済み</strong>
+            <span>Signal / Element をあらかじめ設定。</span>
+          </div>
+        </div>
+        <div class="rg-item">
+          <span class="rg-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l1.67-1.87a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </span>
+          <div class="rg-text">
+            <strong>導入サポート付き</strong>
+            <span>購入後のご質問に対応。48時間以内返信。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ GOOGLE-FREE ECOSYSTEM ══════════════════════════════════ -->
+  <section class="feature-section" style="background:#000;">
+    <div class="feature-text reveal">
+      <p class="feature-eyebrow">Google-Free Ecosystem</p>
+      <h2 class="feature-title">Googleゼロ。<br>Androidそのままに。</h2>
+      <p class="feature-body">
+        Google のデータ収集を一切受け入れません。サンドボックス化した Google Play により、Google へのログインなしでアプリを利用可能。Aurora Store で Play Store のほぼすべてのアプリを匿名ダウンロードできます。Apple ID も不要です。
+      </p>
+      <div class="feature-specs">
+        <div class="feature-spec-row">
+          <span class="spec-label">Google ログイン</span>
+          <span class="spec-value" style="color:#FF453A;">不要</span>
+        </div>
+        <div class="feature-spec-row">
+          <span class="spec-label">Apple ID</span>
+          <span class="spec-value" style="color:#FF453A;">不要</span>
+        </div>
+        <div class="feature-spec-row">
+          <span class="spec-label">アプリ入手</span>
+          <span class="spec-value good">Aurora Store（匿名）</span>
+        </div>
+        <div class="feature-spec-row">
+          <span class="spec-label">権限管理</span>
+          <span class="spec-value good">アプリ単位で個別制御</span>
+        </div>
+        <div class="feature-spec-row">
+          <span class="spec-label">サンドボックス Play</span>
+          <span class="spec-value good">Google アクセスを遮断</span>
+        </div>
+      </div>
+    </div>
+    <div class="perm-wrap">
+      <div class="perm-card">
+        <p class="perm-card-title">アプリ権限コントロール</p>
+        <div class="perm-legend-row">
+          <span></span>
+          <span>通信</span>
+          <span>カメラ</span>
+          <span>連絡帳</span>
+          <span>位置情報</span>
+        </div>
+        <div class="perm-row">
+          <span class="perm-app">Signal</span>
+          <span class="perm-cell on">✓</span>
+          <span class="perm-cell on">✓</span>
+          <span class="perm-cell on">✓</span>
+          <span class="perm-cell off">✗</span>
+        </div>
+        <div class="perm-row">
+          <span class="perm-app">Tor Browser</span>
+          <span class="perm-cell on">✓</span>
+          <span class="perm-cell off">✗</span>
+          <span class="perm-cell off">✗</span>
+          <span class="perm-cell off">✗</span>
+        </div>
+        <div class="perm-row">
+          <span class="perm-app">Aurora Store</span>
+          <span class="perm-cell on">✓</span>
+          <span class="perm-cell off">✗</span>
+          <span class="perm-cell off">✗</span>
+          <span class="perm-cell off">✗</span>
+        </div>
+        <div class="perm-row">
+          <span class="perm-app">カメラ</span>
+          <span class="perm-cell off">✗</span>
+          <span class="perm-cell on">✓</span>
+          <span class="perm-cell off">✗</span>
+          <span class="perm-cell off">✗</span>
+        </div>
+        <div class="perm-row">
+          <span class="perm-app">マップ</span>
+          <span class="perm-cell on">✓</span>
+          <span class="perm-cell off">✗</span>
+          <span class="perm-cell off">✗</span>
+          <span class="perm-cell on">✓</span>
+        </div>
+      </div>
     </div>
   </section>
 
