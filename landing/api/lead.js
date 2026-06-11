@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         email,
         message:  message ?? '（メッセージなし）',
         page_url: page_url ?? '',
-        _subject: `【AntiSpy 問い合わせ】${name}様より`,
+        _subject: `【SPY 問い合わせ】${name}様より`,
       }),
     });
   } catch (e) {

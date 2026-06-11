@@ -1,12 +1,12 @@
-# AntiSpy Phone
+# SPY Phone
 
 > 司法機関・通信会社・Google・Apple・Metaに追跡されないプライバシー特化スマートフォン。Google Pixel 9 Pro に GrapheneOS を搭載し、デジタル監視から完全保護。¥220,000（税込・送料込）。月額費用なし。
 
-AntiSpy Phone は、ジャーナリスト・弁護士・経営幹部・活動家など、強力なプライバシー保護を必要とするユーザー向けに構築されたスマートフォンです。GrapheneOS（独立したセキュリティ研究者によって監査されたオープンソース OS）を搭載した Google Pixel 9 Pro を、お届け前に徹底的に設定・最適化した状態でお届けします。
+SPY Phone は、ジャーナリスト・弁護士・経営幹部・活動家など、強力なプライバシー保護を必要とするユーザー向けに構築されたスマートフォンです。GrapheneOS（独立したセキュリティ研究者によって監査されたオープンソース OS）を搭載した Google Pixel 9 Pro を、お届け前に徹底的に設定・最適化した状態でお届けします。
 
 ## 製品情報
 
-- [AntiSpy Phone（トップページ）](https://antispy.socialboost.jp/): 製品概要・購入・問い合わせ
+- [SPY Phone（トップページ）](https://antispy.socialboost.jp/): 製品概要・購入・問い合わせ
 - [よくある質問](https://antispy.socialboost.jp/faq.html): 購入前の疑問・初心者向けガイド・上級者向け技術情報（GrapheneOS、ブートローダー、暗号化など）
 - [特定商取引法に基づく表記](https://antispy.socialboost.jp/tokushoho.html): 販売者情報・返品ポリシー・配送情報
 
