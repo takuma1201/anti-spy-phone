@@ -6,9 +6,9 @@ SPY Phone は、ジャーナリスト・弁護士・経営幹部・活動家な�
 
 ## 製品情報
 
-- [SPY Phone（トップページ）](https://antispy.socialboost.jp/): 製品概要・購入・問い合わせ
-- [よくある質問](https://antispy.socialboost.jp/faq.html): 購入前の疑問・初心者向けガイド・上級者向け技術情報（GrapheneOS、ブートローダー、暗号化など）
-- [特定商取引法に基づく表記](https://antispy.socialboost.jp/tokushoho.html): 販売者情報・返品ポリシー・配送情報
+- [SPY Phone（トップページ）](https://spyphone.socialboost.jp/): 製品概要・購入・問い合わせ
+- [よくある質問](https://spyphone.socialboost.jp/faq.html): 購入前の疑問・初心者向けガイド・上級者向け技術情報（GrapheneOS、ブートローダー、暗号化など）
+- [特定商取引法に基づく表記](https://spyphone.socialboost.jp/tokushoho.html): 販売者情報・返品ポリシー・配送情報
 
 ## 主な特徴
 
