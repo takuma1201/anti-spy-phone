@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'email and items are required' });
   }
 
-  const baseUrl = process.env.BASE_URL ?? 'https://antispy.shop';
+  const baseUrl = process.env.BASE_URL ?? 'https://spyphone.socialboost.jp';
 
   try {
     const session = await stripe.checkout.sessions.create({
