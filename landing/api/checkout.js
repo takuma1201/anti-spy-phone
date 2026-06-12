@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { orderNum, name, email, tel, address, items, total } = req.body ?? {};
+  const { orderNum, name, email, tel, address, items, total, ref } = req.body ?? {};
 
   if (!email || !items?.length) {
     return res.status(400).json({ error: 'email and items are required' });
@@ -42,12 +42,14 @@ export default async function handler(req, res) {
         name,
         tel: tel ?? '',
         address: address ?? '',
+        ref: ref ?? '',
       },
       payment_intent_data: {
         metadata: {
           orderNum,
           name,
           email,
+          ref: ref ?? '',
         },
       },
       locale: 'ja',
