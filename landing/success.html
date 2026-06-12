@@ -201,6 +201,12 @@
 
   <script>
     (function () {
+      // 決済が完了したので、保存済みカートと使用済みの紹介情報をクリア
+      try {
+        localStorage.removeItem('spyphone-cart');
+        localStorage.removeItem('spyphone-ref');
+      } catch (e) {}
+
       const params = new URLSearchParams(location.search);
       const orderNum = params.get('order');
       const numEl  = document.getElementById('js-order-num');

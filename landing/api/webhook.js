@@ -42,17 +42,17 @@ export default async function handler(req, res) {
 }
 
 async function handleOrderCompleted(session) {
-  const { orderNum, name, tel, address } = session.metadata ?? {};
+  const { orderNum, name, tel, address, ref } = session.metadata ?? {};
   const email = session.customer_email ?? session.customer_details?.email ?? '';
   const total = session.amount_total;
 
   await Promise.allSettled([
-    saveOrderToSupabase({ orderNum, name, email, tel, address, total, sessionId: session.id }),
-    sendOrderNotification({ orderNum, name, email, tel, address, total }),
+    saveOrderToSupabase({ orderNum, name, email, tel, address, total, ref, sessionId: session.id }),
+    sendOrderNotification({ orderNum, name, email, tel, address, total, ref }),
   ]);
 }
 
-async function saveOrderToSupabase({ orderNum, name, email, tel, address, total, sessionId }) {
+async function saveOrderToSupabase({ orderNum, name, email, tel, address, total, ref, sessionId }) {
   const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!SUPABASE_URL || !SUPABASE_KEY) return;
@@ -72,6 +72,7 @@ async function saveOrderToSupabase({ orderNum, name, email, tel, address, total,
       tel:        tel ?? null,
       address:    address ?? null,
       total_jpy:  total,
+      ref:        ref || null,
       stripe_session_id: sessionId,
       status:     'paid',
     }),
@@ -80,7 +81,7 @@ async function saveOrderToSupabase({ orderNum, name, email, tel, address, total,
   if (!r.ok) console.error('Supabase insert error:', await r.text());
 }
 
-async function sendOrderNotification({ orderNum, name, email, tel, address, total }) {
+async function sendOrderNotification({ orderNum, name, email, tel, address, total, ref }) {
   const FORMSPREE = process.env.ORDER_NOTIFY_ENDPOINT;
   if (!FORMSPREE) return;
 
@@ -95,6 +96,7 @@ async function sendOrderNotification({ orderNum, name, email, tel, address, tota
       tel,
       address,
       total: `¥${total?.toLocaleString('ja-JP')}`,
+      ref: ref || '（紹介なし）',
     }),
   }).catch(e => console.error('Formspree error:', e));
 }

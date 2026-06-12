@@ -10,13 +10,18 @@ create table if not exists orders (
   tel               text,
   address           text,
   total_jpy         integer,
+  ref               text,
   stripe_session_id text        unique,
   status            text        not null default 'paid',
   created_at        timestamptz default now()
 );
 
+-- 既存テーブルに紹介コード列を追加（再実行しても安全）
+alter table orders add column if not exists ref text;
+
 create index if not exists orders_email_idx     on orders (email);
 create index if not exists orders_order_num_idx on orders (order_num);
+create index if not exists orders_ref_idx       on orders (ref);
 
 alter table orders enable row level security;
 

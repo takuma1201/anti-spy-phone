@@ -3227,7 +3227,7 @@
         <p class="ref-card-title">あなた専用の紹介リンク</p>
         <p class="ref-card-sub">このリンクから購入された方が、あなたの紹介としてカウントされます。</p>
         <div class="ref-link-box">
-          <input type="text" id="ref-link-input" class="ref-input" readonly value="">
+          <input type="text" id="ref-link-input" class="ref-input" readonly value="" aria-label="あなた専用の紹介リンク">
           <button type="button" id="ref-copy-btn" class="ref-copy-btn">コピー</button>
         </div>
         <div class="ref-share">
@@ -3399,7 +3399,17 @@
         if (input) input.value = myLink();
 
         function copyLink(btn) {
-          navigator.clipboard.writeText(myLink()).then(function () { flash(btn, 'コピーしました ✓'); });
+          var link = myLink();
+          function ok() { flash(btn, 'コピーしました ✓'); }
+          function fallback() {
+            if (input) { input.focus(); input.select(); }
+            try { document.execCommand('copy'); ok(); } catch (e) { flash(btn, 'コピーできませんでした'); }
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(ok).catch(fallback);
+          } else {
+            fallback();
+          }
         }
         var c1 = document.getElementById('ref-copy-btn');
         var c2 = document.getElementById('ref-share-copy2');
@@ -4209,7 +4219,7 @@
     //  SHOP CONFIG — set your Shopify checkout URL
     // ════════════════════════════════════════════════════════════
     const SHOP_CHECKOUT_URL = 'https://spyphone.socialboost.jp/cart'; // update to your Shopify cart URL
-    const SHOP_PRODUCT = { id: 'spyphone-phone', name: 'SPY Phone', subtitle: 'Google Pixel 9 Pro + GrapheneOS', price: 220000 };
+    const SHOP_PRODUCT = { id: 'spyphone-pixel10', name: 'SPY Phone', subtitle: 'Google Pixel 10 + GrapheneOS', price: 209000 };
 
     // ── Selectors that become editable ──────────────────────────
     const TEXT_SEL = [
@@ -4906,7 +4916,7 @@
         btn.style.cursor = 'pointer';
         btn.addEventListener('click', e => {
           e.preventDefault();
-          addToCart(typeof SHOP_PRODUCT !== 'undefined' ? SHOP_PRODUCT : { id:'spyphone-phone', name:'SPY Phone', subtitle:'Google Pixel 9 Pro + GrapheneOS', price:220000 });
+          addToCart(typeof SHOP_PRODUCT !== 'undefined' ? SHOP_PRODUCT : { id:'spyphone-pixel10', name:'SPY Phone', subtitle:'Google Pixel 10 + GrapheneOS', price:209000 });
         });
       }
     });
@@ -5410,7 +5420,7 @@
       confirmBtn.disabled = true;
       confirmBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:cf-spin 0.8s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> 処理中...';
 
-      const orderNum = 'ASP-' + Date.now().toString(36).toUpperCase().slice(-6);
+      const orderNum = 'SPY-' + Date.now().toString(36).toUpperCase().slice(-6);
       const total    = cartSnapshot.reduce((s,i) => s + i.price * i.qty, 0);
       const ref      = (window.SpyRef && window.SpyRef.getActiveRef()) || '';
 
