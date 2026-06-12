@@ -3183,6 +3183,13 @@
     .ref-share-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
     .ref-share-btn svg { width: 18px; height: 18px; }
     .ref-fine { font-size: 12px; color: var(--gray-2); text-align: center; margin: 24px auto 0; max-width: 620px; line-height: 1.6; }
+    /* Referral registration form */
+    .ref-reg-form { max-width: 620px; margin: 0 auto; }
+    .ref-reg-note { font-size: 13px; color: var(--gray-1); text-align: center; margin: 0 0 16px; line-height: 1.6; }
+    .ref-reg-row { display: flex; gap: 10px; margin-bottom: 12px; }
+    .ref-reg-row .ref-input { flex: 1; min-width: 0; }
+    .ref-reg-btn { width: 100%; padding: 14px; }
+    .ref-reg-error { font-size: 13px; color: #FF6B6B; text-align: center; margin: 12px 0 0; }
     /* Referral arrival banner */
     .ref-banner { position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; z-index: 9000; display: flex; align-items: center; gap: 14px; max-width: 92%; background: var(--surface); border: 1px solid var(--accent-glow); border-radius: 14px; padding: 14px 18px; box-shadow: 0 12px 40px rgba(0,0,0,.5); }
     .ref-banner-text { font-size: 14px; color: var(--silver-1); line-height: 1.5; }
@@ -3193,6 +3200,7 @@
       .ref-steps { grid-template-columns: 1fr; }
       .ref-card { padding: 26px 18px; }
       .ref-link-box { flex-direction: column; }
+      .ref-reg-row { flex-direction: column; }
       .ref-copy-btn { padding: 14px; }
     }
   </style>
@@ -3226,25 +3234,41 @@
       <div class="ref-card reveal reveal-delay-1">
         <p class="ref-card-title">あなた専用の紹介リンク</p>
         <p class="ref-card-sub">このリンクから購入された方が、あなたの紹介としてカウントされます。</p>
-        <div class="ref-link-box">
-          <input type="text" id="ref-link-input" class="ref-input" readonly value="" aria-label="あなた専用の紹介リンク">
-          <button type="button" id="ref-copy-btn" class="ref-copy-btn">コピー</button>
+
+        <!-- 紹介者登録フォーム（未登録時に表示） -->
+        <form id="ref-reg-form" class="ref-reg-form" novalidate>
+          <p class="ref-reg-note">特典をお届けするため、お名前とメールアドレスをご登録のうえ、紹介リンクを発行してください。</p>
+          <div class="ref-reg-row">
+            <input type="text" id="ref-reg-name" class="ref-input" placeholder="お名前" autocomplete="name" required>
+            <input type="email" id="ref-reg-email" class="ref-input" placeholder="メールアドレス" autocomplete="email" required>
+          </div>
+          <button type="submit" id="ref-reg-btn" class="ref-copy-btn ref-reg-btn">紹介リンクを発行</button>
+          <p id="ref-reg-error" class="ref-reg-error" style="display:none;"></p>
+        </form>
+
+        <!-- 紹介リンク＋共有（登録後に表示） -->
+        <div id="ref-link-area" style="display:none;">
+          <div class="ref-link-box">
+            <input type="text" id="ref-link-input" class="ref-input" readonly value="" aria-label="あなた専用の紹介リンク">
+            <button type="button" id="ref-copy-btn" class="ref-copy-btn">コピー</button>
+          </div>
+          <div class="ref-share">
+            <a href="#" id="ref-share-line" class="ref-share-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.69 2 10.25c0 4.09 3.56 7.51 8.37 8.15.33.07.77.22.88.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.09-.46 5.86-3.45 8-5.91 1.47-1.61 2.07-3.25 2.07-5.07C22 5.69 17.52 2 12 2z"/></svg>
+              LINEで送る
+            </a>
+            <a href="#" id="ref-share-x" class="ref-share-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23.3 22h-6.9l-5.4-7-6.2 7H1.7l8-9.2L.9 2h7l4.9 6.5L18.9 2zm-2.4 18h1.9L7.6 4H5.6l10.9 16z"/></svg>
+              Xでシェア
+            </a>
+            <button type="button" id="ref-share-copy2" class="ref-share-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              リンクをコピー
+            </button>
+          </div>
         </div>
-        <div class="ref-share">
-          <a href="#" id="ref-share-line" class="ref-share-btn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.69 2 10.25c0 4.09 3.56 7.51 8.37 8.15.33.07.77.22.88.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.09-.46 5.86-3.45 8-5.91 1.47-1.61 2.07-3.25 2.07-5.07C22 5.69 17.52 2 12 2z"/></svg>
-            LINEで送る
-          </a>
-          <a href="#" id="ref-share-x" class="ref-share-btn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23.3 22h-6.9l-5.4-7-6.2 7H1.7l8-9.2L.9 2h7l4.9 6.5L18.9 2zm-2.4 18h1.9L7.6 4H5.6l10.9 16z"/></svg>
-            Xでシェア
-          </a>
-          <button type="button" id="ref-share-copy2" class="ref-share-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            リンクをコピー
-          </button>
-        </div>
-        <p class="ref-fine">※ 特典の付与は、ご紹介された方のご入金（決済）確認をもって確定します。自己紹介・不正な利用が確認された場合は特典を付与いたしかねます。特典内容は予告なく変更される場合があります。詳しくは<a href="tokushoho.html" style="color:var(--accent);">こちら</a>。</p>
+
+        <p class="ref-fine">※ ご登録のメールアドレスは特典のお届けにのみ使用します。特典の付与は、ご紹介された方のご入金（決済）確認をもって確定します。自己紹介・不正な利用が確認された場合は特典を付与いたしかねます。特典内容は予告なく変更される場合があります。詳しくは<a href="tokushoho.html" style="color:var(--accent);">こちら</a>。</p>
       </div>
     </div>
   </section>
@@ -3391,11 +3415,18 @@
         setTimeout(function () { btn.textContent = btn.dataset.orig; }, 1800);
       }
 
-      function init() {
-        capture();
-        showBanner();
+      var REG_KEY = 'spyphone-ref-registered'; // '1' once owner email is registered server-side
 
-        var input  = document.getElementById('ref-link-input');
+      function isRegistered() { return localStorage.getItem(REG_KEY) === '1'; }
+
+      // Reveal the link + share UI and wire its controls (only after registration)
+      function showLinkArea() {
+        var form = document.getElementById('ref-reg-form');
+        var area = document.getElementById('ref-link-area');
+        if (form) form.style.display = 'none';
+        if (area) area.style.display = 'block';
+
+        var input = document.getElementById('ref-link-input');
         if (input) input.value = myLink();
 
         function copyLink(btn) {
@@ -3420,6 +3451,54 @@
         if (line) line.href = 'https://line.me/R/msg/text/?' + encodeURIComponent(SHARE_TXT + '\n' + myLink());
         var x = document.getElementById('ref-share-x');
         if (x) x.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(SHARE_TXT) + '&url=' + encodeURIComponent(myLink());
+      }
+
+      // Register the referrer (name + email → server) before issuing the link
+      function onRegister(e) {
+        e.preventDefault();
+        var nameEl  = document.getElementById('ref-reg-name');
+        var emailEl = document.getElementById('ref-reg-email');
+        var btn     = document.getElementById('ref-reg-btn');
+        var errEl   = document.getElementById('ref-reg-error');
+        var name  = (nameEl && nameEl.value || '').trim();
+        var email = (emailEl && emailEl.value || '').trim();
+
+        function showErr(msg) { if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; } }
+        if (errEl) errEl.style.display = 'none';
+
+        if (!name || !email || email.indexOf('@') < 1 || email.indexOf('.') < 0) {
+          return showErr('お名前と有効なメールアドレスをご入力ください。');
+        }
+
+        btn.disabled = true;
+        var orig = btn.textContent;
+        btn.textContent = '発行中…';
+
+        fetch('/api/referral', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: myCode(), name: name, email: email }),
+        }).then(function (r) {
+          if (!r.ok) throw new Error('failed');
+          localStorage.setItem(REG_KEY, '1');
+          showLinkArea();
+        }).catch(function () {
+          btn.disabled = false;
+          btn.textContent = orig;
+          showErr('登録に失敗しました。時間をおいて再度お試しください。');
+        });
+      }
+
+      function init() {
+        capture();
+        showBanner();
+
+        if (isRegistered()) {
+          showLinkArea();
+        } else {
+          var form = document.getElementById('ref-reg-form');
+          if (form) form.addEventListener('submit', onRegister);
+        }
       }
 
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

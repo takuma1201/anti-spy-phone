@@ -25,6 +25,21 @@ create index if not exists orders_ref_idx       on orders (ref);
 
 alter table orders enable row level security;
 
+-- ── Referrers (友達紹介プログラムの紹介リンク所有者) ──────────────────
+-- 紹介リンク発行時に /api/referral が code→email を登録。
+-- webhook は注文の ref からこの表を引いて紹介者を特定する。
+create table if not exists referrers (
+  id         uuid        default gen_random_uuid() primary key,
+  code       text        not null unique,
+  name       text,
+  email      text        not null,
+  created_at timestamptz default now()
+);
+
+create index if not exists referrers_code_idx on referrers (code);
+
+alter table referrers enable row level security;
+
 -- ── Chat leads ────────────────────────────────────────────────────
 create table if not exists chat_leads (
   id         uuid        default gen_random_uuid() primary key,
