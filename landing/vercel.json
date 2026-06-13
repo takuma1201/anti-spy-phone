@@ -1,10 +1,4 @@
-cp landing/vercel.json landing/vercel.json.backup
-cat > landing/vercel.json <<'EOF'
 {
-  "version": 2,
-  "name": "spy-phone",
-  "rewrites": [
-    { "source": "/success", "destination": "/success.html" }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true
 }
-EOF
