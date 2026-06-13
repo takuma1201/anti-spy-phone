@@ -2182,39 +2182,42 @@
     </div>
   </nav>
 
-  <!-- ══ HERO ══════════════════════════════════════════════════ -->
-  <section class="hero" data-i18n-root>
-    <p class="hero-eyebrow">新登場 — GrapheneOS搭載</p>
+  <!-- ══ HERO (light redesign) ═══════════════════════════════ -->
+  <section class="rd-hero" data-i18n-root>
+    <div class="rd-hero__inner">
 
-    <h1 class="hero-title">追跡不可能。<br>それが、すべて。</h1>
+      <svg class="rd-hero__hex" viewBox="0 0 400 400" fill="none" stroke="#c9ccd4" stroke-width="10" aria-hidden="true">
+        <polygon points="200,40 330,115 330,265 200,340 70,265 70,115"/>
+        <circle cx="200" cy="40"  r="16" fill="#c9ccd4" stroke="none"/>
+        <circle cx="330" cy="115" r="16" fill="#c9ccd4" stroke="none"/>
+        <circle cx="330" cy="265" r="16" fill="#c9ccd4" stroke="none"/>
+        <circle cx="70"  cy="115" r="16" fill="#c9ccd4" stroke="none"/>
+        <polyline points="200,115 270,160 270,230" stroke="#9ecbff"/>
+      </svg>
 
-    <p class="hero-subtitle">
-      司法機関も、通信会社も、<br>ビッグテックも—届かない。
-    </p>
-
-    <p class="hero-definition">AntiSpy PhoneはGrapheneOSを搭載した追跡対策済みのGoogle Pixelスマートフォンです。</p>
-
-    <div class="hero-actions">
-      <a href="#pricing" class="btn-blue">今すぐ購入</a>
-      <a href="#features" class="btn-ghost">詳しく見る</a>
-    </div>
-
-    <div class="hero-image">
-      <!--
-        IMAGE: landing/images/hero.png
-        Use the Pixel Fold blue front+back image (black background)
-        Recommended size: 1640px wide
-      -->
-      <img
-        src="images/hero.png"
-        alt="AntiSpy Phone — Pixel + GrapheneOS"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-      >
-      <div class="img-placeholder" style="display:none;">
-        PLACE hero.png HERE<br>
-        <small style="font-size:11px;margin-top:8px;">(Pixel Fold blue, black bg)</small>
+      <div class="rd-hero__phones" aria-hidden="true">
+        <div class="rd-phone rd-phone--k"><span class="rd-phone__cam"></span></div>
+        <div class="rd-phone rd-phone--l"><span class="rd-phone__cam"></span></div>
+        <div class="rd-phone rd-phone--g"><span class="rd-phone__cam"></span></div>
+        <div class="rd-phone rd-phone--b"><span class="rd-phone__cam"></span><span class="rd-phone__g">G</span></div>
       </div>
+
+      <div class="rd-hero__card">
+        <h1 class="rd-hero__title">司法にも破れない<br>最強のセキュリティ</h1>
+        <ul class="rd-hero__list">
+          <li>最大32個のLINEやTelegramアカウントの作成可能</li>
+          <li>Google／Appleアカウントに依存せずアプリを導入可能</li>
+          <li>通信を暗号化し、第三者による傍受を防ぐ設計</li>
+          <li>VPN・トラッカー遮断など、主要なセキュリティ対策をプリインストール</li>
+        </ul>
+        <div class="rd-hero__actions">
+          <a href="#pricing" class="rd-btn-primary">注文する</a>
+          <a href="#contact" class="rd-btn-ghost">問い合わせ</a>
+        </div>
+      </div>
+
     </div>
+    <div class="rd-hero__wordmark" aria-hidden="true">GrapheneOS</div>
   </section>
 
   <!-- ══ STATEMENT ═════════════════════════════════════════════ -->
