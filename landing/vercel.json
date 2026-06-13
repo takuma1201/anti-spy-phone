@@ -1,18 +1,10 @@
+cp landing/vercel.json landing/vercel.json.backup
+cat > landing/vercel.json <<'EOF'
 {
   "version": 2,
-  "name": "antispy-phone",
-  "builds": [
-    { "src": "api/**/*.js",  "use": "@vercel/node" },
-    { "src": "*.html",       "use": "@vercel/static" },
-    { "src": "*.xml",        "use": "@vercel/static" },
-    { "src": "*.txt",        "use": "@vercel/static" },
-    { "src": "images/**",    "use": "@vercel/static" },
-    { "src": "blog/*.html",  "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/api/webhook", "dest": "/api/webhook" },
-    { "src": "/api/(.*)",    "dest": "/api/$1" },
-    { "src": "/success",     "dest": "/success.html" },
-    { "src": "/(.*)",        "dest": "/$1" }
+  "name": "spy-phone",
+  "rewrites": [
+    { "source": "/success", "destination": "/success.html" }
   ]
 }
+EOF
