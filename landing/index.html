@@ -13,6 +13,10 @@
   <meta property="og:title"       content="AntiSpy Phone — 追跡不可能なスマートフォン">
   <meta property="og:description" content="司法機関・通信会社・Google・Apple・Metaに追跡されない。GrapheneOS搭載スマートフォン。Pixel 8a〜Pixel 10 Pro対応。¥132,000〜（税込・送料込）">
   <meta property="og:image"       content="https://antispy.socialboost.jp/images/ogp.png">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type"   content="image/png">
+  <meta property="og:image:alt"    content="AntiSpy Phone — GrapheneOS搭載のプライバシースマートフォン">
   <meta property="og:locale"      content="ja_JP">
   <meta property="og:site_name"   content="AntiSpy Phone">
   <meta name="twitter:card"       content="summary_large_image">
@@ -29,42 +33,51 @@
       pixel-8a-2.png → Pixel 8a alternate angle
   -->
 
-  <!-- Space Grotesk for display headings; SF Pro stack for body -->
+  <!-- AntiSpy Phone Design System — Geist (sans+mono) workhorse, Noto Serif JP editorial -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/antispy-design-system.css">
+  <link rel="stylesheet" href="styles/redesign-light.css">
   <style>
     /* ── RESET ───────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
-    /* ── DESIGN TOKENS ───────────────────────────────────────── */
+    /* ── DESIGN TOKENS ───────────────────────────────────────────
+       Bridged to the AntiSpy Phone Design System (styles/antispy-design-system.css).
+       Legacy names are preserved so existing markup keeps working, but every
+       value now resolves to a design-system token: almost-monochrome,
+       warm-white text, atmospheric champagne, no blue.
+    ──────────────────────────────────────────────────────────── */
     :root {
-      /* Typography — Space Grotesk for display, SF Pro for body */
-      --font:         -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      --font-display: "Space Grotesk", -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      /* Typography — Geist workhorse (sans+mono), Noto Serif JP editorial */
+      --font:         var(--as-font-sans);
+      --font-display: var(--as-font-sans);
+      --font-serif:   var(--as-font-serif);
+      --font-mono:    var(--as-font-mono);
 
-      /* Colors */
-      --black:        #000000;
-      --near-black:   #0a0a0a;
-      --surface:      #141414;
-      --surface-2:    #1c1c1e;
-      --border:       #2c2c2e;
+      /* Surfaces (deep ink → graphite) */
+      --black:        var(--as-ink);
+      --near-black:   var(--as-graphite-1);
+      --surface:      var(--as-graphite-2);
+      --surface-2:    var(--as-graphite-3);
+      --border:       var(--as-hairline);
 
-      /* Silver text system (Apple's actual values) */
-      --silver-1:     #F5F5F7;   /* headlines primary */
-      --silver-2:     #C7C7CC;   /* headlines secondary */
-      --silver-3:     #AEAEB2;   /* subheadlines */
-      --gray-1:       #86868B;   /* body text */
-      --gray-2:       #6E6E73;   /* captions */
-      --gray-3:       #48484A;   /* disabled */
+      /* Text system — warm platinum, no cool/blue undertone */
+      --silver-1:     var(--as-platinum);     /* headlines primary */
+      --silver-2:     var(--as-platinum-2);   /* headlines secondary */
+      --silver-3:     var(--as-platinum-2);   /* subheadlines */
+      --gray-1:       var(--as-platinum-3);   /* body text */
+      --gray-2:       var(--as-platinum-3);   /* captions */
+      --gray-3:       var(--as-platinum-4);   /* disabled */
 
-      /* Accent — Classified Amber */
+      /* Accent — atmospheric champagne (never bright, never decorative) */
       --white:        #FFFFFF;
-      --accent:       #C8A96E;   /* Classified Amber — luxury gold */
-      --accent-hover: #B89858;   /* hover state */
-      --accent-dim:   rgba(200,169,110,0.12);
-      --accent-glow:  rgba(200,169,110,0.25);
+      --accent:       var(--as-champagne);    /* #C8A765 */
+      --accent-hover: var(--as-champagne-2);  /* #B0904F */
+      --accent-dim:   var(--as-champagne-soft);
+      --accent-glow:  rgba(200,167,101,0.22);
 
       /* Spacing */
       --nav-h:        52px;
@@ -107,12 +120,22 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       height: var(--nav-h);
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      /* Liquid Glass — ambient sticky header (design system .as-liquid-sticky) */
+      background: var(--as-liquid-tint);
+      backdrop-filter: blur(var(--as-liquid-blur-sticky)) saturate(var(--as-liquid-sat));
+      -webkit-backdrop-filter: blur(var(--as-liquid-blur-sticky)) saturate(var(--as-liquid-sat));
+      border-bottom: 1px solid var(--as-liquid-edge-strong);
       display: flex;
       align-items: center;
+    }
+    /* Soft top-edge highlight — reads as a single physical pane */
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--as-liquid-top), transparent);
+      pointer-events: none;
     }
     .nav-inner {
       max-width: 1024px;
@@ -161,7 +184,41 @@
       transition: background 0.2s;
       white-space: nowrap;
     }
-    .nav-buy:hover { background: #B89858; }
+    .nav-buy:hover { background: var(--as-champagne-2); }
+
+    /* Language switcher — quiet mono segmented control */
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px;
+      border: 1px solid var(--as-hairline);
+      border-radius: var(--as-radius-pill);
+      background: rgba(255,255,255,0.02);
+    }
+    .lang-opt {
+      font-family: var(--as-font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--as-platinum-3);
+      background: transparent;
+      border: 0;
+      border-radius: var(--as-radius-pill);
+      padding: 4px 9px;
+      cursor: pointer;
+      transition: color var(--as-dur-fast) var(--as-ease-standard),
+                  background var(--as-dur-fast) var(--as-ease-standard);
+    }
+    .lang-opt:hover { color: var(--as-platinum); }
+    .lang-opt[aria-pressed="true"] {
+      color: var(--as-champagne);
+      background: var(--as-champagne-soft);
+    }
+    @media (max-width: 600px) {
+      .lang-opt { padding: 4px 7px; font-size: 9px; }
+      .nav-actions { gap: 8px; }
+    }
 
     /* ══════════════════════════════════════════════════════════
        HERO — Full viewport, product float
@@ -177,16 +234,19 @@
       position: relative;
     }
 
-    /* Radial ambient glow behind product */
+    /* Vitrine stage — single overhead light, atmospheric champagne spill.
+       No blue: cool glows read as cybersecurity SaaS, not luxury hardware. */
     .hero::before {
       content: '';
       position: absolute;
-      top: 20%;
+      top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(ellipse, rgba(100,120,160,0.12) 0%, transparent 70%);
+      width: 1200px;
+      height: 760px;
+      background:
+        radial-gradient(900px 460px at 50% -8%, rgba(255,255,255,0.07), transparent 58%),
+        radial-gradient(700px 520px at 50% 80%, rgba(200,167,101,0.045), transparent 62%);
       pointer-events: none;
     }
 
@@ -202,15 +262,15 @@
       animation: fadeUp 0.6s cubic-bezier(0.25,0.1,0.25,1) 0.1s forwards;
     }
 
-    /* PRIMARY — the silver gradient headline */
+    /* PRIMARY — cinematic light display (design system: weight 300, tight track) */
     .hero-title {
       font-family: var(--font-display);
       font-size: clamp(48px, 7vw, 80px);
-      font-weight: 700;
+      font-weight: 300;
       line-height: 1.05;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
       text-align: center;
-      background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
+      background: linear-gradient(180deg, #F5F7FA 0%, #B6BEC6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -231,6 +291,22 @@
       margin-bottom: 28px;
       opacity: 0;
       animation: fadeUp 0.7s cubic-bezier(0.25,0.1,0.25,1) 0.35s forwards;
+    }
+
+    /* Quiet definitional caption — visible to AI/search, restrained
+       typographically so it doesn't compete with the poetic eyebrow→
+       title→subtitle stack. Lives between subtitle and CTA. */
+    .hero-definition {
+      font-size: clamp(13px, 1.3vw, 14px);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0;
+      color: var(--gray-1);
+      text-align: center;
+      max-width: 560px;
+      margin: -6px auto 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s cubic-bezier(0.25,0.1,0.25,1) 0.42s forwards;
     }
 
     .hero-actions {
@@ -314,7 +390,7 @@
        STATEMENT — Large cinematic text section
     ══════════════════════════════════════════════════════════ */
     .statement {
-      padding: 140px 22px;
+      padding: 120px 22px;
       text-align: center;
       background: var(--black);
     }
@@ -326,10 +402,10 @@
     }
     .statement-headline {
       font-size: clamp(40px, 6vw, 72px);
-      font-weight: 700;
+      font-weight: 300;
       line-height: 1.05;
-      letter-spacing: -0.025em;
-      background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
+      letter-spacing: -0.03em;
+      background: linear-gradient(180deg, #F5F7FA 0%, #B6BEC6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -536,7 +612,7 @@
       color: var(--silver-3);
       text-align: right;
     }
-    .spec-value.good { color: #30D158; } /* Apple green */
+    .spec-value.good { color: var(--as-emerald-text); } /* Apple green */
 
     .feature-image {
       height: 100svh;
@@ -630,17 +706,29 @@
       color: var(--silver-1);
       font-weight: 700;
     }
+    /* Status chip — neutral surface, the 6px dot carries the only colour
+       (design system Apple-HIG chip pattern) */
     .badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      padding: 2px 8px;
-      border-radius: 980px;
-      background: rgba(48,209,88,0.15);
-      color: #30D158;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      padding: 3px 10px 3px 9px;
+      border-radius: var(--as-radius-pill);
+      background: var(--as-graphite-3);
+      border: 1px solid var(--as-hairline);
+      color: var(--as-platinum-2);
       margin-left: 8px;
       vertical-align: middle;
+    }
+    .badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--as-emerald);
+      flex-shrink: 0;
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -649,24 +737,29 @@
     .pricing-section {
       padding: 120px 22px;
       text-align: center;
-      background: var(--black);
+      /* Vitrine wash — single overhead light, atmospheric champagne floor */
+      background:
+        radial-gradient(900px 420px at 50% -6%, rgba(255,255,255,0.05), transparent 60%),
+        radial-gradient(700px 460px at 50% 108%, rgba(200,167,101,0.035), transparent 64%),
+        var(--black);
       border-top: 1px solid var(--border);
     }
     .pricing-eyebrow {
-      font-size: 12px;
+      font-family: var(--as-font-mono);
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--gray-1);
+      color: var(--as-champagne);
       margin-bottom: 16px;
     }
     .pricing-title {
       font-family: var(--font-display);
       font-size: clamp(36px, 5vw, 64px);
-      font-weight: 700;
+      font-weight: 300;
       line-height: 1.05;
-      letter-spacing: -0.03em;
-      background: linear-gradient(180deg, #F5F5F7 0%, #8E8E93 100%);
+      letter-spacing: -0.035em;
+      background: linear-gradient(180deg, #F5F7FA 0%, #B6BEC6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -715,7 +808,7 @@
       text-align: left;
     }
     .pricing-row-check {
-      color: #30D158;
+      color: var(--as-emerald-text);
       font-size: 17px;
       flex-shrink: 0;
     }
@@ -786,62 +879,113 @@
     }
     .product-card {
       position: relative;
-      background: #111;
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      background: var(--as-graphite-3);
+      border: 1px solid var(--as-hairline);
+      border-radius: var(--as-radius-xl);
       padding: 28px 24px 24px;
       text-align: left;
       display: flex;
       flex-direction: column;
-      transition: border-color 0.2s, transform 0.2s;
+      box-shadow: var(--as-shadow-2);
+      overflow: hidden;
+      transition: border-color var(--as-dur-base) var(--as-ease-standard),
+                  transform var(--as-dur-base) var(--as-ease-standard);
+    }
+    /* Slow diagonal light sweep across the vitrine on hover */
+    .product-card::after {
+      content: '';
+      position: absolute; inset: -40% -20%;
+      background: linear-gradient(115deg,
+        transparent 38%,
+        rgba(255,255,255,0.05) 49%,
+        rgba(234,212,158,0.10) 50%,
+        rgba(255,255,255,0.05) 51%,
+        transparent 62%);
+      transform: translateX(-120%);
+      transition: transform var(--as-dur-sweep) var(--as-ease-cine);
+      pointer-events: none;
     }
     .product-card:hover {
-      border-color: rgba(200,169,110,0.4);
+      border-color: var(--as-hairline-strong);
       transform: translateY(-2px);
     }
+    .product-card:hover::after { transform: translateX(120%); }
+    /* Focal card — monochrome material with an atmospheric champagne ring
+       + gold corner brackets (gold stays atmospheric, never a fill) */
     .pc-popular {
-      border-color: var(--accent);
-      background: linear-gradient(160deg, #191408 0%, #111 60%);
+      border-color: rgba(200,167,101,0.30);
+      background: var(--as-graphite-3);
+      box-shadow: var(--as-shadow-3), inset 0 0 0 1px rgba(200,167,101,0.14);
+      padding-top: 56px; /* room for the in-card popular badge */
     }
+    .pc-popular::before,
+    .pc-popular .pc-bracket {
+      content: '';
+      position: absolute;
+      width: 16px; height: 16px;
+      border: 1px solid var(--as-champagne);
+      opacity: 0.45;
+      transition: opacity var(--as-dur-base) var(--as-ease-standard);
+      pointer-events: none;
+    }
+    .pc-popular::before { top: 14px; left: 14px; border-right: 0; border-bottom: 0; }
+    .pc-popular .pc-bracket-br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; }
+    .pc-popular:hover::before,
+    .pc-popular:hover .pc-bracket { opacity: 1; }
     .pc-popular-badge {
       position: absolute;
-      top: -13px; left: 50%; transform: translateX(-50%);
-      background: var(--accent);
-      color: #000;
-      font-size: 11px; font-weight: 700;
+      top: 16px; left: 50%; transform: translateX(-50%);
+      background: var(--as-champagne);
+      color: #0B0E12;
+      font-size: 12px; font-weight: 600;
       letter-spacing: 0.06em;
-      padding: 3px 14px;
-      border-radius: 20px;
+      padding: 5px 16px;
+      border-radius: var(--as-radius-pill);
       white-space: nowrap;
+      z-index: 2;
     }
+    /* Edition mark — mono, leading gold rule (replaces the loud tag) */
     .pc-badge {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--as-font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
+      color: var(--as-champagne);
+      margin-bottom: 10px;
+    }
+    .pc-badge::before {
+      content: '';
+      display: inline-block;
+      width: 18px; height: 1px;
+      background: var(--as-champagne);
     }
     .pc-model {
       font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      color: var(--white);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--as-platinum);
       margin-bottom: 2px;
     }
     .pc-name {
       font-size: 13px;
       color: var(--gray-2);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
+    /* Hardware readout — mono, tabular, hairline rule beneath */
     .pc-spec-line {
+      font-family: var(--as-font-mono);
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      color: var(--gray-3);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--as-platinum-3);
+      font-variant-numeric: tabular-nums;
       margin-bottom: 16px;
       padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--as-hairline);
     }
     .pc-official-price {
       display: flex;
@@ -855,18 +999,20 @@
     }
     .pc-official-val {
       font-size: 14px;
-      color: #8E8E93;
+      color: var(--as-platinum-4);
       text-decoration: line-through;
-      text-decoration-color: #FF3B30;
-      text-decoration-thickness: 2px;
+      text-decoration-color: var(--as-platinum-4);
+      text-decoration-thickness: 1px;
+      font-variant-numeric: tabular-nums;
     }
     .pc-our-price {
       font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.04em;
+      font-weight: 500;
+      letter-spacing: -0.03em;
       color: var(--accent);
       line-height: 1;
       margin-bottom: 6px;
+      font-variant-numeric: tabular-nums lining-nums;
     }
     .pc-tax {
       font-size: 13px;
@@ -876,14 +1022,15 @@
     }
     .pc-save {
       display: inline-block;
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 700;
-      color: #30D158;
-      background: rgba(48,209,88,0.1);
-      border: 1px solid rgba(48,209,88,0.25);
-      border-radius: 6px;
-      padding: 2px 8px;
+      color: var(--as-emerald-text);
+      background: rgba(74,140,109,0.14);
+      border: 1px solid rgba(74,140,109,0.32);
+      border-radius: 8px;
+      padding: 6px 14px;
       margin-bottom: 20px;
+      letter-spacing: 0.01em;
     }
     .pc-features {
       list-style: none;
@@ -900,25 +1047,32 @@
       position: relative;
     }
     .pc-features li:last-child { border-bottom: 1px solid var(--border); }
+    /* CSS-drawn check (no Unicode glyph — per design iconography rules) */
     .pc-features li::before {
-      content: '✓';
-      position: absolute; left: 0;
-      color: #30D158;
-      font-size: 12px;
+      content: '';
+      position: absolute;
+      left: 1px; top: 13px;
+      width: 9px; height: 5px;
+      border-left: 1.5px solid var(--as-emerald-text);
+      border-bottom: 1.5px solid var(--as-emerald-text);
+      transform: rotate(-45deg);
     }
     .pc-btn {
       width: 100%;
       background: var(--accent);
-      color: #000;
+      color: #0B0E12;
       border: none;
-      border-radius: 12px;
-      padding: 13px 0;
+      border-radius: var(--as-radius-md);
+      padding: 14px 0;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 500;
+      letter-spacing: -0.01em;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background var(--as-dur-fast) var(--as-ease-standard),
+                  transform var(--as-dur-instant) var(--as-ease-standard);
     }
-    .pc-btn:hover { background: #B89858; }
+    .pc-btn:hover { background: var(--as-champagne-2); }
+    .pc-btn:active { transform: translateY(1px) scale(0.99); }
 
     @media (max-width: 700px) {
       .product-grid { grid-template-columns: 1fr; max-width: 440px; }
@@ -1152,10 +1306,10 @@
     }
     .cf-success-icon {
       width: 48px; height: 48px;
-      background: rgba(48,209,88,0.12);
+      background: rgba(74,140,109,0.12);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px; color: #30D158;
+      font-size: 22px; color: var(--as-emerald-text);
     }
     .cf-success h3 { font-size: 22px; font-weight: 600; color: var(--silver-1); margin: 0; }
     .cf-success p  { font-size: 15px; color: var(--gray-1); margin: 0; }
@@ -1212,7 +1366,7 @@
     ══════════════════════════════════════════════════════════ */
     .profiles-section {
       background: var(--black);
-      padding: 140px 22px;
+      padding: 120px 22px;
       border-top: 1px solid var(--border);
       text-align: center;
     }
@@ -1434,14 +1588,14 @@
       width: 30px; height: 20px; border-radius: 4px;
       font-size: 10px; font-weight: 700; margin: 0 auto;
     }
-    .perm-cell.on { background: rgba(48,209,88,0.14); color: #30D158; }
+    .perm-cell.on { background: rgba(74,140,109,0.14); color: var(--as-emerald-text); }
     .perm-cell.off { background: rgba(255,255,255,0.04); color: var(--gray-3); }
     @media (max-width: 900px) {
       .perm-wrap { height: auto; padding: 48px 24px; }
     }
 
     /* ── Crypto Asset Section ───────────────────────────────── */
-    .crypto-section { background: var(--black); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .crypto-section { background: var(--black); padding: 120px 22px; border-top: 1px solid var(--border); }
     .crypto-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .crypto-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
     .crypto-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 24px; }
@@ -1450,7 +1604,9 @@
     .cwg-item { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 16px; display: flex; flex-direction: column; gap: 8px; }
     .cwg-num { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--accent); }
     .cwg-label { font-size: 12px; color: var(--gray-2); line-height: 1.4; }
-    .cwg-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #30D158; background: rgba(48,209,88,0.1); border: 1px solid rgba(48,209,88,0.2); border-radius: 20px; padding: 3px 8px; width: fit-content; }
+    .cwg-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 10px; font-weight: 400; letter-spacing: 0.06em; color: var(--as-platinum-2); background: var(--as-graphite-3); border: 1px solid var(--as-hairline); border-radius: var(--as-radius-pill); padding: 3px 10px 3px 9px; width: fit-content; }
+    .cwg-badge svg { display: none; }
+    .cwg-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--as-emerald); flex-shrink: 0; }
 
     /* ── Encryption Section ──────────────────────────────────── */
     .encryption-section { background: var(--surface); padding: 120px 22px 100px; border-top: 1px solid var(--border); }
@@ -1466,7 +1622,7 @@
     .eg-body { font-size: 12px; color: var(--gray-3); line-height: 1.6; }
 
     /* ── Japanese IME Section ────────────────────────────────── */
-    .ime-section { background: var(--black); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .ime-section { background: var(--black); padding: 120px 22px; border-top: 1px solid var(--border); }
     .ime-inner { max-width: 800px; margin: 0 auto; text-align: center; }
     .ime-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
     .ime-title { font-family: var(--font-display); font-size: clamp(36px, 5.5vw, 60px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 28px; }
@@ -1490,7 +1646,7 @@
     }
 
     /* ── Vanadium Browser Section ───────────────────────────── */
-    .vanadium-section { background: var(--black); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .vanadium-section { background: var(--black); padding: 120px 22px; border-top: 1px solid var(--border); }
     .vanadium-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .vanadium-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
     .vanadium-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 24px; }
@@ -1513,7 +1669,7 @@
     .vvs-row:last-child { border-bottom: none; }
     .vvs-cell { padding: 13px 16px; font-size: 12px; text-align: center; display: flex; align-items: center; justify-content: center; }
     .vvs-cell.label { text-align: left; justify-content: flex-start; color: var(--gray-2); font-size: 12px; }
-    .vvs-cell.good { color: #30D158; font-weight: 600; }
+    .vvs-cell.good { color: var(--as-emerald-text); font-weight: 600; }
     .vvs-cell.bad { color: #FF453A; }
     @media (max-width: 768px) {
       .vanadium-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -1535,7 +1691,7 @@
     .mg-body { font-size: 12px; color: var(--gray-3); line-height: 1.65; }
 
     /* ── MAC Randomization Section ───────────────────────────── */
-    .mac-section { background: var(--surface); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .mac-section { background: var(--surface); padding: 120px 22px; border-top: 1px solid var(--border); }
     .mac-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .mac-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
     .mac-title { font-family: var(--font-display); font-size: clamp(34px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
@@ -1547,7 +1703,7 @@
     .mac-benefits { display: flex; flex-direction: column; gap: 0; }
     .mac-benefit { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
     .mac-benefit:last-child { border-bottom: none; }
-    .mac-benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: #30D158; flex-shrink: 0; }
+    .mac-benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--as-emerald); flex-shrink: 0; }
     .mac-benefit-text { font-size: 13px; color: var(--gray-2); }
     .mac-wifi-mock { background: var(--near-black); border: 1px solid var(--border); border-radius: 20px; padding: 24px; }
     .mac-wifi-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 16px; }
@@ -1579,14 +1735,14 @@
     .locale-note { margin-top: 20px; font-size: 12px; color: var(--gray-3); line-height: 1.6; }
 
     /* ── PIN Randomization Section ───────────────────────────── */
-    .pin-section { background: var(--black); padding: 140px 22px; border-top: 1px solid var(--border); }
+    .pin-section { background: var(--black); padding: 120px 22px; border-top: 1px solid var(--border); }
     .pin-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .pin-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
     .pin-title { font-family: var(--font-display); font-size: clamp(34px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 24px; }
     .pin-body { font-size: 15px; color: var(--gray-2); line-height: 1.75; margin-bottom: 36px; }
     .pin-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
     .pin-feat { display: flex; align-items: flex-start; gap: 12px; }
-    .pin-feat-dot { width: 6px; height: 6px; border-radius: 50%; background: #30D158; flex-shrink: 0; margin-top: 7px; }
+    .pin-feat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--as-emerald); flex-shrink: 0; margin-top: 7px; }
     .pin-feat-text { font-size: 13px; color: var(--gray-2); line-height: 1.6; }
     .duress-card { background: rgba(255,69,58,0.06); border: 1px solid rgba(255,69,58,0.25); border-radius: 16px; padding: 22px; }
     .duress-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF453A; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
@@ -1619,7 +1775,7 @@
     .usb-mode:last-child { border-bottom: none; }
     .usb-mode-label { font-size: 13px; color: var(--white); font-weight: 500; }
     .usb-mode-badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
-    .usb-mode-badge.on { background: rgba(48,209,88,0.14); color: #30D158; border: 1px solid rgba(48,209,88,0.25); }
+    .usb-mode-badge.on { background: rgba(74,140,109,0.14); color: var(--as-emerald-text); border: 1px solid rgba(74,140,109,0.25); }
     .usb-mode-badge.off { background: rgba(255,255,255,0.05); color: var(--gray-3); border: 1px solid var(--border); }
     .usb-mode-badge.default { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(200,169,110,0.3); }
     .usb-note { font-size: 12px; color: var(--gray-3); line-height: 1.7; background: var(--near-black); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
@@ -1627,7 +1783,7 @@
     .usb-port-icon { width: 80px; height: 80px; border-radius: 20px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent); }
     .usb-toggle-row { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
     .usb-toggle-label { font-size: 13px; font-weight: 500; color: var(--white); }
-    .usb-toggle-switch { width: 44px; height: 26px; border-radius: 13px; background: #30D158; position: relative; flex-shrink: 0; }
+    .usb-toggle-switch { width: 44px; height: 26px; border-radius: 13px; background: var(--as-emerald); position: relative; flex-shrink: 0; }
     .usb-toggle-switch::after { content: ''; position: absolute; right: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--white); }
     .usb-toggle-switch.off { background: rgba(255,255,255,0.1); }
     .usb-toggle-switch.off::after { right: auto; left: 3px; }
@@ -1656,9 +1812,9 @@
     .compare-table tbody td.td-other { background: transparent; color: var(--gray-3); border-right: 1px solid var(--border); }
     .compare-table tbody td.td-other:last-child { border-right: none; }
     .compare-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; margin-bottom: 6px; }
-    .compare-badge.good { background: rgba(48,209,88,0.12); color: #30D158; }
-    .compare-badge.bad { background: rgba(255,69,58,0.1); color: #FF453A; }
-    .compare-badge.mid { background: rgba(255,159,10,0.1); color: #FF9F0A; }
+    .compare-badge.good { background: rgba(74,140,109,0.12); color: var(--as-emerald-text); }
+    .compare-badge.bad { background: var(--as-alert-soft); color: var(--as-alert); }
+    .compare-badge.mid { background: var(--as-warning-soft); color: var(--as-warning); }
     @media (max-width: 768px) {
       .compare-section { padding: 64px 12px; }
       .compare-table thead th, .compare-table tbody td { padding: 12px 10px; font-size: 11px; }
@@ -1706,12 +1862,308 @@
       .faq-q { font-size: 14px; padding: 20px 0; }
     }
   </style>
+
+  <!-- ══ THEME — dark default + light via prefers-color-scheme ══
+       Dark  : bg #000000 · headings #C8CDD3 · body #ffffff
+       Light : bg #ffffff · headings #7C6638 · body #000000
+       Auto-follows the OS appearance setting (no toggle). ─────── -->
+  <style id="theme-overrides">
+    :root {
+      --heading: #C8CDD3;
+      --body:    #ffffff;
+      --muted:   rgba(255,255,255,0.42);
+
+      /* Page + surfaces (kept slightly stepped so section banding survives) */
+      --black:        #000000;
+      --near-black:   #0a0a0a;
+      --surface:      #111111;
+      --surface-2:    #161616;
+      --border:       #262626;
+      --as-ink:       #000000;
+      --as-obsidian:  #000000;
+      --as-graphite-1:#0a0a0a;
+      --as-graphite-2:#111111;
+      --as-graphite-3:#161616;
+      --as-graphite-4:#1f1f1f;
+      --as-hairline:        #262626;
+      --as-hairline-strong: #343434;
+
+      /* Text — headings vs body */
+      --silver-1:      var(--heading);
+      --as-platinum:   var(--heading);
+      --silver-2:      var(--body);
+      --silver-3:      var(--body);
+      --gray-1:        var(--body);
+      --gray-2:        var(--body);
+      --as-platinum-2: var(--body);
+      --as-platinum-3: var(--body);
+      --gray-3:        var(--muted);
+      --as-platinum-4: var(--muted);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --heading: #7C6638;
+        --body:    #000000;
+        --muted:   rgba(0,0,0,0.45);
+
+        --black:        #ffffff;
+        --near-black:   #fafafa;
+        --surface:      #ffffff;
+        --surface-2:    #f3f3f3;
+        --border:       #e5e5e5;
+        --as-ink:       #ffffff;
+        --as-obsidian:  #ffffff;
+        --as-graphite-1:#fafafa;
+        --as-graphite-2:#ffffff;
+        --as-graphite-3:#ffffff;
+        --as-graphite-4:#f0f0f0;
+        --as-hairline:        #e5e5e5;
+        --as-hairline-strong: #d0d0d0;
+
+        /* Liquid-glass header reads light on a light page */
+        --as-liquid-tint:        rgba(255,255,255,0.62);
+        --as-liquid-edge:        rgba(0,0,0,0.06);
+        --as-liquid-edge-strong: rgba(0,0,0,0.10);
+        --as-liquid-top:         rgba(255,255,255,0.70);
+
+        /* Light-mode champagne — deeper so accents stay legible on white.
+           WCAG: #7C6638 vs #FFFFFF ≈ 5.4:1 (AA pass for ≥14pt bold / ≥18pt,
+           and for UI components / large text). */
+        --as-champagne:      #7C6638;
+        --as-champagne-2:    #5E4D2B;
+        --as-champagne-soft: rgba(124,102,56,0.12);
+      }
+      /* Champagne CTAs need white text on the darker light-mode champagne
+         to satisfy AA (white on #7C6638 ≈ 5.4:1). */
+      .nav-buy, .btn-blue, .pc-btn { color: #ffffff; }
+
+      /* .tile.tile-dark carries a permanent dark gradient overlay
+         (linear-gradient to top, rgba(0,0,0,0.9)→0). In light mode the
+         page-level token remap (--heading→#7C6638, --body→#000) would
+         otherwise put dark text on that dark substrate. Force the
+         tile-scoped text back to its dark-mode (light-on-dark) palette. */
+      .tile.tile-dark .tile-eyebrow { color: #C8A765; }
+      .tile.tile-dark .tile-title,
+      .tile.tile-dark h2,
+      .tile.tile-dark h3 {
+        color: #F5F5F7;
+        -webkit-text-fill-color: #F5F5F7;
+        background: none;
+      }
+      .tile.tile-dark .tile-body,
+      .tile.tile-dark p:not(.tile-eyebrow) { color: rgba(245,245,247,0.88); }
+      .tile.tile-dark .tile-link { color: #C8A765; }
+      .tile.tile-dark .tile-link:hover { color: #DCC084; }
+    }
+
+    body { background: var(--black); color: var(--body); }
+
+    /* Headings: drop gradient-clip fills AND unify display weight.
+       Design-system rule: displays use weight 200/300 — never ≥600.
+       A single heading colour applies in both themes via --heading. */
+    .nav-logo,
+    .hero-title,
+    .statement-headline,
+    .feature-title,
+    .specs-title,
+    .pricing-title,
+    .pricing-price,
+    .contact-title,
+    .profiles-title,
+    .ready-title,
+    .crypto-title,
+    .encryption-title,
+    .ime-title,
+    .vanadium-title,
+    .maintenance-title,
+    .mac-title,
+    .locale-title,
+    .pin-title,
+    .usb-title,
+    .compare-title,
+    .hardware-title,
+    .faq-title {
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: var(--heading);
+      color: var(--heading);
+      font-weight: 300;
+      letter-spacing: -0.030em;
+    }
+
+    /* Vertical-rhythm 2-value scale (DESIGN-REVIEW-BRIEF.md #3). Existing
+       sections collapsed to 120/80 via the 140→120 normalization pass;
+       new sections should reference these tokens. */
+    :root {
+      --as-section-pad: 120px;
+      --as-section-pad-lg: 128px;
+      --as-section-pad-mobile: 80px;
+    }
+
+    /* #6 — Chapter dividers. Group the 17 feature sections into 5
+       narrative chapters without reordering them. Each divider sits
+       BEFORE the first section of its chapter, with its own anchor
+       (#chapter-1 … #chapter-5) for direct linking. Visual restraint:
+       mono eyebrow + display-300 title + EN subtitle + hairline rule. */
+    .chapter-divider {
+      padding: 96px 24px 48px;
+      text-align: center;
+      scroll-margin-top: var(--nav-h, 52px);
+    }
+    .chapter-inner { max-width: 720px; margin: 0 auto; }
+    .chapter-num {
+      font-family: var(--as-font-mono, ui-monospace, SFMono-Regular, monospace);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--as-champagne, #C8A765);
+      margin-bottom: 18px;
+      opacity: 0.95;
+    }
+    .chapter-title {
+      font-family: var(--font-display, "Space Grotesk", -apple-system, sans-serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--heading, var(--silver-1, #F5F5F7));
+      margin-bottom: 10px;
+      text-wrap: balance;
+    }
+    .chapter-en {
+      font-family: var(--as-font-mono, ui-monospace, SFMono-Regular, monospace);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      /* Explicit muted grey — not a token: --gray-1 is remapped per theme
+         and resolves to #fff in dark, over-emphasising this line. */
+      color: #8A8A8E;
+      margin-bottom: 22px;
+    }
+    @media (prefers-color-scheme: light) {
+      .chapter-en { color: rgba(0,0,0,0.48); }
+    }
+    /* In EN locale the title is already English; suppress the duplicate
+       EN subtitle. JA/中文 keep it as a bilingual marker. */
+    html[lang="en"] .chapter-en { display: none; }
+    .chapter-rule {
+      width: 56px; height: 1px;
+      background: var(--as-champagne, #C8A765);
+      margin: 0 auto;
+      opacity: 0.7;
+    }
+    @media (max-width: 640px) {
+      .chapter-divider { padding: 72px 22px 36px; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .chapter-divider .chapter-num,
+      .chapter-divider .chapter-title,
+      .chapter-divider .chapter-en,
+      .chapter-divider .chapter-rule {
+        opacity: 0; transform: translateY(8px);
+        animation: fadeUp 0.6s cubic-bezier(0.25,0.1,0.25,1) forwards;
+      }
+      .chapter-divider .chapter-title { animation-delay: 0.08s; }
+      .chapter-divider .chapter-en    { animation-delay: 0.16s; }
+      .chapter-divider .chapter-rule  { animation-delay: 0.24s; }
+    }
+
+    /* #4 — Unified eyebrow (DS-compliant overline). Cross-cuts all
+       *-eyebrow classes; the theme block is the last style block in
+       <head> so equal-specificity rules here win on source order. */
+    [class*="-eyebrow"] {
+      font-family: var(--as-font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--as-champagne);
+    }
+    /* Section h2 sub-line readability override — when an eyebrow lives
+       above a display title, it should reach for the champagne even on
+       light bg (the --heading remap above shifts dim greys upward). */
+    [class*="-eyebrow"] { opacity: 1; }
+
+    /* #5 — Multi-language overflow safeguards. EN/中文 strings can run
+       30–60% longer than JA; protect badges, chips and headings from
+       breaking the layout without enforcing truncation. */
+    [class*="-title"], [class*="-headline"], .h-display {
+      text-wrap: balance;
+      overflow-wrap: anywhere;
+    }
+    .chip, .badge, .vbadge, .compare-badge, .cwg-badge, .vedition,
+    .pc-badge, .featured-mark, .build-chip {
+      max-width: 100%;
+    }
+    /* The popular badge is absolutely positioned; cap width inside card */
+    .pc-popular-badge { max-width: calc(100% - 32px); }
+
+    /* #6 — Mobile sticky purchase CTA. Surfaces when hero scrolls out and
+       hides once #pricing is visible. Liquid-glass to match the header. */
+    .mobile-sticky-cta {
+      display: none;
+      position: fixed; left: 0; right: 0; bottom: 0;
+      z-index: 80;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+      background: var(--as-liquid-tint);
+      backdrop-filter: blur(var(--as-liquid-blur-sticky)) saturate(var(--as-liquid-sat));
+      -webkit-backdrop-filter: blur(var(--as-liquid-blur-sticky)) saturate(var(--as-liquid-sat));
+      border-top: 1px solid var(--as-liquid-edge-strong);
+      align-items: center; justify-content: space-between; gap: 14px;
+      font-family: var(--as-font-sans);
+      text-decoration: none;
+      color: var(--as-platinum);
+      opacity: 0;
+      transform: translateY(110%);
+      transition: opacity 280ms var(--as-ease-standard),
+                  transform 320ms var(--as-ease-standard);
+      pointer-events: none;
+    }
+    .mobile-sticky-cta.is-on {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .mobile-sticky-cta .msc-price {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--as-platinum-2);
+      font-variant-numeric: tabular-nums;
+    }
+    .mobile-sticky-cta .msc-price b {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--as-platinum);
+      letter-spacing: -0.01em;
+    }
+    .mobile-sticky-cta .msc-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 18px;
+      border-radius: var(--as-radius-pill);
+      background: var(--as-champagne);
+      color: #ffffff;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: -0.005em;
+      white-space: nowrap;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset,
+                  0 8px 20px -10px rgba(200,167,101,0.5);
+    }
+    @media (max-width: 768px) { .mobile-sticky-cta { display: flex; } }
+    @media (prefers-reduced-motion: reduce) {
+      .mobile-sticky-cta { transition: opacity 120ms linear; transform: none; }
+    }
+  </style>
 </head>
 
 <body>
 
   <!-- ══ NAV ═══════════════════════════════════════════════════ -->
-  <nav>
+  <nav data-i18n-root>
     <div class="nav-inner">
       <a href="#" class="nav-logo">AntiSpy Phone</a>
       <ul class="nav-links">
@@ -1722,12 +2174,19 @@
         <li><a href="blog.html">ブログ</a></li>
         <li><a href="#contact">サポート</a></li>
       </ul>
-      <a href="#pricing" class="nav-buy">今すぐ購入</a>
+      <div class="nav-actions">
+        <div class="lang-switch" role="group" aria-label="Language / 言語 / 语言">
+          <button type="button" class="lang-opt" data-lang="ja" aria-pressed="true">JA</button>
+          <button type="button" class="lang-opt" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" class="lang-opt" data-lang="zh" aria-pressed="false">中文</button>
+        </div>
+        <a href="#pricing" class="nav-buy">今すぐ購入</a>
+      </div>
     </div>
   </nav>
 
   <!-- ══ HERO ══════════════════════════════════════════════════ -->
-  <section class="hero">
+  <section class="hero" data-i18n-root>
     <p class="hero-eyebrow">新登場 — GrapheneOS搭載</p>
 
     <h1 class="hero-title">追跡不可能。<br>それが、すべて。</h1>
@@ -1735,6 +2194,8 @@
     <p class="hero-subtitle">
       司法機関も、通信会社も、<br>ビッグテックも—届かない。
     </p>
+
+    <p class="hero-definition">AntiSpy PhoneはGrapheneOSを搭載した追跡対策済みのGoogle Pixelスマートフォンです。</p>
 
     <div class="hero-actions">
       <a href="#pricing" class="btn-blue">今すぐ購入</a>
@@ -1749,7 +2210,7 @@
       -->
       <img
         src="images/hero.png"
-        alt="AntiSpy Phone — Google Pixel 9 Pro"
+        alt="AntiSpy Phone — Pixel + GrapheneOS"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
       >
       <div class="img-placeholder" style="display:none;">
@@ -1760,7 +2221,7 @@
   </section>
 
   <!-- ══ STATEMENT ═════════════════════════════════════════════ -->
-  <section class="statement">
+  <section class="statement" data-i18n-root>
     <p class="statement-pre reveal">プライバシーは、妥協しない。</p>
     <h2 class="statement-headline reveal reveal-delay-1">
       誰にも見えない。<br>
@@ -1773,7 +2234,16 @@
   </section>
 
   <!-- ══ FEATURE TILES ══════════════════════════════════════════ -->
-  <section id="features">
+    <div class="chapter-divider" id="chapter-1" role="separator" aria-label="Chapter 1: Anti-Surveillance">
+    <div class="chapter-inner">
+      <p class="chapter-num">CHAPTER 1 / 5</p>
+      <h2 class="chapter-title">監視対策</h2>
+      <p class="chapter-en">Anti-Surveillance</p>
+      <div class="chapter-rule"></div>
+    </div>
+  </div>
+
+<section id="features">
     <div class="tiles">
 
       <!-- Tile 1: GrapheneOS -->
@@ -1846,7 +2316,16 @@
   </section>
 
   <!-- ══ READY OUT OF BOX ════════════════════════════════════════ -->
-  <section class="ready-section">
+    <div class="chapter-divider" id="chapter-2" role="separator" aria-label="Chapter 2: Out of Box & Operations">
+    <div class="chapter-inner">
+      <p class="chapter-num">CHAPTER 2 / 5</p>
+      <h2 class="chapter-title">出荷・運用</h2>
+      <p class="chapter-en">Out of Box & Operations</p>
+      <div class="chapter-rule"></div>
+    </div>
+  </div>
+
+<section class="ready-section">
     <div class="ready-inner">
       <p class="ready-eyebrow reveal">Ready Out of Box</p>
       <h2 class="ready-title reveal reveal-delay-1">届いたその日から、<br>すぐ使える。</h2>
@@ -1949,7 +2428,7 @@
   </section>
 
   <!-- ══ GOOGLE-FREE ECOSYSTEM ══════════════════════════════════ -->
-  <section class="feature-section" style="background:#000;">
+  <section class="feature-section" style="background:var(--black);">
     <div class="feature-text reveal">
       <p class="feature-eyebrow">Google-Free Ecosystem</p>
       <h2 class="feature-title">Googleゼロ。<br>Androidそのままに。</h2>
@@ -2132,7 +2611,16 @@
   </section>
 
   <!-- ══ 32 USER PROFILES ═════════════════════════════════════════ -->
-  <section class="profiles-section" id="profiles">
+    <div class="chapter-divider" id="chapter-3" role="separator" aria-label="Chapter 3: Isolation">
+    <div class="chapter-inner">
+      <p class="chapter-num">CHAPTER 3 / 5</p>
+      <h2 class="chapter-title">隔離</h2>
+      <p class="chapter-en">Isolation</p>
+      <div class="chapter-rule"></div>
+    </div>
+  </div>
+
+<section class="profiles-section" id="profiles">
     <div class="profiles-inner">
       <p class="profiles-eyebrow reveal">Multiple User Profiles</p>
       <h2 class="profiles-title reveal reveal-delay-1">1台で、32人分。</h2>
@@ -2143,31 +2631,31 @@
       <!-- プロファイルグリッド -->
       <div class="profile-grid reveal reveal-delay-2">
         <div class="profile-card">
-          <div class="profile-avatar" style="background:rgba(200,169,110,0.2);border:1px solid rgba(200,169,110,0.4);color:#C8A96E;">個</div>
+          <div class="profile-avatar" style="background:rgba(200,167,101,0.16);border:1px solid rgba(200,167,101,0.34);color:var(--as-champagne);">個</div>
           <span class="profile-label">個人用</span>
         </div>
         <div class="profile-card">
-          <div class="profile-avatar" style="background:rgba(90,140,168,0.18);border:1px solid rgba(90,140,168,0.35);color:#5A8CA8;">法A</div>
+          <div class="profile-avatar" style="background:rgba(82,90,99,0.22);border:1px solid rgba(82,90,99,0.40);color:#9AA1A9;">法A</div>
           <span class="profile-label">法人A</span>
         </div>
         <div class="profile-card">
-          <div class="profile-avatar" style="background:rgba(90,140,168,0.12);border:1px solid rgba(90,140,168,0.25);color:#7AABCB;">法B</div>
+          <div class="profile-avatar" style="background:rgba(82,90,99,0.16);border:1px solid rgba(82,90,99,0.30);color:#8C9299;">法B</div>
           <span class="profile-label">法人B</span>
         </div>
         <div class="profile-card">
-          <div class="profile-avatar" style="background:rgba(138,123,164,0.18);border:1px solid rgba(138,123,164,0.35);color:#A08AC0;">秘</div>
+          <div class="profile-avatar" style="background:rgba(82,90,99,0.22);border:1px solid rgba(82,90,99,0.40);color:#9AA1A9;">秘</div>
           <span class="profile-label">プライベート</span>
         </div>
         <div class="profile-card">
-          <div class="profile-avatar" style="background:rgba(142,126,106,0.18);border:1px solid rgba(142,126,106,0.35);color:#A09070;">客</div>
+          <div class="profile-avatar" style="background:rgba(82,90,99,0.16);border:1px solid rgba(82,90,99,0.30);color:#8C9299;">客</div>
           <span class="profile-label">ゲスト</span>
         </div>
         <div class="profile-card">
-          <div class="profile-avatar" style="background:rgba(48,209,88,0.12);border:1px solid rgba(48,209,88,0.25);color:#30D158;">L</div>
+          <div class="profile-avatar" style="background:var(--as-emerald-soft);border:1px solid rgba(74,140,109,0.32);color:var(--as-emerald-text);">L</div>
           <span class="profile-label">LINE専用</span>
         </div>
         <div class="profile-card">
-          <div class="profile-avatar" style="background:rgba(80,80,90,0.3);border:1px solid rgba(120,120,130,0.3);color:#AEAEB2;">匿</div>
+          <div class="profile-avatar" style="background:rgba(255,255,255,0.04);border:1px solid var(--as-hairline);color:var(--as-platinum-3);">匿</div>
           <span class="profile-label">匿名用</span>
         </div>
         <div class="profile-card overflow">
@@ -2450,7 +2938,16 @@
   </section>
 
   <!-- ══ JAPANESE IME ════════════════════════════════════════════ -->
-  <section class="ime-section">
+    <div class="chapter-divider" id="chapter-4" role="separator" aria-label="Chapter 4: Japanese Locale">
+    <div class="chapter-inner">
+      <p class="chapter-num">CHAPTER 4 / 5</p>
+      <h2 class="chapter-title">日本語環境</h2>
+      <p class="chapter-en">Japanese Locale</p>
+      <div class="chapter-rule"></div>
+    </div>
+  </div>
+
+<section class="ime-section">
     <div class="ime-inner">
       <p class="ime-eyebrow reveal">Offline Japanese Input</p>
       <h2 class="ime-title reveal reveal-delay-1">予測変換も、<br>端末の中だけ。</h2>
@@ -2546,7 +3043,16 @@
   </section>
 
   <!-- ══ PIN RANDOMIZATION ═══════════════════════════════════════ -->
-  <section class="pin-section">
+    <div class="chapter-divider" id="chapter-5" role="separator" aria-label="Chapter 5: Physical Security">
+    <div class="chapter-inner">
+      <p class="chapter-num">CHAPTER 5 / 5</p>
+      <h2 class="chapter-title">物理セキュリティ</h2>
+      <p class="chapter-en">Physical Security</p>
+      <div class="chapter-rule"></div>
+    </div>
+  </div>
+
+<section class="pin-section">
     <div class="pin-inner">
       <div class="pin-text reveal">
         <p class="pin-eyebrow">Physical Security</p>
@@ -2719,7 +3225,7 @@
   </section>
 
   <!-- ══ CINEMATIC FEATURE 1 ════════════════════════════════════ -->
-  <section class="feature-section" style="background:#0a0a0a;">
+  <section class="feature-section" style="background:var(--near-black);">
     <div class="feature-text reveal">
       <p class="feature-eyebrow">Security Hardware</p>
       <h2 class="feature-title">Titan M2。<br>物理レベルの<br>セキュリティ。</h2>
@@ -2758,7 +3264,7 @@
   </section>
 
   <!-- ══ CINEMATIC FEATURE 2 ════════════════════════════════════ -->
-  <section class="feature-section reverse" style="background:#000;">
+  <section class="feature-section reverse" style="background:var(--black);">
     <div class="feature-text reveal">
       <p class="feature-eyebrow">Display</p>
       <h2 class="feature-title">6.3インチ OLED。<br>見えるのは、<br>あなただけ。</h2>
@@ -2786,7 +3292,7 @@
         </div>
       </div>
     </div>
-    <div class="feature-image" style="background:#0a0a0a;">
+    <div class="feature-image" style="background:var(--near-black);">
       <!--
         IMAGE: landing/images/hero.png — reuse or use pixel-8a-2.png for variety
       -->
@@ -2940,7 +3446,7 @@
   </section>
 
   <!-- ══ PRICING ════════════════════════════════════════════════ -->
-  <section class="pricing-section" id="pricing">
+  <section class="pricing-section" id="pricing" data-i18n-root>
     <p class="pricing-eyebrow reveal">今すぐ手に入れる</p>
     <h2 class="pricing-title reveal reveal-delay-1">AntiSpy Phone</h2>
     <p class="pricing-subtitle reveal reveal-delay-2">すべてのモデルに GrapheneOS + 当店独自の厳選セキュリティ構成を搭載</p>
@@ -3018,6 +3524,7 @@
       </div>
 
       <div class="product-card pc-popular">
+        <span class="pc-bracket pc-bracket-br"></span>
         <div class="pc-popular-badge">人気 No.1</div>
         <div class="pc-badge">プレミアム</div>
         <div class="pc-model">Pixel 10</div>
@@ -3060,7 +3567,7 @@
   </section>
 
   <!-- ══ FAQ ═══════════════════════════════════════════════════ -->
-  <section class="faq-section" id="faq-inline">
+  <section class="faq-section" id="faq-inline" data-i18n-root>
     <div class="faq-inner">
       <div class="faq-header reveal">
         <p class="faq-eyebrow">よくある質問</p>
@@ -3162,7 +3669,7 @@
   </section>
 
   <!-- ══ FOOTER ════════════════════════════════════════════════ -->
-  <footer>
+  <footer data-i18n-root>
     <div class="footer-main">
       <div class="footer-col">
         <p class="footer-col-title">AntiSpy Phone</p>
@@ -3483,8 +3990,8 @@
       white-space: nowrap;
     }
     #ed-bar button:hover { background: rgba(255,255,255,0.07); color: #F5F5F7; }
-    #ed-bar #ed-save { color: #30D158; }
-    #ed-bar #ed-save:hover { background: rgba(48,209,88,0.12); color: #34C759; }
+    #ed-bar #ed-save { color: var(--as-emerald-text); }
+    #ed-bar #ed-save:hover { background: rgba(74,140,109,0.12); color: var(--as-emerald-2); }
     #ed-bar #ed-reset:hover { background: rgba(255,149,0,0.12); color: #FF9500; }
     #ed-bar #ed-cancel:hover { background: rgba(255,69,58,0.1); color: #FF453A; }
 
@@ -4761,7 +5268,7 @@
       transition: color 0.2s;
     }
     .co-step.active { color: #F5F5F7; }
-    .co-step.done   { color: #30D158; }
+    .co-step.done   { color: var(--as-emerald-text); }
     .co-step-num {
       width: 20px; height: 20px; border-radius: 50%;
       background: #2C2C2E; display: flex; align-items: center;
@@ -4769,7 +5276,7 @@
       transition: background 0.2s, color 0.2s;
     }
     .co-step.active .co-step-num { background: #C8A96E; color: #fff; }
-    .co-step.done   .co-step-num { background: #30D158; color: #fff; }
+    .co-step.done   .co-step-num { background: var(--as-emerald); color: #fff; }
     .co-step-line {
       width: 32px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 4px;
     }
@@ -4801,6 +5308,7 @@
     .co-input::placeholder { color: #48484A; }
     .co-input:focus { border-color: #C8A96E; background: rgba(200,169,110,0.06); }
     .co-input.invalid { border-color: #FF453A; }
+    .co-zip-hint { display:block; margin-top:5px; font-size:11px; color:#86868B; min-height:14px; }
     .co-select {
       appearance: none; -webkit-appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236E6E73' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
@@ -4845,7 +5353,7 @@
     }
     .co-done-icon {
       width: 56px; height: 56px; border-radius: 50%;
-      background: rgba(48,209,88,0.15);
+      background: rgba(74,140,109,0.15);
       display: flex; align-items: center; justify-content: center;
       font-size: 26px;
     }
@@ -4988,91 +5496,240 @@
       body.scrollTop = 0;
     }
 
-    // ── STEP 1: 購入者情報 ────────────────────────────────────────
+    // ── i18n-aware checkout helpers ──────────────────────────────
+    const coLang = () => {
+      let l = 'ja';
+      try { l = localStorage.getItem('asp-lang') || document.documentElement.lang || 'ja'; }
+      catch (e) { l = document.documentElement.lang || 'ja'; }
+      return (l === 'en' || l === 'zh') ? l : 'ja';
+    };
+
+    // Country list — name per language, dial code, ISO-2 (for postal API)
+    const CO_COUNTRIES = [
+      ['JP','jp','+81',{ja:'日本',en:'Japan',zh:'日本'}],
+      ['US','us','+1',{ja:'アメリカ合衆国',en:'United States',zh:'美国'}],
+      ['CN','cn','+86',{ja:'中国',en:'China',zh:'中国'}],
+      ['HK','hk','+852',{ja:'香港',en:'Hong Kong',zh:'香港'}],
+      ['TW','tw','+886',{ja:'台湾',en:'Taiwan',zh:'台湾'}],
+      ['KR','kr','+82',{ja:'韓国',en:'South Korea',zh:'韩国'}],
+      ['SG','sg','+65',{ja:'シンガポール',en:'Singapore',zh:'新加坡'}],
+      ['GB','gb','+44',{ja:'イギリス',en:'United Kingdom',zh:'英国'}],
+      ['CA','ca','+1',{ja:'カナダ',en:'Canada',zh:'加拿大'}],
+      ['AU','au','+61',{ja:'オーストラリア',en:'Australia',zh:'澳大利亚'}],
+      ['DE','de','+49',{ja:'ドイツ',en:'Germany',zh:'德国'}],
+      ['FR','fr','+33',{ja:'フランス',en:'France',zh:'法国'}],
+      ['NL','nl','+31',{ja:'オランダ',en:'Netherlands',zh:'荷兰'}],
+      ['CH','ch','+41',{ja:'スイス',en:'Switzerland',zh:'瑞士'}],
+      ['IT','it','+39',{ja:'イタリア',en:'Italy',zh:'意大利'}],
+      ['ES','es','+34',{ja:'スペイン',en:'Spain',zh:'西班牙'}],
+      ['TH','th','+66',{ja:'タイ',en:'Thailand',zh:'泰国'}],
+      ['VN','vn','+84',{ja:'ベトナム',en:'Vietnam',zh:'越南'}],
+      ['MY','my','+60',{ja:'マレーシア',en:'Malaysia',zh:'马来西亚'}],
+      ['PH','ph','+63',{ja:'フィリピン',en:'Philippines',zh:'菲律宾'}],
+      ['ID','id','+62',{ja:'インドネシア',en:'Indonesia',zh:'印度尼西亚'}],
+      ['IN','in','+91',{ja:'インド',en:'India',zh:'印度'}],
+      ['AE','ae','+971',{ja:'アラブ首長国連邦',en:'United Arab Emirates',zh:'阿联酋'}],
+      ['NZ','nz','+64',{ja:'ニュージーランド',en:'New Zealand',zh:'新西兰'}],
+    ];
+    const CO_DEFAULT_COUNTRY = { ja:'JP', en:'US', zh:'CN' };
+
+    const CO_T = {
+      ja:{title:'購入者情報の入力',cust:'お客様情報',sei:'お名前（姓）',mei:'お名前（名）',
+          fullname:'お名前',email:'メールアドレス',tel:'電話番号',cc:'国番号',ship:'お届け先住所',
+          country:'国・地域',zip:'郵便番号',pref:'都道府県',state:'都道府県',city:'市区町村',
+          addr1:'番地・建物名',addr2:'建物名・部屋番号（任意）',next:'次へ：注文確認 →',
+          searching:'住所を検索中…',notfound:'該当する住所が見つかりませんでした',
+          phName:'山田',phMei:'太郎',phZipJP:'1000001',phZip:'郵便番号 / ZIP',
+          phAddr1:'渋谷区道玄坂1-2-3',phAddr2:'○○マンション 101号室'},
+      en:{title:'Your details',cust:'Customer information',sei:'Last name',mei:'First name',
+          fullname:'Full name',email:'Email address',tel:'Phone number',cc:'Country code',ship:'Shipping address',
+          country:'Country / region',zip:'Postal / ZIP code',pref:'State / Province',state:'State / Province',city:'City',
+          addr1:'Address line 1',addr2:'Address line 2 (optional)',next:'Continue to review →',
+          searching:'Looking up address…',notfound:'No matching address found',
+          phName:'Yamada',phMei:'Taro',phZipJP:'100-0001',phZip:'e.g. 90210',
+          phAddr1:'123 Main St',phAddr2:'Apt / Suite (optional)'},
+      zh:{title:'填写购买人信息',cust:'客户信息',sei:'姓',mei:'名',
+          fullname:'姓名',email:'电子邮箱',tel:'电话号码',cc:'国家区号',ship:'收货地址',
+          country:'国家 / 地区',zip:'邮政编码',pref:'省 / 州',state:'省 / 州',city:'市',
+          addr1:'详细地址',addr2:'详细地址 2（选填）',next:'下一步：确认订单 →',
+          searching:'正在查询地址…',notfound:'未找到匹配的地址',
+          phName:'山田',phMei:'太郎',phZipJP:'1000001',phZip:'邮政编码',
+          phAddr1:'区/县 + 街道门牌',phAddr2:'楼栋 / 房间（选填）'},
+    };
+    const JP_PREFS = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+
+    let coZipTimer = null;
+    async function coPostalLookup(iso, raw) {
+      const z = (raw || '').trim();
+      if (iso === 'jp') {
+        const d = z.replace(/[^0-9]/g, '');
+        if (d.length !== 7) return null;
+        try {
+          const r = await fetch(`https://api.zipaddress.net/?zipcode=${d}`);
+          const j = await r.json();
+          if (j && j.code === 200 && j.data) {
+            return { pref: j.data.pref || '', city: (j.data.address || '').trim(), state: j.data.pref || '' };
+          }
+        } catch (e) {}
+        return null;
+      }
+      const p = z.replace(/\s/g, '');
+      if (p.length < 3) return null;
+      try {
+        const r = await fetch(`https://api.zippopotam.us/${iso}/${encodeURIComponent(p)}`);
+        if (!r.ok) return null;
+        const j = await r.json();
+        const pl = (j.places || [])[0] || {};
+        return { pref: pl.state || '', city: pl['place name'] || '', state: pl.state || '' };
+      } catch (e) { return null; }
+    }
+
+    // ── STEP 1: buyer info (language-aware) ──────────────────────
     function renderStep1() {
-      title.textContent = '購入者情報の入力';
+      const lang = coLang();
+      const T = CO_T[lang];
+      title.textContent = T.title;
+      const defC = orderData.country || CO_DEFAULT_COUNTRY[lang];
+      const defDial = orderData.cc || (CO_COUNTRIES.find(c => c[0] === defC) || CO_COUNTRIES[0])[2];
+      const ccOpts = CO_COUNTRIES.map(c =>
+        `<option value="${c[2]}|${c[0]}" ${defDial === c[2] && (orderData.cc ? true : c[0] === defC) ? 'selected' : ''}>${c[3][lang]} (${c[2]})</option>`).join('');
+      const countryOpts = CO_COUNTRIES.map(c =>
+        `<option value="${c[0]}" ${defC === c[0] ? 'selected' : ''}>${c[3][lang]}</option>`).join('');
+
+      const nameBlock = lang === 'ja'
+        ? `<div class="co-grid">
+            <div class="co-field"><label class="co-label">${T.sei}</label><input class="co-input" id="co-sei" placeholder="${T.phName}" value="${orderData.sei||''}"></div>
+            <div class="co-field"><label class="co-label">${T.mei}</label><input class="co-input" id="co-mei" placeholder="${T.phMei}" value="${orderData.mei||''}"></div>
+          </div>`
+        : `<div class="co-grid full"><div class="co-field"><label class="co-label">${T.fullname}</label><input class="co-input" id="co-fullname" placeholder="${T.phName} ${T.phMei}" value="${orderData.fullname||''}"></div></div>`;
+
+      // Address block per locale
+      let addrBlock;
+      if (lang === 'ja') {
+        addrBlock = `
+          <div class="co-grid full"><div class="co-field">
+            <label class="co-label">${T.zip}</label>
+            <input class="co-input" id="co-zip" inputmode="numeric" placeholder="${T.phZipJP}" value="${orderData.zip||''}">
+            <span id="co-zip-hint" class="co-zip-hint"></span>
+          </div></div>
+          <div class="co-grid full" style="margin-top:8px;"><div class="co-field">
+            <label class="co-label">${T.pref}</label>
+            <select class="co-input co-select" id="co-pref">${JP_PREFS.map(p=>`<option value="${p}" ${orderData.pref===p?'selected':''}>${p}</option>`).join('')}</select>
+          </div></div>
+          <div class="co-grid full" style="margin-top:8px;"><div class="co-field">
+            <label class="co-label">${T.addr1}</label>
+            <input class="co-input" id="co-addr1" placeholder="${T.phAddr1}" value="${orderData.addr1||''}">
+          </div></div>
+          <div class="co-grid full" style="margin-top:8px;"><div class="co-field">
+            <label class="co-label">${T.addr2}</label>
+            <input class="co-input" id="co-addr2" placeholder="${T.phAddr2}" value="${orderData.addr2||''}">
+          </div></div>`;
+      } else {
+        addrBlock = `
+          <div class="co-grid"><div class="co-field">
+            <label class="co-label">${T.country}</label>
+            <select class="co-input co-select" id="co-country">${countryOpts}</select>
+          </div>
+          <div class="co-field">
+            <label class="co-label">${T.zip}</label>
+            <input class="co-input" id="co-zip" placeholder="${T.phZip}" value="${orderData.zip||''}">
+            <span id="co-zip-hint" class="co-zip-hint"></span>
+          </div></div>
+          <div class="co-grid full" style="margin-top:8px;"><div class="co-field">
+            <label class="co-label">${T.addr1}</label>
+            <input class="co-input" id="co-addr1" placeholder="${T.phAddr1}" value="${orderData.addr1||''}">
+          </div></div>
+          <div class="co-grid full" style="margin-top:8px;"><div class="co-field">
+            <label class="co-label">${T.addr2}</label>
+            <input class="co-input" id="co-addr2" placeholder="${T.phAddr2}" value="${orderData.addr2||''}">
+          </div></div>
+          <div class="co-grid" style="margin-top:8px;">
+            <div class="co-field"><label class="co-label">${T.city}</label><input class="co-input" id="co-city" value="${orderData.city||''}"></div>
+            <div class="co-field"><label class="co-label">${T.state}</label><input class="co-input" id="co-state" value="${orderData.state||''}"></div>
+          </div>`;
+      }
+
       body.innerHTML = `
-        <p class="co-section-title">お客様情報</p>
-        <div class="co-grid">
-          <div class="co-field">
-            <label class="co-label">お名前（姓）</label>
-            <input class="co-input" id="co-sei" placeholder="山田" value="${orderData.sei||''}">
+        <p class="co-section-title">${T.cust}</p>
+        ${nameBlock}
+        <div class="co-grid full"><div class="co-field">
+          <label class="co-label">${T.email}</label>
+          <input class="co-input" id="co-email" type="email" placeholder="you@example.com" value="${orderData.email||''}">
+        </div></div>
+        <div class="co-grid full"><div class="co-field">
+          <label class="co-label">${T.tel}</label>
+          <div style="display:flex;gap:8px;">
+            <select class="co-input co-select" id="co-cc" style="flex:0 0 42%;">${ccOpts}</select>
+            <input class="co-input" id="co-tel" type="tel" style="flex:1;" placeholder="90 1234 5678" value="${orderData.telnum||''}">
           </div>
-          <div class="co-field">
-            <label class="co-label">お名前（名）</label>
-            <input class="co-input" id="co-mei" placeholder="太郎" value="${orderData.mei||''}">
-          </div>
-        </div>
-        <div class="co-grid full">
-          <div class="co-field">
-            <label class="co-label">メールアドレス</label>
-            <input class="co-input" id="co-email" type="email" placeholder="you@example.com" value="${orderData.email||''}">
-          </div>
-        </div>
-        <div class="co-grid">
-          <div class="co-field">
-            <label class="co-label">電話番号</label>
-            <input class="co-input" id="co-tel" type="tel" placeholder="090-0000-0000" value="${orderData.tel||''}">
-          </div>
-          <div class="co-field">
-            <label class="co-label">郵便番号</label>
-            <input class="co-input" id="co-zip" placeholder="000-0000" value="${orderData.zip||''}">
-          </div>
-        </div>
-        <p class="co-section-title" style="margin-top:20px;">お届け先住所</p>
-        <div class="co-grid full">
-          <div class="co-field">
-            <label class="co-label">都道府県</label>
-            <select class="co-input co-select" id="co-pref">
-              ${['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']
-                .map(p => `<option value="${p}" ${orderData.pref===p?'selected':''}>${p}</option>`).join('')}
-            </select>
-          </div>
-        </div>
-        <div class="co-grid full" style="margin-top:8px;">
-          <div class="co-field">
-            <label class="co-label">市区町村・番地</label>
-            <input class="co-input" id="co-addr1" placeholder="渋谷区道玄坂1-2-3" value="${orderData.addr1||''}">
-          </div>
-        </div>
-        <div class="co-grid full" style="margin-top:8px;">
-          <div class="co-field">
-            <label class="co-label">建物名・部屋番号（任意）</label>
-            <input class="co-input" id="co-addr2" placeholder="○○マンション 101号室" value="${orderData.addr2||''}">
-          </div>
-        </div>
+        </div></div>
+        <p class="co-section-title" style="margin-top:20px;">${T.ship}</p>
+        ${addrBlock}
       `;
-      footer.innerHTML = `
-        <button class="co-btn-next co-btn-full" id="co-next1">次へ：注文確認 →</button>
-      `;
+      footer.innerHTML = `<button class="co-btn-next co-btn-full" id="co-next1">${T.next}</button>`;
+
+      // Postal-code autofill (debounced)
+      const zipEl = document.getElementById('co-zip');
+      const hintEl = document.getElementById('co-zip-hint');
+      const runLookup = () => {
+        const iso = lang === 'ja'
+          ? 'jp'
+          : ((CO_COUNTRIES.find(c => c[0] === (document.getElementById('co-country')||{}).value) || ['','jp'])[1]);
+        if (hintEl) { hintEl.textContent = T.searching; hintEl.className = 'co-zip-hint'; }
+        coPostalLookup(iso, zipEl.value).then(res => {
+          if (!res) { if (hintEl) { hintEl.textContent = ''; } return; }
+          if (lang === 'ja') {
+            const pe = document.getElementById('co-pref');
+            if (res.pref && pe) { [...pe.options].forEach(o => { if (o.value === res.pref) pe.value = res.pref; }); }
+            const a1 = document.getElementById('co-addr1');
+            if (res.city && a1 && !a1.value.trim()) a1.value = res.city;
+          } else {
+            const ce = document.getElementById('co-city'); const se = document.getElementById('co-state');
+            if (ce && res.city && !ce.value.trim()) ce.value = res.city;
+            if (se && res.state && !se.value.trim()) se.value = res.state;
+          }
+          if (hintEl) hintEl.textContent = '';
+        }).catch(() => { if (hintEl) hintEl.textContent = ''; });
+      };
+      if (zipEl) zipEl.addEventListener('input', () => { clearTimeout(coZipTimer); coZipTimer = setTimeout(runLookup, 450); });
+
       document.getElementById('co-next1').addEventListener('click', () => {
-        const fields = [
-          {id:'co-sei', label:'姓'},
-          {id:'co-mei', label:'名'},
-          {id:'co-email', label:'メールアドレス', type:'email'},
-          {id:'co-tel', label:'電話番号'},
-          {id:'co-zip', label:'郵便番号'},
-          {id:'co-addr1', label:'住所'},
-        ];
+        const ids = lang === 'ja'
+          ? ['co-sei','co-mei','co-email','co-tel','co-zip','co-addr1']
+          : ['co-fullname','co-email','co-tel','co-zip','co-addr1','co-city'];
         let valid = true;
-        fields.forEach(f => {
-          const el = document.getElementById(f.id);
+        ids.forEach(id => {
+          const el = document.getElementById(id); if (!el) return;
           el.classList.remove('invalid');
           if (!el.value.trim()) { el.classList.add('invalid'); valid = false; }
-          if (f.type === 'email' && el.value && !el.value.includes('@')) {
-            el.classList.add('invalid'); valid = false;
-          }
+          if (id === 'co-email' && el.value && !el.value.includes('@')) { el.classList.add('invalid'); valid = false; }
         });
         if (!valid) { body.scrollTop = 0; return; }
+
+        const g = id => (document.getElementById(id)?.value || '').trim();
+        const ccRaw = g('co-cc'); const dial = ccRaw.split('|')[0]; const cIso = ccRaw.split('|')[1];
+        const telnum = g('co-tel');
+        const country = lang === 'ja' ? 'JP' : g('co-country');
+        const cObj = CO_COUNTRIES.find(c => c[0] === country) || CO_COUNTRIES[0];
+        const countryName = cObj[3][lang];
+        const name = lang === 'ja' ? `${g('co-sei')} ${g('co-mei')}` : g('co-fullname');
+        let address;
+        if (lang === 'ja') {
+          address = `〒${g('co-zip')} ${g('co-pref')}${g('co-addr1')}${g('co-addr2') ? ' ' + g('co-addr2') : ''}`;
+        } else if (lang === 'zh') {
+          address = `${countryName} ${g('co-state')}${g('co-city')}${g('co-addr1')}${g('co-addr2') ? ' ' + g('co-addr2') : ''} ${g('co-zip')}`;
+        } else {
+          address = `${g('co-addr1')}${g('co-addr2') ? ', ' + g('co-addr2') : ''}, ${g('co-city')}, ${g('co-state')} ${g('co-zip')}, ${countryName}`;
+        }
         orderData = {
-          sei:   document.getElementById('co-sei').value.trim(),
-          mei:   document.getElementById('co-mei').value.trim(),
-          email: document.getElementById('co-email').value.trim(),
-          tel:   document.getElementById('co-tel').value.trim(),
-          zip:   document.getElementById('co-zip').value.trim(),
-          pref:  document.getElementById('co-pref').value,
-          addr1: document.getElementById('co-addr1').value.trim(),
-          addr2: document.getElementById('co-addr2').value.trim(),
+          lang, country, countryName, cc: dial, cIso, telnum,
+          sei: g('co-sei'), mei: g('co-mei'), fullname: g('co-fullname'),
+          name,
+          email: g('co-email'),
+          tel: `${dial} ${telnum}`.trim(),
+          zip: g('co-zip'), pref: g('co-pref'), state: g('co-state'), city: g('co-city'),
+          addr1: g('co-addr1'), addr2: g('co-addr2'),
+          address,
         };
         step = 2; render();
       });
@@ -5082,7 +5739,7 @@
     function renderStep2() {
       title.textContent = '注文内容の確認';
       const total = cartSnapshot.reduce((s,i) => s + i.price * i.qty, 0);
-      const addr  = `${orderData.zip} ${orderData.pref}${orderData.addr1}${orderData.addr2 ? ' ' + orderData.addr2 : ''}`;
+      const addr  = orderData.address || `${orderData.zip} ${orderData.pref||''}${orderData.addr1||''}${orderData.addr2 ? ' ' + orderData.addr2 : ''}`;
 
       body.innerHTML = `
         <p class="co-section-title">ご注文商品</p>
@@ -5107,7 +5764,7 @@
         <div class="co-summary" style="margin-bottom:20px;">
           <div class="co-summary-row">
             <span class="co-summary-key">お名前</span>
-            <span class="co-summary-val">${orderData.sei} ${orderData.mei}</span>
+            <span class="co-summary-val">${orderData.name || (orderData.sei + ' ' + orderData.mei)}</span>
           </div>
           <div class="co-summary-row">
             <span class="co-summary-key">メール</span>
@@ -5209,10 +5866,10 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             orderNum,
-            name:    `${orderData.sei} ${orderData.mei}`,
+            name:    orderData.name || `${orderData.sei} ${orderData.mei}`,
             email:   orderData.email,
             tel:     orderData.tel,
-            address: `${orderData.zip} ${orderData.pref}${orderData.addr1}${orderData.addr2 ? ' ' + orderData.addr2 : ''}`,
+            address: orderData.address || `${orderData.zip} ${orderData.pref}${orderData.addr1}${orderData.addr2 ? ' ' + orderData.addr2 : ''}`,
             items:   cartSnapshot,
             total,
           }),
@@ -5289,7 +5946,7 @@
     .cw-head-info { flex:1; min-width:0; }
     .cw-head-name { font-size:13px; font-weight:600; color:#F5F5F7; letter-spacing:-0.01em; }
     .cw-online { display:flex; align-items:center; gap:4px; margin-top:1px; }
-    .cw-dot { width:6px; height:6px; border-radius:50%; background:#30D158; animation:cw-pulse 2.5s ease-in-out infinite; }
+    .cw-dot { width:6px; height:6px; border-radius:50%; background:var(--as-emerald); animation:cw-pulse 2.5s ease-in-out infinite; }
     @keyframes cw-pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
     .cw-online-lbl { font-size:11px; color:#86868B; }
     .cw-head-line { display:flex; align-items:center; gap:5px; padding:5px 9px; background:rgba(6,199,85,0.12); border:1px solid rgba(6,199,85,0.25); border-radius:980px; text-decoration:none; font-size:11px; font-weight:600; color:#06C755; flex-shrink:0; transition:background 0.15s; }
@@ -5707,7 +6364,7 @@
         "@type": "LocalBusiness",
         "@id": "https://antispy.socialboost.jp/#localbusiness",
         "name": "AntiSpy Phone（SocialBoost）",
-        "image": "https://antispy.socialboost.jp/images/og.jpg",
+        "image": "https://antispy.socialboost.jp/images/hero.png",
         "url": "https://antispy.socialboost.jp/",
         "telephone": "+81-70-9175-3590",
         "email": "info@socialboost.jp",
@@ -5823,5 +6480,36 @@
     ]
   }
   </script>
+
+  <!-- ══ I18N — site-wide JA / EN / ZH (shared engine + dictionary) ══ -->
+  <!-- ══ MOBILE STICKY PURCHASE CTA (≤768px) ══════════════════════ -->
+  <a class="mobile-sticky-cta" id="msc" href="#pricing">
+    <span class="msc-price">
+      <b>¥132,000〜</b>
+      <span class="msc-note" style="display:block;font-size:10px;color:var(--as-platinum-3);letter-spacing:.04em;margin-top:2px;">税込 · 送料無料</span>
+    </span>
+    <span class="msc-cta">今すぐ購入</span>
+  </a>
+  <script>
+    (function () {
+      var el = document.getElementById('msc'); if (!el) return;
+      var on = false, heroOut = false, pricingIn = false;
+      var set = function (v) { if (v !== on) { on = v; el.classList.toggle('is-on', v); } };
+      var tick = function () { set(heroOut && !pricingIn); };
+      var hero = document.querySelector('.hero');
+      var pricing = document.getElementById('pricing');
+      if (!('IntersectionObserver' in window)) return;
+      if (hero) new IntersectionObserver(function (es) {
+        es.forEach(function (e) { heroOut = !e.isIntersecting; tick(); });
+      }, { threshold: 0 }).observe(hero);
+      if (pricing) new IntersectionObserver(function (es) {
+        es.forEach(function (e) { pricingIn = e.isIntersecting; tick(); });
+      }, { threshold: 0.05 }).observe(pricing);
+    })();
+  </script>
+
+  <script src="scripts/i18n-dict.js"></script>
+  <script src="scripts/i18n-overrides.js"></script>
+  <script src="scripts/i18n.js"></script>
 
 </body>
