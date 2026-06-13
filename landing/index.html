@@ -1749,11 +1749,16 @@
         Use the Pixel Fold blue front+back image (black background)
         Recommended size: 1640px wide
       -->
-      <img
-        src="images/hero.png"
-        alt="SPY Phone — Google Pixel 9 Pro"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-      >
+      <picture style="display:contents">
+        <source srcset="images/hero.webp" type="image/webp">
+        <img
+          src="images/hero.png"
+          alt="SPY Phone — Google Pixel 9 Pro"
+          width="1280" height="1280"
+          fetchpriority="high"
+          onerror="this.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';"
+        >
+      </picture>
       <div class="img-placeholder" style="display:none;">
         PLACE hero.png HERE<br>
         <small style="font-size:11px;margin-top:8px;">(Pixel Fold blue, black bg)</small>
@@ -1785,11 +1790,15 @@
             IMAGE: landing/images/hero.png
             SPY Phone device on dark background
           -->
-          <img
-            src="images/hero.png"
-            alt="SPY Phone（GrapheneOS搭載）"
-            onerror="this.style.display='none';"
-          >
+          <picture style="display:contents">
+            <source srcset="images/hero.webp" type="image/webp">
+            <img
+              src="images/hero.png"
+              alt="SPY Phone（GrapheneOS搭載）"
+              width="1280" height="1280" loading="lazy"
+              onerror="this.style.display='none';"
+            >
+          </picture>
         </div>
         <div class="tile-overlay"></div>
         <div class="tile-content">
@@ -1807,11 +1816,15 @@
             IMAGE: landing/images/pixel-9.png
             Pixel 9 charcoal back on black background
           -->
-          <img
-            src="images/pixel-9.png"
-            alt="SPY Phone Pixel 9"
-            onerror="this.style.display='none';"
-          >
+          <picture style="display:contents">
+            <source srcset="images/pixel-9.webp" type="image/webp">
+            <img
+              src="images/pixel-9.png"
+              alt="SPY Phone Pixel 9"
+              width="1280" height="1280" loading="lazy"
+              onerror="this.style.display='none';"
+            >
+          </picture>
         </div>
         <div class="tile-content">
           <p class="tile-eyebrow">Anonymous VPN</p>
@@ -1834,12 +1847,16 @@
             IMAGE: landing/images/pixel-8a-1.png
             Pixel 8a black back
           -->
-          <img
-            src="images/pixel-8a-1.png"
-            alt="SPY Phone Pixel 8a"
-            class="img-white-bg"
-            onerror="this.style.display='none';"
-          >
+          <picture style="display:contents">
+            <source srcset="images/pixel-8a-1.webp" type="image/webp">
+            <img
+              src="images/pixel-8a-1.png"
+              alt="SPY Phone Pixel 8a"
+              class="img-white-bg"
+              width="1280" height="1280" loading="lazy"
+              onerror="this.style.display='none';"
+            >
+          </picture>
         </div>
         <div class="tile-overlay" style="background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);"></div>
       </div>
@@ -2754,8 +2771,12 @@
         IMAGE: landing/images/pixel-9.png
         Pixel 9 charcoal — back camera detail
       -->
-      <img src="images/pixel-9.png" alt="Titan M2 セキュリティチップ搭載 Pixel 9"
-        onerror="this.style.display='none';">
+      <picture style="display:contents">
+        <source srcset="images/pixel-9.webp" type="image/webp">
+        <img src="images/pixel-9.png" alt="Titan M2 セキュリティチップ搭載 Pixel 9"
+          width="1280" height="1280" loading="lazy"
+          onerror="this.style.display='none';">
+      </picture>
     </div>
   </section>
 
@@ -2792,9 +2813,13 @@
       <!--
         IMAGE: landing/images/hero.png — reuse or use pixel-8a-2.png for variety
       -->
-      <img src="images/pixel-8a-2.png" alt="SPY Phone ディスプレイ"
-        class="img-white-bg"
-        onerror="this.style.display='none';">
+      <picture style="display:contents">
+        <source srcset="images/pixel-8a-2.webp" type="image/webp">
+        <img src="images/pixel-8a-2.png" alt="SPY Phone ディスプレイ"
+          class="img-white-bg"
+          width="1280" height="1280" loading="lazy"
+          onerror="this.style.display='none';">
+      </picture>
     </div>
   </section>
 
@@ -4965,7 +4990,7 @@
       cartBody.innerHTML = cart.map(item => `
         <div class="cart-item">
           <div class="cart-item-img">
-            <img src="images/pixel-9.png" alt="${item.name}" onerror="this.style.display='none'">
+            <img src="images/pixel-9.webp" alt="${item.name}" width="64" height="64" loading="lazy" onerror="this.onerror=null;this.src='images/pixel-9.png'">
           </div>
           <div class="cart-item-info">
             <div class="cart-item-name">${item.name}</div>
