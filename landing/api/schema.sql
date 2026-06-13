@@ -10,15 +10,35 @@ create table if not exists orders (
   tel               text,
   address           text,
   total_jpy         integer,
+  ref               text,
   stripe_session_id text        unique,
   status            text        not null default 'paid',
   created_at        timestamptz default now()
 );
 
+-- 既存テーブルに紹介コード列を追加（再実行しても安全）
+alter table orders add column if not exists ref text;
+
 create index if not exists orders_email_idx     on orders (email);
 create index if not exists orders_order_num_idx on orders (order_num);
+create index if not exists orders_ref_idx       on orders (ref);
 
 alter table orders enable row level security;
+
+-- ── Referrers (友達紹介プログラムの紹介リンク所有者) ──────────────────
+-- 紹介リンク発行時に /api/referral が code→email を登録。
+-- webhook は注文の ref からこの表を引いて紹介者を特定する。
+create table if not exists referrers (
+  id         uuid        default gen_random_uuid() primary key,
+  code       text        not null unique,
+  name       text,
+  email      text        not null,
+  created_at timestamptz default now()
+);
+
+create index if not exists referrers_code_idx on referrers (code);
+
+alter table referrers enable row level security;
 
 -- ── Chat leads ────────────────────────────────────────────────────
 create table if not exists chat_leads (

@@ -38,4 +38,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://antispy.socialboost.jp/sitemap.xml
+Sitemap: https://spyphone.socialboost.jp/sitemap.xml
