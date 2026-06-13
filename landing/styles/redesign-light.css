@@ -1,0 +1,139 @@
+/* ============================================================
+   Spy Phone — Light Redesign (header + hero)
+   Scoped under .rd-* so it never collides with the legacy
+   dark design system. Loaded AFTER antispy-design-system.css.
+   ============================================================ */
+
+:root {
+  --rd-bg:        #ffffff;
+  --rd-surface:   #f7f7f9;
+  --rd-surface-2: #fbfbfd;
+  --rd-border:    #e8e8ea;
+  --rd-ink:       #1d1d1f;
+  --rd-ink-2:     #6e6e73;
+  --rd-blue:      #2f5fe0;
+  --rd-blue-ink:  #ffffff;
+  --rd-cart:      #a8e6b0;
+  --rd-cart-ink:  #0a3d14;
+  --rd-radius:    22px;
+  --rd-pill:      980px;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.rd-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--rd-surface-2);
+  border-bottom: 1px solid var(--rd-border);
+  font-family: var(--as-font-sans, -apple-system, "Hiragino Kaku Gothic ProN", sans-serif);
+}
+.rd-nav__inner {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; gap: 16px;
+}
+.rd-nav__logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700; font-size: 22px; letter-spacing: .5px;
+  color: var(--rd-ink); text-decoration: none;
+}
+.rd-nav__links {
+  list-style: none; display: flex; align-items: center; gap: 24px;
+  margin: 0; padding: 0;
+}
+.rd-nav__links a {
+  font-size: 14px; font-weight: 600; color: #333; text-decoration: none;
+}
+.rd-nav__links a:hover { color: var(--rd-blue); }
+.rd-nav__actions { display: flex; align-items: center; gap: 16px; }
+.rd-lang { display: flex; gap: 4px; }
+.rd-lang__opt {
+  border: none; background: transparent; cursor: pointer;
+  font-size: 11px; color: var(--rd-ink-2); padding: 4px 6px; border-radius: 6px;
+}
+.rd-lang__opt[aria-pressed="true"] { color: var(--rd-ink); font-weight: 700; }
+.rd-cart {
+  background: var(--rd-cart); color: var(--rd-cart-ink);
+  font-size: 13px; font-weight: 700; text-decoration: none;
+  padding: 9px 18px; border-radius: var(--rd-pill);
+}
+
+/* ── HERO ───────────────────────────────────────────────── */
+.rd-hero {
+  position: relative; background: var(--rd-bg); overflow: hidden;
+  font-family: var(--as-font-sans, -apple-system, "Hiragino Kaku Gothic ProN", sans-serif);
+  color: var(--rd-ink);
+}
+.rd-hero__inner {
+  position: relative; max-width: 1120px; margin: 0 auto;
+  padding: 56px 24px 0; min-height: 520px;
+}
+.rd-hero__hex {
+  position: absolute; top: 40px; right: 14%; width: 420px; height: 420px;
+  opacity: .5; z-index: 0; pointer-events: none;
+}
+.rd-hero__phones {
+  position: absolute; right: 24px; bottom: 0; z-index: 1;
+  display: flex; align-items: flex-end;
+}
+.rd-phone {
+  border-radius: 20px; margin-right: -30px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.18); position: relative;
+}
+.rd-phone__cam {
+  position: absolute; top: 8%; left: 12%; right: 12%; height: 14%;
+  background: #0d0d0d; border-radius: 12px;
+}
+.rd-phone--k { width: 92px;  height: 270px; background: linear-gradient(160deg,#3a3a3c,#1c1c1e); }
+.rd-phone--l { width: 100px; height: 296px; background: linear-gradient(160deg,#d6dcf5,#c0c8ee); }
+.rd-phone--g { width: 108px; height: 322px; background: linear-gradient(160deg,#cdee9a,#b6e07a); }
+.rd-phone--b { width: 118px; height: 352px; background: linear-gradient(160deg,#3b6ef0,#2f5fe0); margin-right: 0; }
+.rd-phone__g {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  width: 26px; height: 26px; border-radius: 50%; background: #fff;
+  color: #3b6ef0; font-weight: 700; font-size: 15px; text-align: center; line-height: 26px;
+}
+.rd-hero__card {
+  position: relative; z-index: 2; max-width: 460px;
+  background: rgba(247,247,249,.92); backdrop-filter: blur(4px);
+  border-radius: var(--rd-radius); padding: 34px 32px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.06);
+}
+.rd-hero__title {
+  font-size: 34px; font-weight: 800; line-height: 1.22; letter-spacing: -.5px; margin: 0;
+}
+.rd-hero__list { list-style: none; padding: 0; margin: 24px 0 0; }
+.rd-hero__list li {
+  position: relative; padding-left: 20px; margin-bottom: 14px;
+  font-size: 15px; line-height: 1.55; color: #2c2c2e;
+}
+.rd-hero__list li:last-child { margin-bottom: 0; }
+.rd-hero__list li::before { content: "・"; position: absolute; left: 0; color: var(--rd-blue); }
+.rd-hero__actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.rd-btn-primary {
+  background: var(--rd-blue); color: var(--rd-blue-ink);
+  font-size: 15px; font-weight: 700; text-decoration: none;
+  padding: 12px 30px; border-radius: var(--rd-pill);
+}
+.rd-btn-ghost {
+  background: #fff; border: 1px solid #c7c7cc; color: var(--rd-ink);
+  font-size: 15px; font-weight: 600; text-decoration: none;
+  padding: 12px 26px; border-radius: var(--rd-pill);
+}
+.rd-hero__wordmark {
+  text-align: center; font-weight: 500; font-size: clamp(56px, 12vw, 132px);
+  color: #c2c2c7; letter-spacing: -2px; line-height: 1; margin-top: -8px;
+  padding-bottom: 8px; user-select: none;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 820px) {
+  .rd-nav__links { display: none; }
+  .rd-hero__inner { padding-top: 36px; min-height: auto; }
+  .rd-hero__phones { position: relative; right: auto; bottom: auto; justify-content: center; margin-top: 28px; }
+  .rd-hero__hex { display: none; }
+  .rd-hero__card { max-width: 100%; }
+  .rd-phone--k { width: 64px; height: 188px; }
+  .rd-phone--l { width: 70px; height: 206px; }
+  .rd-phone--g { width: 76px; height: 224px; }
+  .rd-phone--b { width: 84px; height: 248px; }
+}
