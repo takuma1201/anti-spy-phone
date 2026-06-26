@@ -5552,16 +5552,31 @@
           </h4>
           <p style="font-size:13px;color:#86868B;margin-top:8px;line-height:1.5;">次の画面でカード情報を安全に入力してください。Visa / Mastercard / JCB / American Express に対応しています。</p>
         </div>
+
+        <div class="co-bank-box" style="background:rgba(247,147,26,0.06);border-color:rgba(247,147,26,0.28);margin-top:12px;">
+          <h4 style="display:flex;align-items:center;gap:8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F7931A" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h3.2a2 2 0 0 1 0 4H9.5zm0 4h3.6a2 2 0 0 1 0 4H9.5zm0-4V6.5m0 11V16m2-9.5V6m0 12v-.5"/></svg>
+            Bitcoin決済（BTCPay）
+          </h4>
+          <p style="font-size:13px;color:#86868B;margin-top:8px;line-height:1.5;">Bitcoin payments are processed through our BTCPay Server. プライバシーに配慮した決済方法です。次の画面で請求書（インボイス）が発行され、Bitcoinで安全にお支払いいただけます。</p>
+        </div>
       `;
       footer.innerHTML = `
         <button class="co-btn-back" id="co-back2">← 戻る</button>
-        <button class="co-btn-next" id="co-confirm">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-          Stripeで支払う
-        </button>
+        <div style="display:flex;flex-direction:column;gap:8px;flex:2;">
+          <button class="co-btn-next" id="co-confirm" style="flex:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Stripeで支払う
+          </button>
+          <button class="co-btn-next" id="co-confirm-btc" style="flex:none;background:transparent;border:1px solid #F7931A;color:#F7931A;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h3.2a2 2 0 0 1 0 4H9.5zm0 4h3.6a2 2 0 0 1 0 4H9.5zm0-4V6.5m0 11V16"/></svg>
+            Pay with Bitcoin
+          </button>
+        </div>
       `;
       document.getElementById('co-back2').addEventListener('click', () => { step = 1; render(); });
       document.getElementById('co-confirm').addEventListener('click', placeOrder);
+      document.getElementById('co-confirm-btc').addEventListener('click', payWithBitcoin);
     }
 
     // ── STEP 3: 完了 ─────────────────────────────────────────────
@@ -5650,6 +5665,52 @@
         confirmBtn.disabled = false;
         confirmBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Stripeで支払う';
         alert('決済の開始に失敗しました。時間をおいて再度お試しください。');
+      }
+    }
+
+    // ── Pay with Bitcoin → BTCPay hosted invoice ─────────────────
+    async function payWithBitcoin() {
+      const btn = document.getElementById('co-confirm-btc');
+      btn.disabled = true;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:cf-spin 0.8s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> 請求書を発行中...';
+
+      const orderNum = 'SPY-' + Date.now().toString(36).toUpperCase().slice(-6);
+      const total    = cartSnapshot.reduce((s,i) => s + i.price * i.qty, 0);
+      const ref      = (window.SpyRef && window.SpyRef.getActiveRef()) || '';
+
+      // Save locally in case the redirect interrupts the session.
+      const order = { orderNum, ...orderData, items: cartSnapshot, total, ref, method: 'bitcoin', createdAt: new Date().toISOString() };
+      const orders = JSON.parse(localStorage.getItem('spyphone-orders') || '[]');
+      orders.push(order);
+      localStorage.setItem('spyphone-orders', JSON.stringify(orders));
+
+      try {
+        const resp = await fetch('/api/btcpay/create-invoice', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderNum,
+            name:    `${orderData.sei} ${orderData.mei}`,
+            email:   orderData.email,
+            tel:     orderData.tel,
+            address: `${orderData.zip} ${orderData.pref}${orderData.addr1}${orderData.addr2 ? ' ' + orderData.addr2 : ''}`,
+            // Only ids + quantities are used server-side; prices are
+            // resolved from the trusted catalog, never from here.
+            items:   cartSnapshot.map(i => ({ id: i.id, qty: i.qty })),
+            ref,
+          }),
+        });
+
+        if (!resp.ok) throw new Error((await resp.json().catch(() => ({}))).error ?? 'invoice failed');
+
+        const { url } = await resp.json();
+        if (!url) throw new Error('no checkout url');
+        window.location.href = url;   // → BTCPay hosted invoice checkout
+      } catch (err) {
+        console.error('Bitcoin checkout error:', err);
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h3.2a2 2 0 0 1 0 4H9.5zm0 4h3.6a2 2 0 0 1 0 4H9.5zm0-4V6.5m0 11V16"/></svg> Pay with Bitcoin';
+        alert('Bitcoin請求書の発行に失敗しました。時間をおいて再度お試しください。');
       }
     }
 
