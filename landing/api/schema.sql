@@ -40,6 +40,29 @@ create index if not exists referrers_code_idx on referrers (code);
 
 alter table referrers enable row level security;
 
+-- ── Crypto orders (BTCPay webhook upserts on invoice events) ───────
+-- Idempotent: the unique btcpay_invoice_id lets the webhook upsert
+-- safely on duplicate / redelivered events.
+create table if not exists crypto_orders (
+  id                uuid        default gen_random_uuid() primary key,
+  btcpay_invoice_id text        not null unique,
+  order_num         text,
+  name              text,
+  email             text,
+  tel               text,
+  address           text,
+  total_jpy         integer,
+  status            text        not null default 'pending',  -- pending | paid | failed
+  created_at        timestamptz default now(),
+  updated_at        timestamptz default now()
+);
+
+create index if not exists crypto_orders_order_num_idx on crypto_orders (order_num);
+create index if not exists crypto_orders_email_idx     on crypto_orders (email);
+
+alter table crypto_orders enable row level security;
+-- service key bypasses RLS; the webhook writes via the service role only.
+
 -- ── Chat leads ────────────────────────────────────────────────────
 create table if not exists chat_leads (
   id         uuid        default gen_random_uuid() primary key,
