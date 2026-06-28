@@ -17,6 +17,11 @@ Bitcoin payment available as a privacy-respecting payment option, processed
 through our own BTCPay Server. All prices are resolved server-side from a
 trusted catalog — the client never sets the amount.
 
+> **Server hosting:** BTCPay Server runs on a Linux VPS (not on a Mac), with
+> a **watch-only** wallet — only the xpub/zpub/descriptor is connected, never a
+> seed or private key. Full provisioning walkthrough:
+> [`docs/btcpay-vps-setup.md`](../docs/btcpay-vps-setup.md).
+
 ### Files
 
 | File | Purpose |
