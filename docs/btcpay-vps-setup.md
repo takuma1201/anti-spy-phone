@@ -30,6 +30,10 @@ SPY Phone EC サイト（`spyphone.socialboost.jp`）に **Bitcoin（BTCPay Serv
 - 概算 **約 ¥3,600/月**
 - 国内データセンター・JPY 決済・日本語管理画面
 
+### 無料案: Oracle Cloud Always Free（ARM）
+- 無期限無料の **Ampere A1**（最大 4 OCPU / 24GB / ブロック 200GB）で BTCPay 稼働可。
+- 容量品薄・SLA なし等の注意あり。専用手順は [`btcpay-oracle-free-setup.md`](./btcpay-oracle-free-setup.md)。
+
 ### 低コスト案: Hetzner Cloud CPX21
 - **Ubuntu 22.04 LTS**
 - 3 vCPU / 4GB / 80GB SSD
